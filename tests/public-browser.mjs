@@ -55,6 +55,18 @@ try{
   assert.equal(await page.locator('.project-category-group').count(),4);
   assert.match(await page.locator('.about-section').innerText(),/מנהל/);
   await page.screenshot({path:'artifacts/14-hebrew-home.png',fullPage:true,animations:'disabled'});
+  await page.goto('http://127.0.0.1:4190/he/cases/proxmox-ha-san/',{waitUntil:'domcontentloaded'});
+  await page.locator('.case-node').first().waitFor();
+  assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+  await page.locator('.case-mode').nth(2).click();
+  assert.match(await page.locator('#case-view-title').innerText(),/גיבוי/);
+  await page.screenshot({path:'artifacts/16-hebrew-proxmox-case.png',fullPage:true,animations:'disabled'});
+  await page.goto('http://127.0.0.1:4190/he/examples/network-design/',{waitUntil:'domcontentloaded'});
+  await page.locator('.bp-node').first().waitFor();
+  await page.locator('[data-node="storage"]').click();
+  assert.match(await page.locator('#bp-title').innerText(),/אחסון/);
+  await page.screenshot({path:'artifacts/17-hebrew-network-blueprint.png',fullPage:true,animations:'disabled'});
+
   for(const track of ['infrastructure','automation','operations','leadership']){
     await page.goto('http://127.0.0.1:4190/he/'+track+'/',{waitUntil:'domcontentloaded'});
     await page.locator('.project-card').first().waitFor();
