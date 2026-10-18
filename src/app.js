@@ -230,7 +230,7 @@
     if(nav.getAttribute("href")==="/"){e.preventDefault();history.pushState({track:"all"},"","/");showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
   });
   window.addEventListener("popstate",()=>showTrack(fromLocation(),false));
-  const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();renderFieldStudies();enableImageFallbacks();
+  const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();renderFieldStudies();observeReveal();enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
   if(navTrack!=="all" && path.startsWith("/for/")) {
     intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">TAILORED CAREER VIEW</span>');
