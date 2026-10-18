@@ -191,7 +191,7 @@
       '<h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>'+txt("Contribution & scope","תחומי אחריות ותרומה")+'</h3><p>'+escapeHTML(p.role)+'</p>'+
       '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
-       '<p><a class="modal-deep-link" href="/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
+       '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '<div class="review-notice"><span>● ARCHITECTURAL OVERVIEW</span><p>'+escapeHTML(approvalText)+' Representative imagery is not a real project screenshot.</p></div>';
     enableImageFallbacks($("#dialog-body"));
     dialog.showModal();

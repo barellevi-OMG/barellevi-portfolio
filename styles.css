@@ -161,3 +161,11 @@ html[lang="he"] .model-number,html[lang="he"] .model-card-text h3,html[lang="he"
 html[lang="he"] .site-header .brand{direction:ltr}
 html[lang="he"] .hero-orbit,html[lang="he"] .diagram,html[lang="he"] .component-photo{direction:ltr}
 @media(prefers-reduced-motion:reduce){.category-overview-link{transition:none}}
+
+/* Hebrew case-studies and diagrams: preserve technical geometry, mirror text flow. */
+html[lang="he"] .case-body,html[lang="he"] .blueprint-page{font-family:Arial,"Noto Sans Hebrew",sans-serif}
+html[lang="he"] .case-header,html[lang="he"] .case-hero,html[lang="he"] .case-section{direction:rtl}
+html[lang="he"] .case-map-canvas,html[lang="he"] .bp-canvas{direction:ltr}
+html[lang="he"] .case-node,html[lang="he"] .bp-node{direction:rtl;text-align:center}
+html[lang="he"] .case-hero h1,html[lang="he"] .case-section h2{letter-spacing:-.04em}
+html[lang="he"] .case-language-link{border:1px solid #729486;padding:8px 12px;border-radius:4px}
