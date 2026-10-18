@@ -25,7 +25,7 @@
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
     return '<article class="project-card reveal '+(i === 0 ? "wide" : "")+'" style="--delay:'+Math.min(i*42,260)+'ms">'+
        '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="Open detail for '+escapeHTML(project.title)+'">'+
-       '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(project.visual==="switches"?"Physical network switches and Ethernet cabling":project.visual==="circuits"?"Macro photograph of an electronic circuit board":"Close-up photograph of a laptop keyboard")+'" loading="lazy" />'+
+       '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(project.visual==="switches"?"Physical network switches and Ethernet cabling":project.visual==="circuits"?"Macro photograph of an electronic circuit board":project.visual==="servers"?"Server rack with physical network equipment":project.visual==="camera"?"Ceiling-mounted security camera":"Close-up photograph of a laptop keyboard")+'" loading="lazy" />'+
        '<span class="project-overlay"></span><span class="project-index">'+escapeHTML(project.id)+' / '+escapeHTML(project.year)+'</span>'+
        '<span class="project-image-symbol" aria-hidden="true">'+(project.tracks.includes("infrastructure")?"◈":project.tracks.includes("automation")?"⌘":"↗")+'</span></div>'+
        '<div class="project-content"><div class="project-topline"><span>'+escapeHTML(project.stage)+'</span><span>VIEW CASE STUDY ↗</span></div>'+
