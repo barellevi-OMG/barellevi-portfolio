@@ -41,6 +41,35 @@ try{
   }
 
   await page.screenshot({path:'artifacts/01-public-home-desktop.png',fullPage:true,animations:'disabled'});
+
+  assert.equal(await page.locator('.project-category-group').count(),4);
+  assert.equal(await page.locator('.about-pillars article').count(),3);
+  assert.equal(await page.locator('.category-overview-link').count(),4);
+  assert.equal(await page.locator('.job-card').count(),5);
+  await page.locator('.lang-switch').click();
+  await page.locator('.project-card').first().waitFor();
+  assert.ok(page.url().endsWith('/he/'),'language switch to Hebrew route');
+  assert.equal(await page.locator('html').getAttribute('lang'),'he');
+  assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+  assert.equal(await page.locator('.project-card').count(),16);
+  assert.equal(await page.locator('.project-category-group').count(),4);
+  assert.match(await page.locator('.about-section').innerText(),/מנהל/);
+  await page.screenshot({path:'artifacts/14-hebrew-home.png',fullPage:true,animations:'disabled'});
+  for(const track of ['infrastructure','automation','operations','leadership']){
+    await page.goto('http://127.0.0.1:4190/he/'+track+'/',{waitUntil:'domcontentloaded'});
+    await page.locator('.project-card').first().waitFor();
+    const n=await page.locator('.project-card').count();
+    assert.ok(n>0&&n<16,'category filter should be exclusive: '+track+' '+n);
+    assert.equal(await page.locator('.project-category-group').count(),1);
+  }
+  for(const role of ['mobileye-infrastructure','mobileye-technical-operations','technical-operations','automation-engineering','technical-leadership']){
+    await page.goto('http://127.0.0.1:4190/he/for/'+role+'/',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+    assert.match(await page.locator('#track-intro').innerText(),/משרה/);
+    const href=await page.locator('.lang-switch').getAttribute('href');
+    assert.equal(href,'/for/'+role+'/');
+    assert.ok(await page.locator('.project-card').count()>=4);
+  }
   await page.goto('http://127.0.0.1:4190/infrastructure/',{waitUntil:'domcontentloaded'});
   await page.locator('.project-card').first().waitFor();
   assert.match(await page.locator('#hero-title').innerText(),/resilience/i);
@@ -93,6 +122,12 @@ try{
   await phone.screenshot({path:'artifacts/10-hardware-models-mobile.png',fullPage:false,animations:'disabled'});
 
   await phone.screenshot({path:'artifacts/06-public-home-mobile.png',fullPage:true,animations:'disabled'});
+
+  await phone.goto('http://127.0.0.1:4190/he/',{waitUntil:'domcontentloaded'});
+  await phone.locator('.project-card').first().waitFor();
+  const hebrewOverflow=await phone.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+  assert.ok(hebrewOverflow<=3,'unexpected Hebrew mobile page overflow: '+hebrewOverflow);
+  await phone.screenshot({path:'artifacts/15-hebrew-mobile.png',fullPage:true,animations:'disabled'});
   await phone.goto('http://127.0.0.1:4190/examples/network-design/',{waitUntil:'domcontentloaded'});
   await phone.locator('.bp-node').first().waitFor();
   await phone.getByRole('button',{name:/RECOVERY/}).click();
