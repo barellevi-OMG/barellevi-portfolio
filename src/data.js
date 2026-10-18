@@ -10,11 +10,11 @@ window.PORTFOLIO = {
     leadership: { label: "TECHNOLOGY & PRODUCT LEADERSHIP", desc: "Translating requirements into systems, coordinating decisions, and building better processes." }
   },
   images: {
-    switches: "https://images.unsplash.com/photo-1698668975271-2ba9a323be6b?auto=format&fit=crop&w=1000&q=82",
-    circuits: "https://images.unsplash.com/photo-1586920740280-e7da670f7cb7?auto=format&fit=crop&w=1000&q=82",
+    switches: "https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=1000&q=82",
+    circuits: "https://images.unsplash.com/photo-1592659762303-90081d34b277?auto=format&fit=crop&w=1000&q=82",
     keyboard: "https://images.unsplash.com/photo-1643425959065-e96192696446?auto=format&fit=crop&w=1000&q=82",
     servers: "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?auto=format&fit=crop&w=1000&q=82",
-    camera: "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed?auto=format&fit=crop&w=1000&q=82"
+    camera: "https://images.unsplash.com/photo-1757440010307-0f28f06fdd2b?auto=format&fit=crop&w=1000&q=82"
   },
   profiles: {
     all: {
