@@ -27,6 +27,7 @@ if(work)work.insertAdjacentHTML("beforebegin",category);
 if(approach)approach.insertAdjacentHTML("afterend",jobSection);
 const nav=$(".header-nav");
 if(nav){
+for(const sel of ['a[href="#components"]','a[href="#lab"]','a[href="#approach"]','a[href="#hardware"]','a[href="#field-studies"]']) nav.querySelector(sel)?.remove();
 const a=document.createElement("a");a.href="#categories";a.textContent=text("Four areas","ארבע קטגוריות");nav.prepend(a);
 for(const [href,en,iw] of [["#about","About","עליי"],["#job-links","Roles","משרות"]]){const link=document.createElement("a");link.href=href;link.textContent=text(en,iw);nav.append(link);}
 }
