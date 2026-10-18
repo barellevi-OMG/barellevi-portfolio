@@ -59,6 +59,7 @@ try{
   await page.locator('.case-node').first().waitFor();
   assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
   await page.locator('.case-mode').nth(2).click();
+  console.log('HE CASE DEBUG', JSON.stringify({errors,hasModel:await page.evaluate(()=>Boolean(window.CASE_MODEL)),title:await page.locator('#case-view-title').textContent(),view:await page.locator('.case-mode').nth(2).textContent()}));
   assert.match(await page.locator('#case-view-title').innerText(),/גיבוי/);
   await page.screenshot({path:'artifacts/16-hebrew-proxmox-case.png',fullPage:true,animations:'disabled'});
   await page.goto('http://127.0.0.1:4190/he/examples/network-design/',{waitUntil:'domcontentloaded'});
