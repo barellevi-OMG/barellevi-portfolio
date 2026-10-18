@@ -8,7 +8,8 @@
 - [x] Add case-study overlays, role tabs, paths and conceptual interactive diagnostic.
 - [x] Add preliminary noindex/noarchive and private review notice.
 - [x] Create developer documentation and dependency-free validation.
-- [ ] Verify rendered desktop and mobile visuals in a browser preview.
+- [x] Run headless Chromium desktop/mobile functional browser QA and save screenshots as private GitHub Actions artifacts.
+- [ ] Complete human visual review of those screenshots.
 - [ ] Review project attribution and resolve ownership with user.
 - [ ] Request employer/client permission for individual public case studies.
 - [ ] Replace generic representative images with authorized project photographs where available.
