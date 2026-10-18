@@ -98,6 +98,18 @@
     if(nav){const a=document.createElement("a");a.href="#hardware";a.textContent="Real hardware";nav.insertBefore(a,nav.querySelector('a[href="#lab"]'));}
     enableImageFallbacks($("#hardware"));
   }
+  function renderFieldStudies(){
+    if(document.querySelector("#field-studies"))return;
+    const cases=[
+      ["proxmox-ha-san","Virtualization, SAN & HA","Reported cluster, quorum and scoped recovery work, with explicit production-readiness limits."],
+      ["network-diagnostics","Network diagnostics","Observe, isolate and validate a bottleneck using controlled path comparisons."],
+      ["security-observability","Security observability","Wazuh, OpenSearch and Grafana — from events to meaningful operator context."]
+    ];
+    const items=cases.map((c,i)=>'<article class="featured-study"><a href="/cases/'+c[0]+'/"><span class="featured-study-tag">FIELD STUDY / 0'+(i+1)+'</span><span class="featured-study-art" aria-hidden="true">'+["▦","↳","◇"][i]+'</span><h3>'+c[1]+'</h3><p>'+c[2]+'</p><span class="featured-study-link">EXPLORE INTERACTIVE CASE STUDY ↗</span></a></article>').join("");
+    const html='<section class="featured-studies section-wrap" id="field-studies" aria-labelledby="field-studies-title"><div class="section-heading reveal"><div><p class="eyebrow">FEATURED FIELD STUDIES / INTERACTIVE</p><h2 id="field-studies-title">Beyond the<br><em>project list.</em></h2></div><p>Explore technical architectures, practical decisions and boundaries of documented evidence. Each case study distinguishes tested work from conceptual reference diagrams.</p></div><div class="featured-studies-grid">'+items+'</div></section>';
+    const lab=document.querySelector("#lab");if(lab)lab.insertAdjacentHTML("beforebegin",html);
+    const nav=document.querySelector(".header-nav");if(nav){const a=document.createElement("a");a.href="#field-studies";a.textContent="Field studies";const systems=nav.querySelector('a[href="#lab"]');if(systems)nav.insertBefore(a,systems);else nav.append(a);}
+  }
   function card(project, i) {
     const photo = model.images[project.visual] || model.images.circuits;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
@@ -165,6 +177,8 @@
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
       '<h3>Context</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>Contribution & scope</h3><p>'+escapeHTML(p.role)+'</p>'+
       '<h3>Technology</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
+      ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
+       '<p><a class="modal-deep-link" href="/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '<div class="review-notice"><span>● ARCHITECTURAL OVERVIEW</span><p>'+escapeHTML(approvalText)+' Representative imagery is not a real project screenshot.</p></div>';
     enableImageFallbacks($("#dialog-body"));
     dialog.showModal();
@@ -216,7 +230,7 @@
     if(nav.getAttribute("href")==="/"){e.preventDefault();history.pushState({track:"all"},"","/");showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
   });
   window.addEventListener("popstate",()=>showTrack(fromLocation(),false));
-  const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();enableImageFallbacks();
+  const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();renderFieldStudies();enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
   if(navTrack!=="all" && path.startsWith("/for/")) {
     intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">TAILORED CAREER VIEW</span>');
