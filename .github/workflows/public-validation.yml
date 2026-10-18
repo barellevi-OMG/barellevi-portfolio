@@ -17,3 +17,4 @@ jobs:
       - run: node --check src/data.js
       - run: node --check src/app.js
       - run: node tests/public-check.mjs
+      - run: node tests/security-scan.mjs
