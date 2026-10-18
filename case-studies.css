@@ -61,3 +61,21 @@
 @media(max-width:1000px){.case-layout{grid-template-columns:1fr}.case-phases{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:740px){.case-header,.case-hero{display:flex;flex-direction:column;align-items:stretch}.case-hero{padding:65px 0;gap:25px}.case-hero-aside{padding:25px}.case-section{padding:64px 0}.case-head,.case-proof-grid{grid-template-columns:1fr}.case-phases{grid-template-columns:1fr}.case-products{grid-template-columns:1fr}.case-phases li{min-height:auto}}
 @media(prefers-reduced-motion:reduce){.case-map-lines path{animation:none}.case-node{transition:none}}
+
+
+/* Backup lifecycle: confirmed progress, technically bounded claims */
+.backup-story{background:linear-gradient(145deg,#0e1d20,#0b1115 80%)}
+.backup-story-status{display:flex;align-items:center;flex-wrap:wrap;gap:15px;padding:18px 22px;margin:8px 0 24px;border:1px solid #60816c;background:#1b322b;border-radius:4px}
+.backup-story-status strong{font-size:12px;letter-spacing:.09em;color:#dfefde}.backup-story-status>span:last-child{font-size:11px;color:#adcaba}
+.backup-story-signal{width:9px;height:9px;border-radius:50%;background:#b4dbba;box-shadow:0 0 0 5px #7aab8b27}
+.backup-story-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.backup-story-flow article{min-width:0;position:relative;padding:29px 23px;background:#142628;border:1px solid #3f5f51;border-radius:5px}
+.backup-story-flow article:not(:last-child):after{content:"→";position:absolute;z-index:2;top:50%;right:-13px;font-size:17px;color:#ccdfcd;background:#142628}
+.backup-story-flow article>span,.backup-story-evidence>div>span{font-size:10px;letter-spacing:.14em;font-weight:700;color:#d4b892}
+.backup-story-flow h3{font-size:20px;font-weight:700;letter-spacing:-.045em;margin:25px 0 12px}
+.backup-story-flow p,.backup-story-evidence p{font-size:12px;line-height:1.8;color:#a9c0b2}
+.backup-story-evidence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:20px}
+.backup-story-evidence>div{padding:25px;border:1px solid #2f4940;background:#101d20;border-radius:4px}
+.backup-story-evidence strong{display:block;color:#e1eee3;font-size:14px;line-height:1.4;margin-top:19px}
+@media(max-width:980px){.backup-story-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.backup-story-flow article:after{display:none}}
+@media(max-width:660px){.backup-story-flow,.backup-story-evidence{grid-template-columns:1fr}.backup-story-flow article{padding:23px}}

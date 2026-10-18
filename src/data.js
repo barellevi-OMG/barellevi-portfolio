@@ -1,4 +1,4 @@
-/* Public site data: exact-model imagery is licensed/attributed externally, never actual site photography. */
+/* Public portfolio: user-confirmed 2026-10-18 backup completion; technical specifics not independently verified. */
 window.PORTFOLIO = {
   "tracks": {
     "all": {
@@ -127,11 +127,11 @@ window.PORTFOLIO = {
   ],
   "caseStudies": {
     "P11": {
-      "challenge": "A virtualization environment is more than a cluster: storage paths, quorum, host failure and independent recovery need to work together.",
-      "approach": "Separate compute, storage, management and backup concerns. Document dependencies, test one failure mode at a time and validate recovery from the service perspective.",
-      "evidence": "Architecture review, staged implementation and targeted failure tests appear in project records. The public blueprint is a fictional reference topology, not an image of the real installation.",
-      "limits": "The public summary does not claim blanket production readiness or universal failover coverage.",
-      "evidenceLabel": "Generalized infrastructure case study"
+      "challenge": "Virtualization resilience requires coordinated compute, shared storage, quorum, backup execution and practical recovery procedures.",
+      "approach": "Separate host failover from recoverability. Review storage paths and quorum behavior, implement backup/recovery workflows and validate results stage by stage.",
+      "evidence": "The earlier readiness report documented cluster checks, quorum/path testing, selected guest HA recovery, a saved backup and an isolated restore. The project owner confirmed on 18 October 2026 that the wider backup/recovery phase has subsequently been completed.",
+      "limits": "The specific backup product, independent storage arrangement, retention policy, protected guest count and latest recovery/RPO/RTO measurements have not been independently inspected in this portfolio update. Completion of backup work is distinct from blanket production approval.",
+      "evidenceLabel": "Virtualization and backup/recovery case study"
     },
     "P05": {
       "challenge": "Security and operational signals arrive in different formats and lose meaning without context and consistent field mapping.",
@@ -173,16 +173,17 @@ window.PORTFOLIO = {
     {
       "id": "P11",
       "slug": "virtualization-lab",
-      "title": "Virtualization & resilience",
-      "subtitle": "From isolated hosts to a testable system.",
-      "description": "Virtualization, high availability and storage-path validation, featuring a Dell EMC SCv3020 storage-array reference.",
-      "detail": "A layered reference approach to compute clusters, redundant connectivity, storage paths, monitoring and recovery procedures. The published diagram is intentionally generalized and does not represent an employer's topology. The Dell EMC SCv3020 product photo illustrates the identified storage model, not the actual installed hardware.",
-      "role": "Technical direction, infrastructure troubleshooting and validation planning",
+      "title": "Virtualization, SAN & recovery",
+      "subtitle": "Cluster resilience and completed backup implementation.",
+      "description": "Proxmox virtualization, shared storage, quorum and HA testing, with the backup/recovery phase confirmed complete by the project owner.",
+      "detail": "An engineering project across compute, SAN storage paths, quorum, virtualization recovery and completed backup/recovery work. An earlier technical report documented a saved backup and an isolated restore; on 18 October 2026 the project owner confirmed that the broader backup implementation was completed. Exact backup product, retention policy and recovery metrics were not independently rechecked for this publication. All diagrams are generalized, not as-built company architecture.",
+      "role": "Technical direction, physical infrastructure coordination, troubleshooting, backup/recovery project oversight and validation planning",
       "tech": [
         "Proxmox",
         "Virtualization",
         "Storage",
-        "HA"
+        "HA",
+        "Backup & recovery"
       ],
       "tracks": [
         "infrastructure",
@@ -190,7 +191,7 @@ window.PORTFOLIO = {
         "leadership"
       ],
       "visual": "scv3020",
-      "stage": "Infrastructure design",
+      "stage": "Infrastructure & recovery",
       "year": "2026",
       "featured": true
     },

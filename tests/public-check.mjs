@@ -62,3 +62,12 @@ for(const slug of ["proxmox-ha-san","network-diagnostics","security-observabilit
 assert.ok(js.includes("renderFieldStudies();"),"home and career deep dives missing");
 assert.ok(js.includes("EXPLORE INTERACTIVE FIELD STUDY"),"project dialog has no deep dive CTA");
 assert.ok(fs.existsSync("case-studies.js")&&fs.existsSync("case-studies.css"),"case styles/interactions missing");
+
+// Later first-hand project owner status supersedes the older backup gate.
+const c11=fs.readFileSync("cases/proxmox-ha-san/index.html","utf8");
+assert.ok(c11.includes("BACKUP & RECOVERY — COMPLETED"),"backup status not updated");
+assert.ok(c11.includes("Owner-confirmed"),"backup completion requires attribution");
+assert.ok(!c11.includes("BACKUP GATE"),"obsolete backup gate remains");
+assert.ok(!c11.includes("Pending acceptance"),"obsolete backup pending state remains");
+assert.ok(m.projects.find(p=>p.id==="P11").tech.includes("Backup & recovery"),"backup missing from portfolio model");
+assert.ok(m.caseStudies.P11.evidence.includes("confirmed"),"backup update uncredited");

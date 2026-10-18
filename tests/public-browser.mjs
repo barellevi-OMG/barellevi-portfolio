@@ -67,6 +67,11 @@ try{
   await page.goto('http://127.0.0.1:4190/',{waitUntil:'domcontentloaded'});
   await page.locator('.featured-study').first().waitFor();
   assert.equal(await page.locator('.featured-study').count(),3);
+  await page.goto('http://127.0.0.1:4190/cases/proxmox-ha-san/',{waitUntil:'domcontentloaded'});
+  await page.locator('#backup-recovery').waitFor();
+  assert.equal(await page.locator('.backup-story-flow article').count(),4);
+  assert.match(await page.locator('.backup-story-status').innerText(),/COMPLETED/);
+  await page.screenshot({path:'artifacts/13-backup-recovery-updated.png',fullPage:true,animations:'disabled'});
   for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
     await page.goto('http://127.0.0.1:4190/cases/'+slug+'/',{waitUntil:'domcontentloaded'});
     await page.locator('.case-node').first().waitFor();

@@ -101,7 +101,7 @@
   function renderFieldStudies(){
     if(document.querySelector("#field-studies"))return;
     const cases=[
-      ["proxmox-ha-san","Virtualization, SAN & HA","Reported cluster, quorum and scoped recovery work, with explicit production-readiness limits."],
+      ["proxmox-ha-san","Virtualization, SAN & HA","Cluster, SAN and HA testing, plus owner-confirmed completion of the backup and recovery phase."],
       ["network-diagnostics","Network diagnostics","Observe, isolate and validate a bottleneck using controlled path comparisons."],
       ["security-observability","Security observability","Wazuh, OpenSearch and Grafana — from events to meaningful operator context."]
     ];
