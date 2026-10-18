@@ -106,3 +106,58 @@ dialog{background:#122025;border:1px solid #536f62;color:#e8f2e9;width:min(780px
 @media(max-width:900px){.featured-studies-grid{grid-template-columns:1fr 1fr}.featured-study:last-child{grid-column:span 2}}
 @media(max-width:620px){.featured-studies-grid{grid-template-columns:1fr}.featured-study:last-child{grid-column:auto}.featured-studies{padding:65px 24px 75px}.featured-study>a{min-height:280px}}
 @media(prefers-reduced-motion:reduce){.featured-study{transition:none}}
+
+
+/* v0.7: four categories, career evidence and bilingual experience */
+#about,#categories,#job-links{scroll-margin-top:85px}
+.about-section,.category-overview,.job-links{padding-top:100px;padding-bottom:100px;border-top:1px solid #2f4840}
+.about-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.about-pillars article{display:flex;flex-direction:column;background:#121f23;border:1px solid #365147;padding:34px 30px;min-height:315px;border-radius:5px}
+.about-number,.cat-index,.job-card>a>span{font-size:10px;letter-spacing:.15em;color:#dcbf99;font-weight:800}
+.about-pillars h3{font:600 clamp(21px,2.3vw,30px)/1.2 var(--display);letter-spacing:-.05em;margin:40px 0 16px}
+.about-pillars p,.about-clarifier{font-size:12px;line-height:1.9;color:#abbcb1}
+.about-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:18px}
+.about-tags span{font-size:10px;color:#c6dfcc;padding:7px 9px;border:1px solid #456356;border-radius:3px}
+.about-clarifier{margin:20px 0 0}
+.category-overview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.category-overview-link{display:flex;flex-direction:column;min-height:278px;padding:24px;background:linear-gradient(145deg,#1a302a,#101b20 75%);border:1px solid #3d5b4d;border-radius:4px;transition:transform .22s,border-color .22s}
+.category-overview-link:hover{transform:translateY(-3px);border-color:#a9cbb5}
+.cat-mark{font-size:49px;line-height:1;margin:27px 0 18px;color:#c3dece}
+.category-overview-link strong{font:600 18px/1.3 var(--display);letter-spacing:-.045em;margin:0 0 11px}
+.category-overview-link small{font-size:11px;line-height:1.7;color:#9eb5a5}
+.cat-arrow{font-size:21px;color:#d5bc95;margin-top:auto;align-self:end}
+.project-grid{display:block}
+.project-category-group{margin:0 0 44px}
+.project-category-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #456053;padding:16px 0 20px}
+.project-category-head span{font-size:12px;letter-spacing:.065em;font-weight:800;color:#d6e6d8}
+.project-category-head small{font-size:11px;color:#a4b6a8}
+.project-category-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.job-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.job-card{border:1px solid #355246;background:#121f23;border-radius:5px;padding:0;display:flex;flex-direction:column;min-height:195px}
+.job-card>a{padding:25px 27px 12px;display:flex;flex-direction:column;gap:11px;flex:1}
+.job-card strong{font-size:19px;line-height:1.25;letter-spacing:-.02em}
+.job-card small{font-size:11px;line-height:1.75;color:#9eb4a6}
+.job-card button{align-self:flex-start;border:1px solid #456452;background:transparent;color:#d4e7d8;font-size:11px;border-radius:3px;margin:5px 27px 22px;padding:9px 12px}
+.job-card button:hover{background:#304b3b}
+.job-copy-feedback{color:#c3ddca;font-size:11px;overflow-wrap:anywhere;min-height:1em}
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;border:1px solid #7b9c8b;background:#182723;color:#e1eadd;border-radius:5px;padding:10px 13px;font-size:12px;font-weight:800;white-space:nowrap}
+.lang-switch:hover{background:#2c4638}
+.site-header{height:auto;min-height:90px;flex-wrap:wrap;gap:16px;padding-top:15px;padding-bottom:15px}
+.header-nav{gap:12px;flex-wrap:wrap;justify-content:center;max-width:610px}
+.header-nav a{white-space:nowrap}
+.header-actions{gap:11px}
+@media(max-width:1180px){.category-overview-grid{grid-template-columns:repeat(2,1fr)}.site-header{gap:13px}.header-nav{order:3;width:100%;max-width:100%;justify-content:flex-start;margin-left:0;overflow-x:auto;flex-wrap:nowrap;padding-bottom:9px}.header-actions{margin-left:auto}}
+@media(max-width:900px){.about-pillars{grid-template-columns:1fr 1fr}.about-pillars article:last-child{grid-column:span 2}.project-category-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.about-section,.category-overview,.job-links{padding-top:69px;padding-bottom:70px}.about-pillars,.category-overview-grid,.job-grid,.project-category-cards{grid-template-columns:1fr}.about-pillars article:last-child{grid-column:auto}.about-pillars article{min-height:unset}.category-overview-link{min-height:216px}.cat-mark{margin:15px 0}.site-header{padding-left:20px;padding-right:20px}.availability{display:none}.header-nav{gap:20px}.project-category-head span{font-size:11px}.project-card.wide{grid-column:auto}}
+html[lang="he"]{font-family:Arial,"Noto Sans Hebrew",sans-serif}
+html[lang="he"] body,html[lang="he"] button{font-family:Arial,"Noto Sans Hebrew",sans-serif}
+html[lang="he"] .project-click,html[lang="he"] .modal-content{text-align:start}
+html[lang="he"] .header-nav,html[lang="he"] .header-actions{margin-left:0}
+html[lang="he"] .header-nav{margin-right:auto}
+html[lang="he"] .section-heading h2,html[lang="he"] .hero h1,html[lang="he"] .about-pillars h3,html[lang="he"] .category-overview-link strong{letter-spacing:-.035em}
+html[lang="he"] .about-number,html[lang="he"] .cat-index,html[lang="he"] .job-card>a>span{letter-spacing:0}
+html[lang="he"] .project-topline,html[lang="he"] .project-tags,html[lang="he"] .component-facts{direction:rtl}
+html[lang="he"] .model-number,html[lang="he"] .model-card-text h3,html[lang="he"] .brand-wordmark,html[lang="he"] .job-card strong:lang(en){direction:ltr;unicode-bidi:isolate}
+html[lang="he"] .site-header .brand{direction:ltr}
+html[lang="he"] .hero-orbit,html[lang="he"] .diagram,html[lang="he"] .component-photo{direction:ltr}
+@media(prefers-reduced-motion:reduce){.category-overview-link{transition:none}}
