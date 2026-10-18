@@ -41,6 +41,10 @@ All routes use `_redirects` to load `index.html`; the router reads `location.pat
 `docs/` — requirements, approvals, decisions and handoff notes.
 `tests/check.mjs` — dependency-free validation.
 
+## Browser QA
+
+GitHub Actions run [Private browser visual QA](https://github.com/barellevi-OMG/barellevi-portfolio/actions/runs/39143452332) **passed** on 2026-10-18, checking desktop/mobile layouts, direct job route refresh, career filtering, case-study dialog and simulated diagnostics. Private screenshot artifacts are attached to that run (7-day retention). This is automated browser QA, not a completed human visual audit.
+
 ## Preview and deployment
 
 This branch is **not deployed**. After approval and removal of restricted case studies, connect a static host to the approved release branch. Cloudflare Pages is a low-cost candidate. Configure an SPA fallback, verify HTTPS and custom domain, then remove the preview labels and noindex directives **only after final content review**.
