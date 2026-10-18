@@ -48,7 +48,7 @@ for(const name of ['mobileye-infrastructure','mobileye-technical-operations','te
 assert.ok(!js.includes('PRIVATE PREVIEW'),'public frontend cannot retain preview badge');
 assert.ok(!js.includes('CASE STUDIES IN REVIEW'),'public copy should say projects');
 assert.ok(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://barellevi.com/sitemap.xml'));
-assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,14);
+assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,18);
 
 for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
   const p="cases/"+slug+"/index.html";
@@ -96,3 +96,9 @@ for(const route of ['','infrastructure/','automation/','operations/','leadership
 for(const script of ['src/locale.js','src/experience.js','src/he-ui.js'])assert.ok(fs.existsSync(script));
 assert.ok(fs.readFileSync('src/app.js','utf8').includes('p.primaryCategory===track'));
 assert.ok(fs.readFileSync('src/app.js','utf8').includes('job.ids.includes(p.id)'));
+
+for(const slug of ['proxmox-ha-san','network-diagnostics','security-observability']){
+ const p='he/cases/'+slug+'/index.html';assert.ok(fs.existsSync(p),p);
+ assert.ok(fs.readFileSync(p,'utf8').includes('src/he-case.js'));
+}
+assert.ok(fs.readFileSync('he/examples/network-design/index.html','utf8').includes('src/he-blueprint.js'));
