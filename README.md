@@ -1,6 +1,6 @@
 # Bar-El Levi — Technology Portfolio
 
-A private, editorial portfolio preview for **barellevi.com**. One experience, four role-oriented views, a reusable project catalog, and a conceptual interactive diagnostic lab.
+A private, editorial portfolio prototype for **barellevi.com**. One experience, four role-oriented views, a reusable project catalog, and a conceptual interactive diagnostic lab.
 
 > **PRIVATE REVIEW BUILD — NOT CLEARED FOR EXTERNAL PUBLICATION.**
 > No deployment, DNS changes, or employer content publication has been authorized.
@@ -12,6 +12,9 @@ A private, editorial portfolio preview for **barellevi.com**. One experience, fo
 - Sixteen conservatively worded project previews, grouped by Infrastructure, Automation, Technical Operations, and Leadership.
 - Photos are representative stock images of physical components, **not photos of actual project environments**.
 - Interactive project overlays and a three-step simulated network diagnostic.
+- Four-layer interactive component explorer, role-specific hero headlines, and five structured evidence-conscious technical deep dives.
+- Hardware-photography fallback to local schematic SVGs.
+- See `docs/DESIGN_BRIEF.md` and `docs/SESSION_LOG.md` for the updated design and iteration history.
 - Career-specific paths (SPA rewrites required).
 - robots noindex and Cloudflare Pages headers suppress crawling, **not access control**. Never deploy unapproved data.
 
