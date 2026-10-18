@@ -20,6 +20,61 @@
     const pathname = location.pathname.replace(/\/+$/,"").split("/").filter(Boolean);
     return routes[pathname[0]] || (pathname[0] === "for" ? recruitmentRoutes[pathname[1]] : null) || "all";
   }
+  function enableImageFallbacks(root=document) {
+    $('img[src^="https://images.unsplash.com"]',root).forEach(img=>{
+      if(img.dataset.fallbackBound)return;
+      img.dataset.fallbackBound="true";
+      img.addEventListener("error",()=>{
+        if(img.dataset.localFallbackApplied==="true")return;
+        img.dataset.localFallbackApplied="true";
+        img.classList.add("image-fallback");
+        img.src=img.dataset.fallback || "/assets/server-stack.svg";
+        img.alt="Conceptual vector illustration; source photograph unavailable";
+      });
+    });
+  }
+  function showProfile(track) {
+    const p = model.profiles?.[track] || model.profiles.all;
+    const h = $("#hero-title"), e = $(".hero-copy .eyebrow"), sub = $(".hero-subtitle"), kicker = $("#role-kicker");
+    h.innerHTML = p.title; sub.textContent = p.subtitle;
+    e.innerHTML='<span class="line-decor"></span> '+escapeHTML(p.eyebrow);
+    kicker.textContent=p.note;
+    const meta=document.querySelector('meta[name="description"]');
+    if(meta)meta.content=p.note+" — "+p.subtitle;
+  }
+  function showComponent(key) {
+    const c=model.components.find(x=>x.key===key);
+    if(!c)return;
+    $(".component-tab").forEach(tab=>{
+      const selected=tab.dataset.component===key;
+      tab.classList.toggle("active",selected);
+      tab.setAttribute("aria-selected",String(selected));
+      tab.tabIndex=selected?0:-1;
+    });
+    $("#component-photo").src=model.images[c.photo];
+    $("#component-photo").alt="Representative technology photograph: "+c.title;
+    $("#component-photo").dataset.fallback=c.visual;
+    $("#component-photo").dataset.localFallbackApplied="false";
+    $("#component-photo").classList.remove("image-fallback");
+    $("#component-schematic").src=c.visual;
+    $("#component-schematic").alt="Conceptual illustration: "+c.title;
+    $("#component-stage-number").textContent=c.number;
+    $("#component-number").textContent=c.number+" / 04";
+    $("#component-title").textContent=c.title;
+    $("#component-caption").textContent=c.caption;
+    $("#component-facts").innerHTML=c.facts.map(x=>'<span>'+escapeHTML(x)+'</span>').join("");
+    $("#component-quote").textContent=c.accent;
+    enableImageFallbacks($("#component-panel"));
+  }
+  $(".component-tab").forEach(tab=>tab.addEventListener("click",()=>showComponent(tab.dataset.component)));
+  $(".component-menu").addEventListener("keydown",event=>{
+    if(!["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+    event.preventDefault();
+    const tabs=$(".component-tab"),idx=tabs.indexOf(document.activeElement);
+    const delta=["ArrowDown","ArrowRight"].includes(event.key)?1:-1;
+    const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(idx+delta+tabs.length)%tabs.length;
+    tabs[next].focus();showComponent(tabs[next].dataset.component);
+  });
   function card(project, i) {
     const photo = model.images[project.visual] || model.images.circuits;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
@@ -46,9 +101,18 @@
     const projects = model.projects.filter((p) => track === "all" || p.tracks.includes(track));
     projects.sort((a,b) => Number(Boolean(b.featured))-Number(Boolean(a.featured)));
     cardArea.innerHTML = projects.map(card).join("");
+    showProfile(track);
+    enableImageFallbacks(cardArea);
     if(push && location.pathname !== linkFor(track)) history.pushState({track:track},"",linkFor(track));
     document.title = (track==="all"?"Bar-El Levi":cfg.label+" — Bar-El Levi")+" | Technology Portfolio";
     observeReveal();
+  }
+  function caseStudyMarkup(project){
+    const c=model.caseStudies?.[project.id];
+    if(!c)return '<div class="case-study-placeholder">DEEP DIVE / More details and source validation are being collected.</div>';
+    const rows=[["The challenge",c.challenge],["The approach",c.approach],["Evidence — not independently retested",c.evidence],["Still to verify",c.limits]];
+    return '<div class="case-study-block"><span class="case-study-eyebrow">FIELD STUDY / '+escapeHTML(c.evidenceLabel)+'</span>'+
+      rows.map(([title,value])=>'<div class="case-study-row"><strong>'+escapeHTML(title)+'</strong><p>'+escapeHTML(value)+'</p></div>').join("")+'</div>';
   }
   function openProject(id) {
     const p = model.projects.find(p=>p.id===id);
@@ -59,9 +123,10 @@
       '<div class="modal-eyebrow">'+escapeHTML(p.id)+' / SELECTED WORK / '+escapeHTML(p.year)+'</div>'+
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
-      '<h3>Context</h3><p>'+escapeHTML(p.detail)+'</p><h3>Contribution & scope</h3><p>'+escapeHTML(p.role)+'</p>'+
+      '<h3>Context</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>Contribution & scope</h3><p>'+escapeHTML(p.role)+'</p>'+
       '<h3>Technology</h3><div class="project-tags modal-tags">'+t+'</div>'+
       '<div class="review-notice"><span>● EDITORIAL REVIEW</span><p>'+escapeHTML(approvalText)+'. Illustrative imagery is not a real project screenshot. Achievements and ownership have not been independently re-tested.</p></div>';
+    enableImageFallbacks($("#dialog-body"));
     dialog.showModal();
     $(".modal-close",dialog).focus();
   }
@@ -111,7 +176,7 @@
     if(nav.getAttribute("href")==="/"){e.preventDefault();history.pushState({track:"all"},"","/");showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
   });
   window.addEventListener("popstate",()=>showTrack(fromLocation(),false));
-  const navTrack=fromLocation();showTrack(navTrack,false);step(0);
+  const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
   if(navTrack!=="all" && path.startsWith("/for/")) {
     intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">CURATED CAREER VIEW — PRIVATE PREVIEW</span>');
