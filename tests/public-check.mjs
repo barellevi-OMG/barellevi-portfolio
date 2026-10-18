@@ -49,3 +49,16 @@ assert.ok(!js.includes('PRIVATE PREVIEW'),'public frontend cannot retain preview
 assert.ok(!js.includes('CASE STUDIES IN REVIEW'),'public copy should say projects');
 assert.ok(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://barellevi.com/sitemap.xml'));
 assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,6);
+
+for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
+  const p="cases/"+slug+"/index.html";
+  assert.ok(fs.existsSync(p),"missing detailed project page "+p);
+  const page=fs.readFileSync(p,"utf8");
+  assert.ok(page.includes("window.CASE_MODEL="),"missing interactive model on "+slug);
+  assert.ok(page.includes('class="case-node"'),"no architecture nodes on "+slug);
+  assert.ok(page.includes('rel="canonical"'),"no canonical URL on "+slug);
+  assert.ok(fs.readFileSync("sitemap.xml","utf8").includes("/cases/"+slug+"/"));
+}
+assert.ok(js.includes("renderFieldStudies();"),"home and career deep dives missing");
+assert.ok(js.includes("EXPLORE INTERACTIVE FIELD STUDY"),"project dialog has no deep dive CTA");
+assert.ok(fs.existsSync("case-studies.js")&&fs.existsSync("case-studies.css"),"case styles/interactions missing");
