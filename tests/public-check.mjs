@@ -48,7 +48,7 @@ for(const name of ['mobileye-infrastructure','mobileye-technical-operations','te
 assert.ok(!js.includes('PRIVATE PREVIEW'),'public frontend cannot retain preview badge');
 assert.ok(!js.includes('CASE STUDIES IN REVIEW'),'public copy should say projects');
 assert.ok(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://barellevi.com/sitemap.xml'));
-assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,9);
+assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,14);
 
 for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
   const p="cases/"+slug+"/index.html";
@@ -71,3 +71,28 @@ assert.ok(!c11.includes("BACKUP GATE"),"obsolete backup gate remains");
 assert.ok(!c11.includes("Pending acceptance"),"obsolete backup pending state remains");
 assert.ok(m.projects.find(p=>p.id==="P11").tech.includes("Backup & recovery"),"backup missing from portfolio model");
 assert.ok(m.caseStudies.P11.evidence.includes("confirmed"),"backup update uncredited");
+
+const vmh=await import('node:vm');
+const localeSource=fs.readFileSync('src/locale.js','utf8');
+const localModel=structuredClone(m);
+const hebrewTest={window:{PORTFOLIO:localModel},location:{pathname:'/he/for/technical-leadership/'},document:{documentElement:{},body:{classList:{add(){}}}}};
+vmh.runInNewContext(localeSource,hebrewTest,{timeout:2000});
+assert.equal(hebrewTest.window.SITE_LANG,'he');
+assert.equal(hebrewTest.window.SITE_PREFIX,'/he');
+assert.equal(hebrewTest.window.PORTFOLIO.projects.filter(p=>p.primaryCategory==='leadership').length,4);
+assert.deepEqual([...new Set(hebrewTest.window.PORTFOLIO.projects.map(p=>p.primaryCategory))].sort(),['automation','infrastructure','leadership','operations']);
+assert.equal(hebrewTest.window.PORTFOLIO.projects.length,16);
+for(const [id,job] of Object.entries(hebrewTest.window.SITE_JOB_PAGES)){
+ assert.ok(fs.existsSync('for/'+id+'/index.html'));
+ assert.ok(fs.existsSync('he/for/'+id+'/index.html'));
+ assert.ok(job.ids.length>=4,'job selection too narrow: '+id);
+}
+for(const route of ['','infrastructure/','automation/','operations/','leadership/']){
+ const path='he/'+route+'index.html';const page=fs.readFileSync(path,'utf8');
+ assert.match(page,/<html lang="he" dir="rtl">/,'RTL document markup missing: '+path);
+ assert.ok(page.includes('src/locale.js'),'translation module absent: '+path);
+ assert.ok(page.includes('src/experience.js'),'career bio/links absent: '+path);
+}
+for(const script of ['src/locale.js','src/experience.js','src/he-ui.js'])assert.ok(fs.existsSync(script));
+assert.ok(fs.readFileSync('src/app.js','utf8').includes('p.primaryCategory===track'));
+assert.ok(fs.readFileSync('src/app.js','utf8').includes('job.ids.includes(p.id)'));
