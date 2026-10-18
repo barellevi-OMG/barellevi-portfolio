@@ -32,6 +32,10 @@ for(const p of data.projects){
   assert.ok(data.images[p.visual],'photo source exists: '+p.id);
 }
 for(const f of ['index.html','styles.css','src/app.js','assets/mark.svg','assets/network-switch.svg','assets/server-stack.svg','assets/terminal.svg','assets/cluster.svg','assets/automation-flow.svg','_redirects','_headers']) assert.ok(fs.existsSync(f),f);
+const appSource=fs.readFileSync('src/app.js','utf8');
+assert.ok(appSource.includes('$(".component-tab").forEach'),'component tabs must use querySelectorAll');
+assert.ok(appSource.includes("$('img[src^="),'image fallback must use querySelectorAll');
+assert.ok(appSource.includes('const tabs=$(".component-tab"),idx'),'keyboard tabs must use querySelectorAll');
 const html=fs.readFileSync('index.html','utf8');
 for(const id of ['project-grid','project-dialog','lab-steps','track-intro','lab-progress']) assert.ok(html.includes('id="'+id+'"'),id);
 assert.ok(html.includes('noindex'),'draft must prohibit indexing');
