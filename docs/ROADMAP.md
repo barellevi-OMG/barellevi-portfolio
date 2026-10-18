@@ -4,8 +4,9 @@
 - [x] Create isolated development branch.
 - [x] Build English-first responsive editorial homepage.
 - [x] Map all 16 summarized projects into common role-focused data.
-- [x] Add stock hardware imagery with attribution and custom SVG illustrations.
+- [x] Add and verify hardware image sources, document attribution, and provide local SVG fallbacks.
 - [x] Add case-study overlays, role tabs, paths and conceptual interactive diagnostic.
+- [x] Add four interactive hardware/component views, role-specific hero text and five evidence-aware deep dives.
 - [x] Add preliminary noindex/noarchive and private review notice.
 - [x] Create developer documentation and dependency-free validation.
 - [x] Run headless Chromium desktop/mobile functional browser QA and save screenshots as private GitHub Actions artifacts.
