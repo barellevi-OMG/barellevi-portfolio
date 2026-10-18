@@ -16,9 +16,9 @@ function walk(dir) {
 }
 walk('.');
 // Public infrastructure endpoint addresses are published by GitHub itself.
-// Only these exact documented CDN addresses and local loopback are exempt;
+// Only these exact documented Pages CDN addresses, Cloudflare's public DNS resolver and local loopback are exempt;
 // all other literal IPv4 values remain flagged for manual inspection.
-const publishedPagesAddresses=new Set(['127.0.0.1','185.199.108.153','185.199.109.153','185.199.110.153','185.199.111.153']);
+const publishedPagesAddresses=new Set(['127.0.0.1','1.1.1.1','185.199.108.153','185.199.109.153','185.199.110.153','185.199.111.153']);
 const checks=[
   ['IPv4 address',/(?<![\d.])(?:\d{1,3}\.){3}\d{1,3}(?![\d.])/g, x=>!publishedPagesAddresses.has(x)],
   ['MAC address',/\b(?:[a-f0-9]{2}:){5}[a-f0-9]{2}\b/gi],
