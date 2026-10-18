@@ -51,7 +51,7 @@ set("#architecture .case-head h2","הארכיטקטורה<br><em>במבחן.</em
 set("#architecture .case-head > p","בחר זווית ניתוח ורכיב כדי להבין את תפקידו. התרשים הוא המחשה מקצועית.");
 set(".case-map-head span:first-child","מודל מערכת / להמחשה");set(".case-map-head span:last-child","שכבות אינטראקטיביות ◈");
 set(".case-map-foot","תרשים להמחשה בלבד — ללא כתובות, שמות שרתים או הרשאות ייצור");
-set(".case-detail > .case-label:first-child","זווית ניתוח / 01");
+set(".case-detail > .case-label:first-child",'זווית ניתוח / <span id="case-view-count">01</span>',true);
 set(".case-detail > .case-label:nth-of-type(2)","רכיב נבחר");
 set(".case-hero .case-label",slug==="proxmox-ha-san"?"תשתיות / שרידות וגיבויים":slug==="network-diagnostics"?"תפעול / אבחון רשת":"ניטור / מערכות אבטחה");
 for(let i=0;i<3;i++){const b=$$('.case-mode')[i];if(b)b.textContent="0"+(i+1)+" / "+t.modes[i][0];}
