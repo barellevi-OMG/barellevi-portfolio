@@ -1,0 +1,31 @@
+name: Verify live portfolio routing
+on:
+  push:
+    branches:
+      - gh-pages
+    paths:
+      - .github/workflows/check-domain.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: DNS and HTTPS checks from an external GitHub runner
+        shell: bash
+        run: |
+          echo '--- Nameservers ---'
+          dig +short NS barellevi.com @1.1.1.1 || true
+          for host in barellevi.com www.barellevi.com; do
+            echo "--- Host: $host; A ---"
+            dig +short A "$host" @1.1.1.1 || true
+            echo "--- Host: $host; CNAME ---"
+            dig +short CNAME "$host" @1.1.1.1 || true
+            echo "--- Host: $host; HTTP ---"
+            curl -ILsS --connect-timeout 8 --max-time 15 -o /dev/null -w 'Status: %{http_code}; final URL: %{url_effective}; SSL verified: %{ssl_verify_result}; error: %{errormsg}\n' "https://$host/" || true
+          done
+          echo '--- Pages default host ---'
+          dig +short A barellevi-omg.github.io @1.1.1.1 || true
+          curl -ILsS --connect-timeout 8 --max-time 15 -o /dev/null -w 'Status: %{http_code}; final URL: %{url_effective}; SSL verified: %{ssl_verify_result}; error: %{errormsg}\n' 'https://barellevi-omg.github.io/barellevi-portfolio/' || true
