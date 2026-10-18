@@ -21,7 +21,7 @@
     return routes[pathname[0]] || (pathname[0] === "for" ? recruitmentRoutes[pathname[1]] : null) || "all";
   }
   function enableImageFallbacks(root=document) {
-    $('img[src^="https://images.unsplash.com"]',root).forEach(img=>{
+    $$('img[src^="https://images.unsplash.com"]',root).forEach(img=>{
       if(img.dataset.fallbackBound)return;
       img.dataset.fallbackBound="true";
       img.addEventListener("error",()=>{
@@ -45,7 +45,7 @@
   function showComponent(key) {
     const c=model.components.find(x=>x.key===key);
     if(!c)return;
-    $(".component-tab").forEach(tab=>{
+    $$(".component-tab").forEach(tab=>{
       const selected=tab.dataset.component===key;
       tab.classList.toggle("active",selected);
       tab.setAttribute("aria-selected",String(selected));
@@ -66,11 +66,11 @@
     $("#component-quote").textContent=c.accent;
     enableImageFallbacks($("#component-panel"));
   }
-  $(".component-tab").forEach(tab=>tab.addEventListener("click",()=>showComponent(tab.dataset.component)));
+  $$(".component-tab").forEach(tab=>tab.addEventListener("click",()=>showComponent(tab.dataset.component)));
   $(".component-menu").addEventListener("keydown",event=>{
     if(!["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
     event.preventDefault();
-    const tabs=$(".component-tab"),idx=tabs.indexOf(document.activeElement);
+    const tabs=$$(".component-tab"),idx=tabs.indexOf(document.activeElement);
     const delta=["ArrowDown","ArrowRight"].includes(event.key)?1:-1;
     const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(idx+delta+tabs.length)%tabs.length;
     tabs[next].focus();showComponent(tabs[next].dataset.component);
