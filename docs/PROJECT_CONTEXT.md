@@ -2,7 +2,7 @@
 
 **Project:** barellevi.com — Bar-El Levi technology portfolio  
 **Date:** 2026-10-18  
-**Phase:** v0.3 design-and-content prototype on private development branch  
+**Phase:** v0.4 visual/content refinement on private development branch  
 **Hosting:** not selected/configured; domain reportedly purchased by the user  
 **Repository:** barellevi-OMG/barellevi-portfolio (private)
 
@@ -30,7 +30,7 @@ Static website: index.html, styles.css, src/data.js, src/app.js. No build step. 
 
 ## State
 
-GitHub writes are connected and verified. Branch develop/portfolio-v0.3 is used for all work. Main remains untouched. Interactive filters and project detail dialog, diagnostic lab, motion, noindex preview mode and mobile CSS are implemented. GitHub Actions visual browser QA passed on 2026-10-18: desktop/mobile screenshots, direct route, track filters, project dialog and lab interaction. Publication clearance remains open.
+GitHub writes are connected and verified. Branch develop/portfolio-v0.3 is used for all work. Main remains untouched. Interactive filters, hardware explorer, five evidence-aware case studies, career-specific hero language, project detail dialog, diagnostic lab, motion, noindex preview mode and mobile CSS are implemented. GitHub Actions visual browser QA passed again on 2026-10-18 after the component selector repair: desktop/mobile screenshots, direct role routes, role headline, component explorer, project dialog and lab interaction. Publication clearance remains open.
 
 ## Next action
 
