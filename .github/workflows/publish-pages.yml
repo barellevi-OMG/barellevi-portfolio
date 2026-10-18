@@ -31,7 +31,7 @@ jobs:
       - name: Prepare deploy-only static directory
         run: |
           mkdir -p _site
-          cp index.html 404.html CNAME .nojekyll styles.css _site/
+          cp index.html 404.html CNAME .nojekyll styles.css robots.txt sitemap.xml _site/
           cp -R src assets examples infrastructure automation operations leadership for _site/
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

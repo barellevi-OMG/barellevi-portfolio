@@ -120,14 +120,24 @@
       button.tabIndex = selected ? 0 : -1;
     });
     const cfg = model.tracks[track];
-    intro.innerHTML = '<span>'+escapeHTML(cfg.label)+'</span><p>'+escapeHTML(cfg.desc)+'</p><span class="counter">'+(track==="all"?model.projects.length:model.projects.filter(p=>p.tracks.includes(track)).length)+' CASE STUDIES IN REVIEW</span>';
+    intro.innerHTML = '<span>'+escapeHTML(cfg.label)+'</span><p>'+escapeHTML(cfg.desc)+'</p><span class="counter">'+(track==="all"?model.projects.length:model.projects.filter(p=>p.tracks.includes(track)).length)+' PROJECTS</span>';
     const projects = model.projects.filter((p) => track === "all" || p.tracks.includes(track));
     projects.sort((a,b) => Number(Boolean(b.featured))-Number(Boolean(a.featured)));
     cardArea.innerHTML = projects.map(card).join("");
     showProfile(track);
     enableImageFallbacks(cardArea);
     if(push && location.pathname !== linkFor(track)) history.pushState({track:track},"",linkFor(track));
-    document.title = (track==="all"?"Bar-El Levi":cfg.label+" — Bar-El Levi")+" | Technology Portfolio";
+    document.title = (track==="all"?"Bar-El Levi | Infrastructure, Automation & Technical Operations":cfg.label+" — Bar-El Levi | Technology Portfolio");
+    const canonicalUrl = "https://barellevi.com" + (location.pathname.endsWith("/")?location.pathname:location.pathname+"/");
+    const setMeta=(selector,value)=>{const el=document.querySelector(selector);if(el)el.content=value;};
+    const summary=document.querySelector('meta[name="description"]')?.content || "";
+    setMeta('meta[property="og:title"]',document.title);
+    setMeta('meta[property="og:description"]',summary);
+    setMeta('meta[property="og:url"]',canonicalUrl);
+    setMeta('meta[name="twitter:title"]',document.title);
+    setMeta('meta[name="twitter:description"]',summary);
+    const canonical=document.querySelector('link[rel="canonical"]');
+    if(canonical) canonical.href=canonicalUrl;
     observeReveal();
   }
   function hardwareInProject(project){
@@ -209,7 +219,7 @@
   const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
   if(navTrack!=="all" && path.startsWith("/for/")) {
-    intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">CURATED CAREER VIEW — PRIVATE PREVIEW</span>');
+    intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">TAILORED CAREER VIEW</span>');
   }
   const header=$("#site-header");let lastScrolled=-1;
   window.addEventListener("scroll",()=>{const y=scrollY;if(Math.abs(y-lastScrolled)>6){header.classList.toggle("scrolled",y>20);lastScrolled=y;}},{passive:true});
