@@ -27,6 +27,7 @@ jobs:
           node --check src/app.js
           node --check src/data.js
           node tests/public-check.mjs
+          node tests/security-scan.mjs
       - name: Prepare deploy-only static directory
         run: |
           mkdir -p _site
