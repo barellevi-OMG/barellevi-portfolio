@@ -169,3 +169,6 @@ html[lang="he"] .case-map-canvas,html[lang="he"] .bp-canvas{direction:ltr}
 html[lang="he"] .case-node,html[lang="he"] .bp-node{direction:rtl;text-align:center}
 html[lang="he"] .case-hero h1,html[lang="he"] .case-section h2{letter-spacing:-.04em}
 html[lang="he"] .case-language-link{border:1px solid #729486;padding:8px 12px;border-radius:4px}
+
+/* Make position-specific context genuinely visible. */
+.track-intro .tailored-note{display:inline-flex!important;border:1px solid #719789;padding:9px 13px;border-radius:3px;color:#d3e5d7;font-size:10px;font-weight:700;letter-spacing:.05em}
