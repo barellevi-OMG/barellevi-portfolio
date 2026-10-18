@@ -26,6 +26,8 @@ jobs:
             echo "--- Host: $host; HTTP ---"
             curl -ILsS --connect-timeout 8 --max-time 15 -o /dev/null -w 'Status: %{http_code}; final URL: %{url_effective}; SSL verified: %{ssl_verify_result}; error: %{errormsg}\n' "https://$host/" || true
           done
+          echo '--- GitHub Pages HTTPS direct edge comparison ---'
+          curl -ILsS --connect-timeout 8 --max-time 15 --resolve barellevi.com:443:185.199.108.153 -o /dev/null -w 'Status: %{http_code}; final URL: %{url_effective}; SSL verified: %{ssl_verify_result}; error: %{errormsg}\\n' 'https://barellevi.com/' || true
           echo '--- Pages default host ---'
           dig +short A barellevi-omg.github.io @1.1.1.1 || true
           curl -ILsS --connect-timeout 8 --max-time 15 -o /dev/null -w 'Status: %{http_code}; final URL: %{url_effective}; SSL verified: %{ssl_verify_result}; error: %{errormsg}\n' 'https://barellevi-omg.github.io/barellevi-portfolio/' || true
