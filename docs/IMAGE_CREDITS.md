@@ -1,15 +1,30 @@
-# Image references
+# Photography and component references
 
-Selected representative technology photographs served directly from Unsplash. No photograph is represented as depicting a real project, client, office or infrastructure environment.
+Photographs used in the private prototype are representative, third-party images. They do **not** show the user's hardware, a real deployment, or any employer environment. The SVG component illustrations in `assets/` are conceptual artworks made specifically for the prototype.
 
-| Illustration category | Source |
-|---|---|
-| Managed network switches and patch cables | https://unsplash.com/photos/c-lSQecD9oI |
-| Circuit board / small computer close-up | https://unsplash.com/photos/nePxBIvqUlU |
-| MacBook keyboard detail | https://unsplash.com/photos/XCx8jZXPXPU |
-| Server room racks | https://unsplash.com/photos/2JJ3wBHu4_0 |
-| Ceiling-mounted security camera | https://unsplash.com/photos/ujSsIk5iZmA |
+| Site category | Verified source / photographer | Usage |
+| --- | --- | --- |
+| Server racks | [Kevin Ache — A rack of servers in a server room](https://unsplash.com/photos/a-rack-of-servers-in-a-server-room-2JJ3wBHu4_0) | Homepage, compute, virtualization |
+| Network switching and rack cabling | [Tyler — A rack of electronic equipment in a dark room](https://unsplash.com/photos/a-rack-of-electronic-equipment-in-a-dark-room-OnI_TNcIv9U) | Network component and project images |
+| Dark electronic circuit board | [Vishnu Mohanan — Close up of dark blue circuit board](https://unsplash.com/photos/close-up-of-dark-blue-circuit-board-pfR18JNEMv8) | Automation, edge component, projects |
+| Security camera | [Adam Hornyak — Security camera mounted on a white wall](https://unsplash.com/photos/security-camera-mounted-on-a-white-wall-bf4kN7qk4ng) | Video-review project |
+| Keyboard | Existing Unsplash CDN reference — provenance confirmation still pending | Operator interface; replace if not reliable |
 
-The five photo asset URLs currently point to images.unsplash.com. Confirm licensing and accessibility during visual QA; keep attribution links.
+These four source photo pages were checked during the 18 October 2026 design review. Their corresponding image URLs were verified through direct photo links. Photograph licenses are stated on their Unsplash pages; see [Unsplash License](https://unsplash.com/license).
 
-Original vector drawings in /assets: server stack, network switch, terminal, connected cluster, automation flow and identity mark. They are **schematic illustrations**, not equipment models or accurate customer environments.
+Do not crop, caption, or imply these photographs are the source project's actual devices. For a commercial release, conduct a final image-usage rights and load-time review. Unsplash API users have additional attribution requirements; this site currently hotlinks known URLs without API calls.
+
+## Image-resilience behavior
+
+If an image fails, the site uses an original local schematic SVG fallback rather than rendering a browser broken-image icon. Automated browser QA should test both the photo-loaded and fallback paths.
+
+## Schematic files
+
+- `assets/server-stack.svg`: generic server rack
+- `assets/network-switch.svg`: generic network switch
+- `assets/terminal.svg`: conceptual terminal
+- `assets/cluster.svg`: connected infrastructure
+- `assets/automation-flow.svg`: generic automation flow
+- `assets/mark.svg`: monogram identity
+
+All are intentionally illustrative and contain no internal architecture or device identifiers.
