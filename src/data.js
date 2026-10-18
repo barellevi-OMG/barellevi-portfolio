@@ -16,6 +16,97 @@ window.PORTFOLIO = {
     servers: "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?auto=format&fit=crop&w=1000&q=82",
     camera: "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed?auto=format&fit=crop&w=1000&q=82"
   },
+  profiles: {
+    all: {
+      eyebrow:"ENGINEERING · OPERATIONS · SYSTEMS",
+      title:"From complexity<br>to <em>clarity.</em>",
+      subtitle:"I turn technical challenges into reliable, usable systems — bridging infrastructure, automation, product thinking, and the people who depend on them.",
+      note:"A cross-disciplinary technology portfolio"
+    },
+    infrastructure: {
+      eyebrow:"INFRASTRUCTURE · NETWORKS · RESILIENCE",
+      title:"Built for<br><em>resilience.</em>",
+      subtitle:"From physical hardware and networking to virtualization and observability — designing for systems that must keep working.",
+      note:"Infrastructure & systems engineering"
+    },
+    automation: {
+      eyebrow:"AUTOMATION · INTEGRATION · PRODUCT",
+      title:"Less friction.<br><em>More flow.</em>",
+      subtitle:"Designing practical automation, connected services, and interfaces that make complicated work feel simple.",
+      note:"Automation & applied AI"
+    },
+    operations: {
+      eyebrow:"DIAGNOSTICS · OPERATIONS · RELIABILITY",
+      title:"Find the signal.<br><em>Fix the system.</em>",
+      subtitle:"An evidence-led approach to troubleshooting, service recovery and real-world technical operations.",
+      note:"Technical operations & reliability"
+    },
+    leadership: {
+      eyebrow:"PRODUCT THINKING · TEAMS · EXECUTION",
+      title:"Ideas into<br><em>working systems.</em>",
+      subtitle:"Turning ambiguous problems into clear requirements, sound engineering decisions, and coordinated delivery.",
+      note:"Technical & product leadership"
+    }
+  },
+  components: [
+    {
+      key:"compute", number:"01",title:"Compute",detail:"The physical foundation",visual:"/assets/server-stack.svg",photo:"servers",
+      caption:"A hardware view of resources, isolation, recovery and capacity.",
+      facts:["Host lifecycle","Virtualization","Recovery paths"],accent:"A reliable service starts with an understood host."
+    },
+    {
+      key:"network",number:"02",title:"Network",detail:"The connective tissue",visual:"/assets/network-switch.svg",photo:"switches",
+      caption:"A signal path is only as strong as its weakest and least visible link.",
+      facts:["Layer boundaries","Connectivity","Observability"],accent:"Follow the packet, not the assumption."
+    },
+    {
+      key:"edge",number:"03",title:"Edge & devices",detail:"Where software touches reality",visual:"/assets/automation-flow.svg",photo:"circuits",
+      caption:"Physical inputs, local decisions, and graceful degradation.",
+      facts:["Sensors & state","Local control","Interoperability"],accent:"Make the physical/digital boundary legible."
+    },
+    {
+      key:"interface",number:"04",title:"Operator interface",detail:"The human control plane",visual:"/assets/terminal.svg",photo:"keyboard",
+      caption:"Make important actions comprehensible, safe and repeatable.",
+      facts:["Clear feedback","Human handoff","Accessible flow"],accent:"Complexity belongs behind the interface."
+    }
+  ],
+  caseStudies: {
+    P11: {
+      challenge:"Validation is difficult when storage paths, cluster behavior and recovery assumptions are interconnected.",
+      approach:"Reconcile the observed state, stage changes, and test specific failure paths rather than treating a design document as proof.",
+      evidence:"The 18 October readiness report records quorum, host/path-loss and shared-storage tests, plus HA recovery for one selected guest. These reported results were not rerun in this review.",
+      limits:"Independent backup acceptance, physical network redundancy and final production approval remain outstanding.",
+      evidenceLabel:"Recorded operational report"
+    },
+    P12: {
+      challenge:"Per-user delivery times, parallel messaging sessions and duplicate sends interact in ways that are easy to miss.",
+      approach:"Keep channel processes separate, persist scheduling preferences and duplicate-send state, and make recovery explicit.",
+      evidence:"Earlier deployment transcripts report 131 passing Telegram tests and working services. Current delivery health was not checked during the review.",
+      limits:"Ownership separation, current runtime layout, deployment revision and content permissions still need confirmation.",
+      evidenceLabel:"Recorded tests and service reports"
+    },
+    P02: {
+      challenge:"Calendar timing and device events create ordering, state and identity problems between local control and interface.",
+      approach:"Separate UI and control logic, keep scheduling in the control core, and validate a bounded prototype before promising vendor support.",
+      evidence:"A repository commit under the confirmed user identity reports 18 passing end-to-end tests for an earlier state; output was not independently inspected.",
+      limits:"The later specification does not prove installed hardware support or complete vendor integrations.",
+      evidenceLabel:"Repository evidence and recorded test claim"
+    },
+    P05: {
+      challenge:"Heterogeneous security events can be difficult to normalize, query and interpret without a clear operational view.",
+      approach:"Normalize events before display, validate query field types and tune visualization to the environment.",
+      evidence:"Dashboard and collector artifacts were observed. A 4 October chat reports single-node index health changing from yellow to green without deleting data; not rechecked.",
+      limits:"Live event-flow coverage, alert quality and newer requested integrations are not established.",
+      evidenceLabel:"Observed repository artifacts + operational report"
+    },
+    P14: {
+      challenge:"An interactive experience must maintain puzzle order and saved progress without exposing content ahead of time.",
+      approach:"Use a static browser application, validate persisted state and test navigation and date boundaries.",
+      evidence:"A local session dated 11 October reports a successful build, six passing tests and a ready deployment; tests were not independently repeated.",
+      limits:"Current public availability and personal media rights still need confirmation.",
+      evidenceLabel:"Recorded build and deployment report"
+    }
+  },
   projects: [
     {id:"P11",slug:"virtualization-lab",title:"Virtualization & resilience",subtitle:"From isolated hosts to a testable system.",description:"Exploring the decisions, dependencies, and validation steps behind an infrastructure modernization effort.",detail:"A systems-level study in making a virtualization environment observable and testable. Decisions are presented conceptually, without internal topology or production assertions.",role:"Technical direction, operational review, validation planning",tech:["Proxmox","Virtualization","Storage","HA"],tracks:["infrastructure","operations","leadership"],visual:"servers",stage:"Case-study review",approval:"employer",year:"2026",featured:true},
     {id:"P12",slug:"messaging-automation",title:"Messaging, on a schedule",subtitle:"Personalized delivery across two channels.",description:"A multi-channel messaging service shaped around language choice, local time, archives, and operational control.",detail:"A personal-project candidate using separate messaging processes, scheduling preferences, and operational recovery patterns. Current deployment and ownership separation need final confirmation.",role:"Product requirements, service boundaries, operational iteration",tech:["Node.js","Telegram","WhatsApp","PM2"],tracks:["automation","operations","leadership"],visual:"circuits",stage:"Previously operational",approval:"ownership",year:"2026",featured:true},
