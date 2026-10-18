@@ -63,6 +63,22 @@ try{
   assert.equal(await page.locator('#bp-map').getAttribute('data-mode'),'failover');
   assert.match(await page.locator('#bp-title').innerText(),/Compute/);
   await page.screenshot({path:'artifacts/05-recovery-simulation.png',fullPage:true,animations:'disabled'});
+
+  await page.goto('http://127.0.0.1:4190/',{waitUntil:'domcontentloaded'});
+  await page.locator('.featured-study').first().waitFor();
+  assert.equal(await page.locator('.featured-study').count(),3);
+  for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
+    await page.goto('http://127.0.0.1:4190/cases/'+slug+'/',{waitUntil:'domcontentloaded'});
+    await page.locator('.case-node').first().waitFor();
+    assert.equal(await page.locator('.case-node').count(),7);
+    assert.equal(await page.locator('.case-mode').count(),3);
+    await page.locator('.case-mode').nth(1).click();
+    assert.ok((await page.locator('#case-view-desc').innerText()).length>25);
+    await page.locator('.case-node').first().click();
+    assert.ok((await page.locator('#case-node-desc').innerText()).length>25);
+    await page.locator('.case-mode').nth(2).click();
+    await page.screenshot({path:'artifacts/11-'+slug+'-desktop.png',fullPage:true,animations:'disabled'});
+  }
   const phone=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1,reducedMotion:'reduce',isMobile:true,hasTouch:true});
   phone.on('pageerror',err=>errors.push(err.message));
   await phone.goto('http://127.0.0.1:4190/',{waitUntil:'domcontentloaded'});
@@ -77,6 +93,16 @@ try{
   await phone.getByRole('button',{name:/RECOVERY/}).click();
   assert.match(await phone.locator('#bp-title').innerText(),/Recovery/);
   await phone.screenshot({path:'artifacts/07-network-mobile.png',fullPage:true,animations:'disabled'});
+
+  for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
+    await phone.goto('http://127.0.0.1:4190/cases/'+slug+'/',{waitUntil:'domcontentloaded'});
+    await phone.locator('.case-node').first().waitFor();
+    const spill=await phone.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+    assert.ok(spill<=3,'mobile page overflow '+slug+': '+spill);
+    await phone.locator('.case-mode').nth(2).click();
+    await phone.screenshot({path:'artifacts/12-'+slug+'-mobile.png',fullPage:false,animations:'disabled'});
+  }
+  await phone.goto('http://127.0.0.1:4190/examples/network-design/',{waitUntil:'domcontentloaded'});
   const overflow=await phone.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
   assert.ok(overflow<=3,'unexpected horizontal overflow: '+overflow);
   assert.deepEqual(errors,[],'browser errors: '+errors.join(', '));
