@@ -7,6 +7,21 @@ const sandbox={window:{}};
 vm.runInNewContext(dataText,sandbox,{timeout:2000});
 const data=sandbox.window.PORTFOLIO;
 assert.equal(data.projects.length,16,'expected 16 source-review projects');
+assert.equal(data.components.length,4,'expected four interactive hardware views');
+assert.equal(new Set(data.components.map(x=>x.key)).size,4,'component identifiers unique');
+for(const c of data.components) {
+  assert.ok(data.images[c.photo],'component photo mapping: '+c.key);
+  assert.ok(fs.existsSync(c.visual.slice(1)),'component local schematic: '+c.key);
+  assert.ok(c.caption&&c.facts.length>=3,'component description: '+c.key);
+}
+for(const t of ['all','infrastructure','automation','operations','leadership']) {
+  assert.ok(data.profiles[t].title && data.profiles[t].subtitle,'hero narrative: '+t);
+}
+for(const [id,story] of Object.entries(data.caseStudies)) {
+  assert.ok(data.projects.some(p=>p.id===id),'case study tied to project: '+id);
+  for(const field of ['challenge','approach','evidence','limits','evidenceLabel'])
+    assert.ok(story[field],id+' case study lacks '+field);
+}
 assert.equal(new Set(data.projects.map(p=>p.id)).size,16,'unique project IDs');
 for(const key of ['all','infrastructure','automation','operations','leadership']) assert.ok(data.tracks[key]);
 for(const p of data.projects){
