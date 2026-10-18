@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore a conceptual network blueprint: segmentation, compute resilience, storage, backups and operational diagnostics. A technical portfolio example by Bar-El Levi.">
+<meta name="theme-color" content="#0b1115"><meta name="robots" content="index,follow">
+<title>Network architecture, explored — Bar-El Levi</title><link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.blueprint-page{--panel:#101a1f;--border:#2d4340;--text:#dbe8df;--mint:#b8d9c6;--amber:#d5b995}
+.bp-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px clamp(18px,5vw,65px);border-bottom:1px solid var(--border)}
+.bp-brand{font-size:12px;font-weight:800;letter-spacing:.18em}.bp-header a:last-child{font-size:12px;color:#bcd8c7;border:1px solid #3d6357;padding:11px 16px;border-radius:4px}
+.bp-inner{max-width:1420px;margin:0 auto;padding:68px clamp(18px,5vw,70px) 100px}
+.bp-eyebrow{font:700 10px/1.4 var(--font);color:var(--amber);letter-spacing:.19em}
+.bp-intro{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:end;margin:28px 0 44px}
+.bp-intro h1{font-size:clamp(48px,6.4vw,94px);line-height:1.04;font-weight:600;letter-spacing:-.07em;margin:0}
+.bp-intro h1 em{color:#b9dbc6}
+.bp-intro p{max-width:430px;color:#9eb3a9;line-height:1.9;font-size:15px;margin:0 0 8px}
+.bp-modebar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.bp-mode{border:1px solid #3a554c;padding:12px 19px;background:transparent;color:#9fbaaa;border-radius:4px;font-size:12px;font-weight:700;transition:.2s}
+.bp-mode:hover{background:#2a4338;color:white}.bp-mode.active{background:#c4decf;color:#14251f;border-color:#c4decf}
+.bp-modebar .bp-hint{font-size:11px;color:#6d887d;margin-left:auto}
+.bp-layout{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(270px,.8fr);gap:16px;align-items:stretch}
+.bp-topology{border:1px solid #37544a;border-radius:6px;background:radial-gradient(ellipse at 55% 42%,#1c38352d,transparent 60%),#0d181d;overflow:hidden;min-width:0}
+.bp-top{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;border-bottom:1px solid #2d4942;padding:0 21px;font-size:10px;letter-spacing:.13em;color:#a2c9b3}
+.bp-top span:last-child{color:#d3c19e}
+.bp-viewport{overflow-x:auto;scrollbar-width:thin}.bp-canvas{position:relative;min-width:760px;aspect-ratio:1000/550;background:linear-gradient(#213a3526 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,#213a3526 1px,transparent 1px) 0 0/32px 32px}
+.bp-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.bp-link{fill:none;stroke:#477969;stroke-width:2.5;stroke-linecap:round;opacity:.7;stroke-dasharray:4 9;animation:routeFlow 23s linear infinite;transition:stroke .35s,opacity .35s,stroke-width .35s}
+.bp-link.monitor{stroke:#d2bd93}.bp-link.backup{stroke:#88bcb3}
+.bp-node{position:absolute;transform:translate(-50%,-50%);width:126px;height:110px;border:1px solid #43645b;background:#15272acb;color:#d4e7d8;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;z-index:2;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s,background .3s;box-shadow:0 7px 23px #050f0f91;cursor:pointer}
+.bp-node:hover,.bp-node.active{transform:translate(-50%,-51.5%);border-color:#c4e4ce;background:#233f39}
+.bp-node img{width:65px;height:49px;object-fit:contain;filter:drop-shadow(0 4px 10px #030e0a)}
+.bp-node strong{font-size:10px;letter-spacing:.075em}.bp-node small{font-size:9px;color:#93b2a1}
+.bp-node[data-node="internet"]{left:14%;top:50%}.bp-node[data-node="firewall"]{left:34%;top:50%}.bp-node[data-node="switch"]{left:55%;top:50%}.bp-node[data-node="compute"]{left:80%;top:18%}.bp-node[data-node="storage"]{left:80%;top:50%}.bp-node[data-node="backup"]{left:80%;top:81%}.bp-node[data-node="monitor"]{left:55%;top:81%}
+.bp-legend{border-top:1px solid #2d4942;padding:15px 21px;display:flex;gap:17px;flex-wrap:wrap;align-items:center;color:#9eb8aa;font-size:10px}
+.bp-key{display:inline-flex;gap:6px;align-items:center}.bp-dot{width:7px;height:7px;border-radius:50%;background:#79b5a1}.bp-key:nth-child(2) .bp-dot{background:#d3b88f}.bp-key:nth-child(3) .bp-dot{background:#739ca8}
+.bp-details{border:1px solid #37544a;border-radius:6px;background:#122024;overflow:hidden;display:flex;flex-direction:column}
+.bp-photo{height:204px;background:#152625;position:relative;overflow:hidden}
+.bp-photo>img{width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.68);transition:transform .6s}
+.bp-details:hover .bp-photo>img{transform:scale(1.04)}
+.bp-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#122024,transparent 65%)}
+.bp-detailbody{padding:25px;flex:1}
+.bp-detailbody h2{font-size:29px;font-weight:600;letter-spacing:-.05em;margin:10px 0 15px}
+.bp-detailbody p{font-size:13px;color:#adc2b6;line-height:1.85}
+.bp-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px}.bp-chip{padding:8px 10px;border:1px solid #3e6151;border-radius:3px;font-size:10px;color:#b7cfbc}
+.bp-footerline{border-top:1px solid #345045;padding:17px 25px;color:#8cae9a;font-size:11px;line-height:1.75}
+.bp-commentary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:23px}
+.bp-commentary article{padding:29px;border:1px solid #2c453c;background:#0f1a1d;border-radius:5px}
+.bp-commentary h3{font-size:18px;font-weight:600;letter-spacing:-.04em;color:#e7f0e6}
+.bp-commentary p{font-size:12px;color:#9cb2a6;line-height:1.85}
+.bp-commentary .n{display:block;font-size:10px;color:#d8be92;margin-bottom:25px}
+.bp-alert{border-left:2px solid #c8b38b;padding:12px 19px;color:#9eb4a4;font-size:12px;line-height:1.9;margin-top:27px}
+[data-mode="zones"] .bp-link.internet{stroke:#d4b58b;stroke-width:4}
+[data-mode="zones"] .bp-link.storage{stroke:#7cb1c7;stroke-width:4}
+[data-mode="zones"] .bp-link.management{stroke:#bca3d0;stroke-width:4}
+[data-mode="zones"] .bp-link.trusted{stroke:#94cbb0;stroke-width:4}
+[data-mode="failover"] .bp-link.compute{stroke:#d9a17e;stroke-width:4;opacity:.95;stroke-dasharray:2 6}
+[data-mode="failover"] .bp-link.backup{stroke:#c3e6aa;stroke-width:4;opacity:1}
+[data-mode="failover"] .bp-node[data-node="compute"]{border-color:#d9a17e;box-shadow:0 0 24px #d9a17e24}
+@keyframes routeFlow{to{stroke-dashoffset:-260}}
+@media(max-width:960px){.bp-intro{grid-template-columns:1fr;gap:22px}.bp-layout{grid-template-columns:1fr}.bp-details{display:grid;grid-template-columns:35% 1fr}.bp-photo{height:100%;min-height:240px}.bp-footerline{grid-column:span 2}.bp-commentary{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.bp-inner{padding-top:45px}.bp-intro h1{font-size:clamp(44px,12vw,65px)}.bp-commentary{grid-template-columns:1fr}.bp-details{grid-template-columns:1fr}.bp-photo{height:220px}.bp-footerline{grid-column:auto}.bp-modebar .bp-hint{width:100%}.bp-top{font-size:9px}.bp-commentary article{padding:24px}}
+@media(prefers-reduced-motion:reduce){.bp-link{animation:none}.bp-photo>img,.bp-node{transition:none}}
+.bp-footerline p{margin:0 0 12px}.bp-footerline a{color:#d2dcbf;text-decoration:underline;text-underline-offset:3px}.bp-footerline a[hidden]{display:none}
+</style>
+</head>
+<body class="blueprint-page">
+<a class="skip-link" href="#diagram-title">Skip to network diagram</a>
+<header class="bp-header"><a href="/" class="bp-brand">B<span style="color:#c5b28c">.</span> BAR-EL LEVI / SYSTEMS</a><a href="/">← Back to portfolio</a></header>
+<main class="bp-inner">
+<p class="bp-eyebrow">INTERACTIVE REFERENCE / 01</p>
+<section class="bp-intro"><h1>Systems are<br><em>relationships.</em></h1><p>A network is more than a collection of devices. Select a component, inspect the relationship between layers, or switch into segmentation and failover views. This is a conceptual reference design — not a live company topology.</p></section>
+<div class="bp-modebar" role="group" aria-label="Diagram view"><button class="bp-mode active" type="button" data-mode-btn="topology" aria-pressed="true">01 / Topology</button><button class="bp-mode" type="button" data-mode-btn="zones" aria-pressed="false">02 / Security zones</button><button class="bp-mode" type="button" data-mode-btn="failover" aria-pressed="false">03 / Recovery path</button><span class="bp-hint">SELECT ANY COMPONENT TO EXPLORE ↗</span></div>
+<div class="bp-layout">
+<section class="bp-topology" id="bp-map" data-mode="topology" aria-labelledby="diagram-title">
+<div class="bp-top"><span id="diagram-title">NETWORK BLUEPRINT / CONCEPTUAL</span><span id="mode-title">REFERENCE TOPOLOGY</span></div>
+<div class="bp-viewport"><div class="bp-canvas">
+<svg class="bp-lines" viewBox="0 0 1000 550" aria-hidden="true">
+<path class="bp-link internet" d="M140 275H340"/><path class="bp-link trusted" d="M340 275H550"/><path class="bp-link compute" d="M550 275L800 99"/><path class="bp-link storage" d="M550 275H800"/><path class="bp-link backup" d="M550 275L800 445"/><path class="bp-link monitor management" d="M550 275V445"/>
+</svg>
+<button class="bp-node" data-node="internet" type="button"><img src="/assets/automation-flow.svg" alt=""><strong>UPSTREAM</strong><small>External boundary</small></button>
+<button class="bp-node" data-node="firewall" type="button"><img src="/assets/network-switch.svg" alt=""><strong>FIREWALL</strong><small>Security control</small></button>
+<button class="bp-node active" data-node="switch" type="button"><img src="/assets/network-switch.svg" alt=""><strong>DISTRIBUTION</strong><small>Core switching</small></button>
+<button class="bp-node" data-node="compute" type="button"><img src="/assets/server-stack.svg" alt=""><strong>COMPUTE</strong><small>Virtualization layer</small></button>
+<button class="bp-node" data-node="storage" type="button"><img src="/assets/server-stack.svg" alt=""><strong>STORAGE</strong><small>Shared resources</small></button>
+<button class="bp-node" data-node="backup" type="button"><img src="/assets/cluster.svg" alt=""><strong>RECOVERY</strong><small>Backup domain</small></button>
+<button class="bp-node" data-node="monitor" type="button"><img src="/assets/terminal.svg" alt=""><strong>OBSERVABILITY</strong><small>Health & events</small></button>
+</div></div>
+<div class="bp-legend"><span class="bp-key"><span class="bp-dot"></span> Data / trust boundary</span><span class="bp-key"><span class="bp-dot"></span> Security / external</span><span class="bp-key"><span class="bp-dot"></span> Storage / management</span></div>
+</section>
+<aside class="bp-details" aria-live="polite">
+<div class="bp-photo"><img id="bp-image" src="https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=650&q=82" alt="Representative network equipment photograph" loading="lazy"></div>
+<div class="bp-detailbody"><p class="bp-eyebrow" id="bp-id">COMPONENT / 03</p><h2 id="bp-title">Distribution switching</h2><p id="bp-desc">A conceptual connection point for compute, storage and management flows. In a real deployment, availability depends on the physical design, redundancy and tested failure behavior.</p><div class="bp-chips" id="bp-tags"><span class="bp-chip">Traffic boundaries</span><span class="bp-chip">Redundancy</span><span class="bp-chip">Link validation</span></div></div>
+<div class="bp-footerline"><p id="bp-footer">Architecture illustrated for education; no real site identifiers.</p><a id="bp-model-source" href="https://www.dell.com/support/product-details/en-us/product/storage-scv3020" target="_blank" rel="noopener noreferrer" hidden>Exact storage model: Dell EMC SCv3020 — manufacturer details ↗</a></div>
+</aside>
+</div>
+<div class="bp-commentary">
+<article><span class="n">01 / DESIGN</span><h3>Separate concerns.</h3><p>Map trust boundaries, management access, storage paths, backups and observability deliberately. Document what each link is for.</p></article>
+<article><span class="n">02 / FAILURE</span><h3>Test the assumptions.</h3><p>Redundant-looking diagrams do not establish failover. Validate path loss, quorum decisions and recovery at the workload level.</p></article>
+<article><span class="n">03 / OPERATIONS</span><h3>Make it diagnosable.</h3><p>Use explicit baselines, change one variable at a time and verify the result without exposing production-only access details.</p></article>
+</div>
+<p class="bp-alert">Publication standard: conceptual topology, component categories and engineering methods are shown openly. No device hostnames, internal addresses, credentials, client details or actual security-control configurations are reproduced. A conceptual diagram must never be mistaken for verified as-built documentation.</p>
+</main>
+<script>
+(()=>{'use strict';
+const data={
+internet:{title:'Upstream boundary',id:'01',desc:'The public-facing edge. Good diagnosis compares the upstream baseline with throughput and loss observed after security and switching boundaries.',tags:['Baseline tests','Public boundary','Change isolation'],photo:'https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=650&q=82',fallback:'/assets/network-switch.svg'},
+firewall:{title:'Security gateway',id:'02',desc:'Policy boundaries control which flows are allowed. Separate trust concepts from implementation identifiers, rule lists and device-specific management details.',tags:['Security zones','Stateful inspection','Path verification'],photo:'https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=650&q=82',fallback:'/assets/network-switch.svg'},
+switch:{title:'Distribution switching',id:'03',desc:'A conceptual connection point for compute, storage and management flows. Availability depends on the physical design, redundancy and tested failure behavior.',tags:['Traffic boundaries','Redundancy','Link validation'],photo:'https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=650&q=82',fallback:'/assets/network-switch.svg'},
+compute:{title:'Compute and virtualization',id:'04',desc:'Virtualization hosts share workloads across a managed cluster. Consider quorum and real workload recovery separately from mere host availability.',tags:['Host lifecycle','Quorum','HA validation'],photo:'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?auto=format&fit=crop&w=650&q=82',fallback:'/assets/server-stack.svg'},
+storage:{title:'Dell EMC SCv3020 · storage',id:'05',desc:'Exact-model Dell EMC SCv3020 reference for the storage role. A resilient design considers both redundant controllers and independently validated storage paths; this drawing is intentionally not an as-built infrastructure diagram.',tags:['Dell EMC SCv3020','SAN storage','Validated paths'],photo:'https://www.karma-group.ru/upload/iblock/3e9/scv3020.webp',fallback:'/assets/server-stack.svg'},
+backup:{title:'Recovery and backups',id:'06',desc:'A backup only becomes a resilience control when independent copies exist and a restore has been exercised. Recovery scope and targets must be validated.',tags:['Independent copies','Restore tests','Recovery scope'],photo:'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?auto=format&fit=crop&w=650&q=82',fallback:'/assets/cluster.svg'},
+monitor:{title:'Operational observability',id:'07',desc:'Collect health signals and meaningful events, normalize them and create actionable views. Dashboard visibility should not be confused with complete detection coverage.',tags:['Event ingestion','Dashboards','Alert quality'],photo:'https://images.unsplash.com/photo-1592659762303-90081d34b277?auto=format&fit=crop&w=650&q=82',fallback:'/assets/terminal.svg'}
+};
+const modeText={topology:['REFERENCE TOPOLOGY','Component relationships and traffic paths'],zones:['TRUST & SECURITY ZONES','Conceptual boundary highlighting; not actual access-control rules'],failover:['RECOVERY PATH / SIMULATED','Illustrating resilience questions, not asserting real failover acceptance']};
+const $=id=>document.getElementById(id);
+const buttons=[...document.querySelectorAll('[data-node]')];
+function select(name){
+const n=data[name];if(!n)return;
+buttons.forEach(b=>{const active=b.dataset.node===name;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+$('bp-id').textContent='COMPONENT / '+n.id;
+$('bp-title').textContent=n.title;$('bp-desc').textContent=n.desc;
+$('bp-tags').replaceChildren(...n.tags.map(t=>{const x=document.createElement('span');x.className='bp-chip';x.textContent=t;return x}));
+$('bp-model-source').hidden=name!=='storage';
+const img=$('bp-image');img.onerror=()=>{img.onerror=null;img.src=n.fallback;img.classList.add('image-fallback')};img.classList.remove('image-fallback');img.src=n.photo;
+}
+buttons.forEach(btn=>btn.addEventListener('click',()=>select(btn.dataset.node)));
+document.querySelectorAll('[data-mode-btn]').forEach(btn=>btn.addEventListener('click',()=>{
+const m=btn.dataset.modeBtn;$('bp-map').dataset.mode=m;document.querySelectorAll('[data-mode-btn]').forEach(b=>{const on=b.dataset.modeBtn===m;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+$('mode-title').textContent=modeText[m][0];$('bp-footer').textContent=modeText[m][1]+'. No actual environment identifiers or production telemetry.';
+if(m==='failover')select('compute');else if(m==='zones')select('firewall');else select('switch');
+}));
+select('switch');
+})();
+</script>
+</body>
+</html>

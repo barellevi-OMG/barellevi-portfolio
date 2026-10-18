@@ -1,0 +1,45 @@
+name: Publish public portfolio to GitHub Pages
+on:
+  push:
+    branches:
+      - gh-pages
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate release before publication
+        run: |
+          node --check src/app.js
+          node --check src/data.js
+          node tests/public-check.mjs
+      - name: Prepare deploy-only static directory
+        run: |
+          mkdir -p _site
+          cp index.html 404.html CNAME .nojekyll styles.css _site/
+          cp -R src assets examples infrastructure automation operations leadership for _site/
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload public release
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

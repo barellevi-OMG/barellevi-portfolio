@@ -1,0 +1,19 @@
+name: Validate public GitHub Pages content
+on:
+  push:
+    branches:
+      - gh-pages
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check src/data.js
+      - run: node --check src/app.js
+      - run: node tests/public-check.mjs
