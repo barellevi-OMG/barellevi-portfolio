@@ -88,3 +88,21 @@ dialog{background:#122025;border:1px solid #536f62;color:#e8f2e9;width:min(780px
 @media(max-width:860px){.hardware-section{padding-top:85px;padding-bottom:88px}.model-photo{height:220px}.model-card-text{padding:25px 22px}.model-pending{flex-direction:column;gap:13px}}
 @media(max-width:620px){.hardware-models{grid-template-columns:1fr}.model-photo{height:235px}.model-card-text{min-height:unset}.model-photo img{padding:22px}.model-card-text h3{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.model-reference-card,.model-photo img{transition:none}}
+
+/* Editorial, source-grounded field-study links */
+.featured-studies{padding-top:90px;padding-bottom:105px;border-top:1px solid #2b463b}
+.featured-studies .section-heading{margin-bottom:45px}
+.featured-studies-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.featured-study{border:1px solid #3b564c;border-radius:5px;background:linear-gradient(140deg,#19302b,#111c20 65%);transition:transform .25s,border-color .25s}
+.featured-study:hover{transform:translateY(-4px);border-color:#a4ccb5}
+.featured-study>a{min-height:325px;padding:28px;display:flex;flex-direction:column;height:100%}
+.featured-study-tag{font-size:10px;color:#dbba95;letter-spacing:.12em;font-weight:800}
+.featured-study-art{font-size:61px;line-height:1;margin:31px 0 17px;color:#add4c0}
+.featured-study h3{font:600 clamp(21px,2.2vw,30px)/1.2 var(--display);letter-spacing:-.05em;margin:0 0 13px}
+.featured-study p{font-size:12px;line-height:1.82;color:#afc1b5;margin:0 0 27px}
+.featured-study-link{font-size:10px;letter-spacing:.05em;color:#cee3d5;font-weight:800;margin-top:auto}
+.modal-deep-link{display:inline-flex;padding:14px 18px;border-radius:4px;color:#d0e9d7;border:1px solid #729787;font-size:12px;font-weight:800}
+.modal-deep-link:hover{background:#263e35}
+@media(max-width:900px){.featured-studies-grid{grid-template-columns:1fr 1fr}.featured-study:last-child{grid-column:span 2}}
+@media(max-width:620px){.featured-studies-grid{grid-template-columns:1fr}.featured-study:last-child{grid-column:auto}.featured-studies{padding:65px 24px 75px}.featured-study>a{min-height:280px}}
+@media(prefers-reduced-motion:reduce){.featured-study{transition:none}}
