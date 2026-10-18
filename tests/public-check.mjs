@@ -48,7 +48,7 @@ for(const name of ['mobileye-infrastructure','mobileye-technical-operations','te
 assert.ok(!js.includes('PRIVATE PREVIEW'),'public frontend cannot retain preview badge');
 assert.ok(!js.includes('CASE STUDIES IN REVIEW'),'public copy should say projects');
 assert.ok(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://barellevi.com/sitemap.xml'));
-assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,6);
+assert.equal((fs.readFileSync('sitemap.xml','utf8').match(/<url>/g)||[]).length,9);
 
 for(const slug of ["proxmox-ha-san","network-diagnostics","security-observability"]){
   const p="cases/"+slug+"/index.html";
