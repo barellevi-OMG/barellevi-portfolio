@@ -77,7 +77,7 @@ const grid=$("#project-grid");
 if(grid)new MutationObserver(translateGrid).observe(grid,{childList:true,subtree:false});
 translateGrid();
 // Keep in-depth technical links in the selected site language.
-$('a[href^="/cases/"],a[href^="/examples/network-design/"]').forEach(a=>a.setAttribute("href","/he"+a.getAttribute("href")));
+$$('a[href^="/cases/"],a[href^="/examples/network-design/"]').forEach(a=>a.setAttribute("href","/he"+a.getAttribute("href")));
 const dialog=$("#project-dialog");
 if(dialog)new MutationObserver(()=>{
  const body=$("#dialog-body");if(!body)return;
