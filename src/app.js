@@ -2,6 +2,8 @@
   "use strict";
   const model = window.PORTFOLIO;
   if (!model) return;
+  const he=window.SITE_LANG==="he",base=window.SITE_PREFIX||"",jobs=window.SITE_JOB_PAGES||{};
+  const txt=(en,hebrew)=>he?hebrew:en;
   const $ = (selector, root) => (root || document).querySelector(selector);
   const $$ = (selector, root) => Array.from((root || document).querySelectorAll(selector));
   const cardArea = $("#project-grid"), intro = $("#track-intro"), dialog = $("#project-dialog");
@@ -15,9 +17,10 @@
     "technical-leadership":"leadership"
   };
   const escapeHTML = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, ch => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[ch]);
-  function linkFor(track) { return track === "all" ? "/" : "/" + track + "/"; }
+  function linkFor(track) { return base+(track==="all"?"/":"/"+track+"/"); }
   function fromLocation() {
-    const pathname = location.pathname.replace(/\/+$/,"").split("/").filter(Boolean);
+    const parts = location.pathname.replace(/\/+$/,"").split("/").filter(Boolean);
+    const pathname = parts[0]==="he"?parts.slice(1):parts;
     return routes[pathname[0]] || (pathname[0] === "for" ? recruitmentRoutes[pathname[1]] : null) || "all";
   }
   function enableImageFallbacks(root=document) {
@@ -132,14 +135,24 @@
       button.tabIndex = selected ? 0 : -1;
     });
     const cfg = model.tracks[track];
-    intro.innerHTML = '<span>'+escapeHTML(cfg.label)+'</span><p>'+escapeHTML(cfg.desc)+'</p><span class="counter">'+(track==="all"?model.projects.length:model.projects.filter(p=>p.tracks.includes(track)).length)+' PROJECTS</span>';
-    const projects = model.projects.filter((p) => track === "all" || p.tracks.includes(track));
-    projects.sort((a,b) => Number(Boolean(b.featured))-Number(Boolean(a.featured)));
-    cardArea.innerHTML = projects.map(card).join("");
+    const pieces=location.pathname.split("/").filter(Boolean);
+    const normalized=pieces[0]==="he"?pieces.slice(1):pieces;
+    const job=(normalized[0]==="for"&&jobs[normalized[1]])?jobs[normalized[1]]:null;
+    let projects=job?model.projects.filter(p=>job.ids.includes(p.id)):model.projects.filter(p=>track==="all"||p.primaryCategory===track);
+    if(job)projects.sort((a,b)=>job.ids.indexOf(a.id)-job.ids.indexOf(b.id));
+    else projects.sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
+    intro.innerHTML='<span>'+escapeHTML(job?(he?job.he:job.title):cfg.label)+'</span><p>'+escapeHTML(job?(he?job.introHe:job.intro):cfg.desc)+'</p><span class="counter">'+projects.length+' '+txt("PROJECTS","פרויקטים")+'</span>';
+    if(job)intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">'+txt("JOB-SPECIFIC VIEW · SHAREABLE LINK","עמוד מותאם למשרה · קישור עצמאי")+'</span>');
+    cardArea.innerHTML=["infrastructure","automation","operations","leadership"].map((key,i)=>{
+      const group=projects.filter(p=>p.primaryCategory===key);
+      if(!group.length)return "";
+      const label=model.tracks[key].label;
+      return '<section class="project-category-group" data-category="'+key+'" aria-label="'+escapeHTML(label)+'"><div class="project-category-head"><span>0'+(i+1)+' / '+escapeHTML(label)+'</span><small>'+group.length+' '+txt("PROJECTS","פרויקטים")+'</small></div><div class="project-category-cards">'+group.map(card).join("")+'</div></section>';
+    }).join("");
     showProfile(track);
     enableImageFallbacks(cardArea);
     if(push && location.pathname !== linkFor(track)) history.pushState({track:track},"",linkFor(track));
-    document.title = (track==="all"?"Bar-El Levi | Infrastructure, Automation & Technical Operations":cfg.label+" — Bar-El Levi | Technology Portfolio");
+    document.title = he?(job?job.he+" | בר-אל לוי":(track==="all"?"בר-אל לוי | תשתיות, אוטומציה וניהול טכנולוגי":cfg.label+" | בר-אל לוי")):(job?job.title+" | Bar-El Levi":(track==="all"?"Bar-El Levi | Infrastructure, Automation & Technical Operations":cfg.label+" — Bar-El Levi | Technology Portfolio"));
     const canonicalUrl = "https://barellevi.com" + (location.pathname.endsWith("/")?location.pathname:location.pathname+"/");
     const setMeta=(selector,value)=>{const el=document.querySelector(selector);if(el)el.content=value;};
     const summary=document.querySelector('meta[name="description"]')?.content || "";
@@ -162,21 +175,21 @@
   function caseStudyMarkup(project){
     const c=model.caseStudies?.[project.id];
     if(!c)return '<div class="case-study-placeholder">SELECTED SYSTEMS / Additional technical material may be added over time.</div>';
-    const rows=[["The challenge",c.challenge],["The approach",c.approach],["Evidence — not independently retested",c.evidence],["Still to verify",c.limits]];
+    const rows=[[txt("The challenge","האתגר"),c.challenge],[txt("The approach","הגישה"),c.approach],[txt("Evidence — not independently retested","ראיות מהתיעוד"),c.evidence],[txt("Still to verify","מגבלות האימות"),c.limits]];
     return '<div class="case-study-block"><span class="case-study-eyebrow">FIELD STUDY / '+escapeHTML(c.evidenceLabel)+'</span>'+
       rows.map(([title,value])=>'<div class="case-study-row"><strong>'+escapeHTML(title)+'</strong><p>'+escapeHTML(value)+'</p></div>').join("")+'</div>';
   }
   function openProject(id) {
     const p = model.projects.find(p=>p.id===id);
     if (!p) return;
-    const approvalText = "This study uses a generalized technical description. No organization-specific network identifiers, credentials, customer records, or production topology are included.";
+    const approvalText = txt("This study uses a generalized technical description. No organization-specific network identifiers, credentials, customer records, or production topology are included.","הפרויקט מוצג כארכיטקטורה כללית, ללא כתובות רשת, פרטי גישה או מידע לקוחות.");
     const t = p.tech.map(x=>"<span>"+escapeHTML(x)+"</span>").join("");
     $("#dialog-body").innerHTML =
       '<div class="modal-eyebrow">'+escapeHTML(p.id)+' / SELECTED WORK / '+escapeHTML(p.year)+'</div>'+
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
-      '<h3>Context</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>Contribution & scope</h3><p>'+escapeHTML(p.role)+'</p>'+
-      '<h3>Technology</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
+      '<h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>'+txt("Contribution & scope","תחומי אחריות ותרומה")+'</h3><p>'+escapeHTML(p.role)+'</p>'+
+      '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
        '<p><a class="modal-deep-link" href="/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '<div class="review-notice"><span>● ARCHITECTURAL OVERVIEW</span><p>'+escapeHTML(approvalText)+' Representative imagery is not a real project screenshot.</p></div>';
@@ -227,14 +240,12 @@
   document.addEventListener("click",e=>{
     const nav=e.target.closest("a[data-nav]");
     if(!nav)return;
-    if(nav.getAttribute("href")==="/"){e.preventDefault();history.pushState({track:"all"},"","/");showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
+    if(nav.getAttribute("href")===linkFor("all")){e.preventDefault();history.pushState({track:"all"},"",linkFor("all"));showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
   });
   window.addEventListener("popstate",()=>showTrack(fromLocation(),false));
   const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();renderFieldStudies();observeReveal();enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
-  if(navTrack!=="all" && path.startsWith("/for/")) {
-    intro.insertAdjacentHTML("beforeend",'<span class="tailored-note">TAILORED CAREER VIEW</span>');
-  }
+  // The job-specific introduction is rendered by showTrack.
   const header=$("#site-header");let lastScrolled=-1;
   window.addEventListener("scroll",()=>{const y=scrollY;if(Math.abs(y-lastScrolled)>6){header.classList.toggle("scrolled",y>20);lastScrolled=y;}},{passive:true});
   if(matchMedia("(prefers-reduced-motion: no-preference)").matches) {
