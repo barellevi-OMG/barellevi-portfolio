@@ -183,3 +183,17 @@ html[lang="he"] .case-language-link{border:1px solid #729486;padding:8px 12px;bo
 .about-section .about-pillars h3{margin:24px 0 14px}
 html[lang="he"] .about-story p{letter-spacing:0}
 @media(max-width:650px){.about-story{margin-bottom:28px}.about-story p{font-size:16px;line-height:1.9}}
+
+
+/* Dedicated people-management story: visually distinct from technical project catalog. */
+.people-leadership{padding-top:100px;padding-bottom:100px;border-top:1px solid #365147;background:linear-gradient(125deg,rgba(138,172,151,.055),transparent 65%)}
+.leadership-editorial{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,85px);align-items:start}
+.leadership-story{max-width:700px}
+.leadership-story p{font-size:clamp(16px,1.4vw,20px);line-height:1.95;color:#c9d9d0;margin:0 0 24px}
+.leadership-story p:first-child{color:#f0f3ef}
+.leadership-focus{border-top:1px solid #527264}
+.leadership-focus>div{display:grid;grid-template-columns:38px 1fr;column-gap:14px;padding:23px 0;border-bottom:1px solid #365147}
+.leadership-focus span{font-size:11px;color:#c9b18d;grid-row:span 2}
+.leadership-focus strong{font-size:17px;color:#e8f0ea}
+.leadership-focus p{font-size:13px;color:#aabfb4;line-height:1.75;margin:8px 0 0}
+@media(max-width:760px){.people-leadership{padding-top:65px;padding-bottom:65px}.leadership-editorial{grid-template-columns:1fr;gap:24px}}
