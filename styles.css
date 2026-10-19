@@ -197,3 +197,11 @@ html[lang="he"] .about-story p{letter-spacing:0}
 .leadership-focus strong{font-size:17px;color:#e8f0ea}
 .leadership-focus p{font-size:13px;color:#aabfb4;line-height:1.75;margin:8px 0 0}
 @media(max-width:760px){.people-leadership{padding-top:65px;padding-bottom:65px}.leadership-editorial{grid-template-columns:1fr;gap:24px}}
+
+
+/* Decision board 2026-10-19: more assertive hero typography and human-systems abstract visual. */
+@media(min-width:781px){.hero-copy h1{font-size:clamp(76px,8.8vw,132px);line-height:1.025;letter-spacing:-.06em}.hero-copy{padding-right:clamp(18px,2vw,34px)}}
+@media(max-width:780px){.hero-copy h1{font-size:clamp(64px,12vw,102px);line-height:1.04}}
+@media(max-width:400px){.hero-copy h1{font-size:clamp(56px,12vw,70px)}}
+.hero-visual{background:#101d1d}
+.hero-photo{filter:brightness(.7) saturate(.65)}
