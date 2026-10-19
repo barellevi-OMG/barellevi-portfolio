@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 
 const html=fs.readFileSync('index.html','utf8'),js=fs.readFileSync('src/app.js','utf8');
 const ctx={window:{}};vm.runInNewContext(fs.readFileSync('src/data.js','utf8'),ctx,{timeout:1500});
 const m=ctx.window.PORTFOLIO;
-assert.equal(m.projects.length,16);
+assert.ok(m.projects.length>=16);
+assert.ok(m.projects.some(p=>p.id==='P17' && p.tracks.includes('infrastructure')),'DC infrastructure experience missing');
 assert.equal(m.components.length,4);
 assert.equal(m.hardwareModels.length,2,'two source-identified physical models');
 assert.equal(m.hardwareModels[0].model,'SCv3020');
@@ -25,7 +26,7 @@ assert.equal(fs.readFileSync('CNAME','utf8').trim(),'barellevi.com');
 assert.ok(!js.includes('Employer publication approval required'));
 for(const path of ['infrastructure','automation','operations','leadership','for/systems-infrastructure','for/technical-support']) assert.ok(fs.existsSync(path+'/index.html'),path);
 for(const p of m.projects) assert.ok(!JSON.stringify(p).match(/(?:password|secret|token|192\\.168\\.|10\\.70\\.)/i),'sensitive identifier in '+p.id);
-console.log('Public release checks passed: 16 generalized projects, route files, network demo and release safeguards.');
+console.log('Public release checks passed: generalized projects, route files, network demo and release safeguards.');
 
 const seoRoutes={
 'index.html':'https://barellevi.com/',
