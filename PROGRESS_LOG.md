@@ -151,3 +151,29 @@ Responsibilities: requirements and architecture, logical network/security config
 Mostly independently planned and configured a 6-server, 10-VM computing environment, integrating Proxmox/Linux virtualization, Dell networking and storage, SAN/Fibre Channel and iSCSI, Check Point security, cluster/HA and backup/recovery tooling. Resolved complex networking and storage faults during the build. Installation and configuration are complete; acceptance/testing is ongoing. Scope excludes physical infrastructure deployment. No production status, measurable uptime, performance gains or RPO/RTO outcomes have been verified.
 
 **TODO:** Seek final editorial approval before changing public case-study content. Determine relationship of new DC case study to existing P17/P11; continue one-by-one project review later. Do not infer unspecified outcomes.
+
+
+## 2026-10-19 — סריקת גיבוי ChatGPT מ-Google Drive (מחקר מקורות, לא לפרסום)
+
+**מקור:** תיקיית Drive שהמשתמש סיפק: https://drive.google.com/drive/folders/1-viUrkNnA2frvzeAyuxmluKdGrO7hn-Y
+קובצי שיחות: conversations-000.json (100 שיחות), conversations-001.json (71 שיחות), סה"כ **171 שיחות**. נסקרו כותרות והודעות משתמש בכל 171 השיחות, ובוצעה בדיקה ממוקדת של שיחות פרויקטים טכנולוגיים, ניהול, תשתיות ותכנון הפורטפוליו. בתיקייה יש גם chat.html, export_manifest.json וקובצי נספחים; אין לטעון שנבדק כל נספח חזותי או כל הודעת עוזר. קובצי השיחות הם מקור היסטורי; דיווחי ביצוע שהודבקו בהם אינם תחליף לאימות מצב מערכת נוכחי.
+
+### ממצאים עם ערך לפורטפוליו
+1. **מערכת NA מרובת ערוצים:** שיחות Telegram (מזהה מתחיל 6ab53b98) ו-WhatsApp (6ab8a7bd) כוללות היסטוריה עשירה של תכנון, פיתוח, בדיקות, פריסה ותחזוקה. מערך רכיבים: בוט טלגרם, בוט WhatsApp, ממשק ניהול, Ubuntu/Oracle Cloud, PM2, Caddy, משימות מתוזמנות, סנכרון מקורות תוכן ו-fallback, לוקליזציה HE/EN.
+2. **Telegram UX והנדסת מוצר:** ממשק inline, התאמה לאזורי זמן IANA, שעת שליחה אישית, שיתוף פרקים, ארכיון, חישוב ימי נקיון, ציוני דרך, בדיקת קלט תאריכים ותמיכה בשתי שפות. דיווחי בדיקות והעלאה לסביבת שרת מופיעים בשיחות; יש לבדוק בריפו ובשרת מה מצבם כיום. בפרויקט Telegram מופיע גם **ריפו נפרד telegram-na-bot**, מעבר למונוריפו whatsapp-na-bot — חשוב לקטלוג מקורות.
+3. **WhatsApp כפרויקט נפרד:** הפרדה בין שירות קבוצתי ישן לשירות אישי ייעודי; מעבר למספר נפרד; תפריטים מבוססי טקסט, תזמון, קבלת טריגרים בעברית ובאנגלית בקבוצות, הודעות הצטרפות, הזמנה לצ'אט פרטי, מנגנוני cooldown, טיפול בזיהוי משתתפים ב-WhatsApp LID, בדיקות regression ופתרון תקלות בפרודקשן. המשתמש דן בהסרת הבוט הישן — **לא להציג כהסרה שבוצעה** בלי ראיה.
+4. **אבחון Production ממשי:** שיחת Telegram מתעדת תקלה בממשק הניהול שבה PM2 דיווח online ופורט HTTP היה פתוח, אך בקשות נתקעו; בוצע אבחון נפרד ל-Caddy, לתהליך Node ולשירות, והפעלה מחדש ממוקדת של רכיב הניהול בלבד. מועמד טוב למקרה בוחן reliability, בכפוף לאימות הראיות.
+5. **הובלת מוצר ותהליכי אימות:** שיחת קורות החיים (6acf022b) מספקת מידע מפורט על אפיון תהליכים, גיוס והכשרת מנהלים, כתיבת נהלים, ביזור משימות, תעדוף פיתוח, עבודה עם מנהל פיתוח ומתכנתים, שיווק, ניהול אירועים ותקשורת ציבורית. המשתמש דיווח על 11–12 מנהלים בכירים, כ-150 מנהלים, 4 מפתחים, כ-4,500 נותני שירות/מוכרים ויותר מ-1.5 מיליון משתמשים ייחודיים פעילים בהקשר של פעילות עבר. מדובר ב**דיווח עצמי היסטורי** ובתחום רגיש מבחינה משפטית/תדמיתית; לא להעתיק שמות ארגונים או פרטים אישיים לפורטפוליו ללא החלטת המשתמש.
+6. **אוטומציית תהליך אימות:** באותה שיחת קורות חיים המשתמש תיאר מעבר מתהליך ידני לתהליך בוט אסינכרוני שאסף קלט, הכין תיקי בדיקה ואפשר למאמת לטפל באצוות במקום להמתין בזמן אמת. המשתמש דיווח שהבוט היה בשימוש מעל שנה. יש להציג רק ברמת עקרונות workflow/automation, בלי לפרסם מידע אישי, סוגי מסמכי זהות או מנגנוני אימות מפורטים.
+7. **אבחון Check Point ו-WAN:** שיחה 6acf7da6 מתעדת בדיקת הבדל בין קישור ישיר מהיר לבין מהירות נמוכה דרך Firewall, ניסויי בידוד רכיבי רשת והפרדה בין סביבת משרד ל-DC. מדובר בסביבת בדיקות; אין להסיק שהבעיה נפתרה או לייחס שיפור מדיד סופי. לא לפרסם כתובות IP פנימיות.
+8. **Fujitsu / Proxmox:** שיחות 6ad4baa8 ו-6ad4baad כוללות התקנת Proxmox VE 9.2-1 על שרת Fujitsu, שימוש בקונסולת ניהול מרחוק, בירור גישת SSH/8006 ופתרון בעיות Boot/Network. הן מתעדות **אבחון והתקדמות**, לא אישור שכל השלבים הושלמו באותן שיחות. יש לקשור למקרה הבוחן DC האחרון בזהירות ולא ליצור כפילות.
+9. **עבודה עם כלי AI ותהליכי פיתוח:** שיחות על Cursor/Codex, GitHub, הפעלה על שרת, אימות לפני Git push, גבולות scope בין Telegram/WhatsApp ומבחני רגרסיה. רלוונטי להצגת תהליך engineering ויכולת עבודה עם AI, לא כטענה שה-AI ביצע את כל העבודה באופן אוטונומי.
+10. **Windows troubleshooting:** שיחה 6abd30cd מתעדת ניתוח תקלות אתחול עם שני כוננים/שתי התקנות Windows, BCD, אירועי מערכת וזמני Boot. דוגמה אפשרית לאבחון שיטתי, אך כנראה לא פרויקט דגל; יש להבחין בין תקלת Boot שנמדדה לבין קפיאות שלא אומתו.
+
+### מגבלות ומעקב
+- הגיבוי הוא 171 שיחות בשני קובצי JSON; **לא נטען שזה כל ההיסטוריה המקצועית** של המשתמש, ובפרט עבודת Codex בחשבון עבודה ו-Gemini עשויה שלא להופיע.
+- חלק מההודעות הן דוחות Cursor/Codex שהמשתמש הדביק; לסמן כ-*דיווח פריסה/בדיקות*, ולא כבדיקה עצמאית.
+- לא לשלב פרטים אישיים, נתוני זיהוי, מספרי טלפון, מזהי קבוצות, פרטי חשבונות או תיעוד של תהליכים רגישים באתר או ביומן.
+- TODO: לבדוק בנפרד קוד, README והיסטוריית GitHub של whatsapp-na-bot ושל telegram-na-bot; להצליב טענות פריסה/בדיקות עם commits.
+- TODO: להרחיב מקרה בוחן NA לתתי פרויקטים Telegram, WhatsApp, Admin, Reliability; לשקול מקרה בוחן workflow automation נפרד; ולמפות מחדש פרויקטי DC/Proxmox/Firewall כדי למנוע כפילות.
+- TODO: לעבור אחד־אחד על כל הפרויקטים עם המשתמש לפני שינוי ציבורי, בהתאם להנחייתו.
