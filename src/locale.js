@@ -18,7 +18,7 @@ window.SITE_JOB_PAGES={
 "technical-support":{track:"operations",title:"Technical Support & Operations",he:"תמיכה ותפעול טכני",intro:"Cross-team coordination, fault isolation, reporting and day-to-day technical support.",introHe:"תיאום בין צוותים, אבחון תקלות, דיווח, הדרכה ותמיכה טכנית שוטפת.",ids:["P08","P11","P05","P04","P16","P12"]},
 "technical-operations":{track:"operations",title:"Technical Operations",he:"תפעול טכנולוגי",intro:"Troubleshooting, integration, documentation, reliable operations and practical service recovery.",introHe:"אבחון תקלות, אינטגרציות, תיעוד, עבודה תפעולית אמינה והתאוששות שירותים.",ids:["P05","P08","P16","P12","P11","P04"]},
 "automation-engineering":{track:"automation",title:"Automation Engineering",he:"פיתוח אוטומציה ואינטגרציות",intro:"Message workflows, APIs, process automation, service reliability and human-facing interfaces.",introHe:"תהליכי מסרים, API, אוטומציית תהליכים, אמינות שירותים וממשקים לאנשים.",ids:["P12","P01","P02","P06","P14","P04"]},
-"technical-leadership":{track:"leadership",title:"Technical & Product Leadership",he:"ניהול טכנולוגי ומוצר",intro:"Requirements, prioritization, team coordination, process design and delivery across disciplines.",introHe:"אפיון, תעדוף, תיאום צוותים, עיצוב תהליכים ומימוש פתרונות משולבים.",ids:["P04","P01","P15","P10","P11","P12"]}
+"technical-leadership":{track:"leadership",title:"Technical & Product Leadership",he:"ניהול אנשים ומוצר טכנולוגי",intro:"Requirements, prioritization, team coordination, process design and delivery across disciplines.",introHe:"אפיון, תעדוף, תיאום צוותים, עיצוב תהליכים ומימוש פתרונות משולבים.",ids:["P04","P01","P15","P10","P11","P12"]}
 };
 const translations={
 P11:["וירטואליזציה, SAN וגיבויים","תשתיות עם שרידות והתאוששות מוכחות","עבודה ב־Proxmox, אחסון משותף, Quorum ובדיקות HA, לצד השלמה של מערך הגיבויים והשחזור באישור בעל הפרויקט.","תכנון תשתיות וירטואליזציה, נתיבי אחסון ושרידות, תהליכי גיבוי והתאוששות. תוצאות העבר מתועדות וסטטוס השלמת הגיבויים אושר ב־18.10.2026; מדדי RPO/RTO ומדיניות שמירה לא אומתו מחדש.","הובלה טכנית, תיאום עבודה פיזית, אבחון תקלות ותכנון בדיקות"],
@@ -56,7 +56,7 @@ const tracks={
  infrastructure:["תשתיות ומערכות","וירטואליזציה, אחסון, רשתות, חומרה ומערכות תקשורת."],
  automation:["אוטומציה ואינטגרציות","מערכות מחוברות, כלי AI וממשקים שמייעלים עבודה."],
  operations:["תפעול ואמינות","אבחון, התאוששות, ניטור, נהלים ופעילות שוטפת."],
- leadership:["ניהול טכנולוגי ומוצר","אפיון, תעדוף, תיאום צוותים והובלת שיפור מתמשך."]
+ leadership:["ניהול אנשים ומוצר טכנולוגי","אפיון, תעדוף, תיאום צוותים והובלת שיפור מתמשך."]
 };
 for(const [key,parts] of Object.entries(tracks)){model.tracks[key].label=parts[0];model.tracks[key].desc=parts[1];}
 for(const p of model.projects){const tx=translations[p.id];if(!tx)continue;[p.title,p.subtitle,p.description,p.detail,p.role]=tx;}
