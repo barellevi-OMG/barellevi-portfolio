@@ -254,3 +254,10 @@ Mostly independently planned and configured a 6-server, 10-VM computing environm
 - `d1d936a` — `src/experience.js`: הוספת section `#career` עם ציר זמן דו-לשוני של שישה שלבים, הוספת קישור בניווט, ופרטי קשר בעיר/מייל/טלפון. הפרטים מתבססים על קורות חיים V5/V6, ללא שנת לידה וללא שמות מעסיקים. טרם בוצעה בדיקת דפדפן מלאה.
 
 **משימת המשך תלויה במשתמש:** הוא מתכוון להעביר קבצי ביקורת תוכן נרחבים. להמתין לקבלתם לפני יישום השיפורים שהם יבקשו; אין להציג את הביקורת העתידית כאילו התקבלה.
+
+
+## 2026-10-20 — User resolution of V5/V6 discrepancies
+
+User explicitly confirmed: **11 parallel subprojects** in entrepreneurial activity. For all other conflicting data, use **V6 as authoritative**, rather than V5 or historical CV figures. In the public About section, this means March 2017–March 2019; more than 1.5 million unique active users; approximately 4,500 vendors; approximately 150 managers, of whom 11–12 senior managers reported directly; development manager and four developers; intake automation used for over one year. Older figures (55,000 users; 70 managers; 2016–2017; seven subprojects) are superseded for public copy and must not be presented as alternative current facts. Earlier infrastructure/education details can be considered separately when relevant and confirmed. Do not publish sensitive project names or personal identifiers.
+
+**Published directly to gh-pages:** `src/experience.js`, commit `bb07dca1de8c69f6610542e53a84a0b07aa97257`: bilingual About-section experience/scale facts, including the newly confirmed 11 subprojects. User's pending comprehensive critique files have **not** yet arrived; await them for the broader editorial redesign. No additional project restructuring was performed.
