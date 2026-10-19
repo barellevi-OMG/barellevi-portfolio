@@ -23,7 +23,7 @@ assert.ok(!html.includes('PRIVATE REVIEW BUILD'));
 assert.ok(!html.includes('noindex'));
 assert.equal(fs.readFileSync('CNAME','utf8').trim(),'barellevi.com');
 assert.ok(!js.includes('Employer publication approval required'));
-for(const path of ['infrastructure','automation','operations','leadership','for/mobileye-infrastructure','for/mobileye-technical-operations']) assert.ok(fs.existsSync(path+'/index.html'),path);
+for(const path of ['infrastructure','automation','operations','leadership','for/systems-infrastructure','for/technical-support']) assert.ok(fs.existsSync(path+'/index.html'),path);
 for(const p of m.projects) assert.ok(!JSON.stringify(p).match(/(?:password|secret|token|192\\.168\\.|10\\.70\\.)/i),'sensitive identifier in '+p.id);
 console.log('Public release checks passed: 16 generalized projects, route files, network demo and release safeguards.');
 
@@ -41,7 +41,7 @@ for(const [path,canonical] of Object.entries(seoRoutes)){
  assert.ok(content.includes('property="og:title"'),"missing open graph: "+path);
  assert.ok(content.includes('property="og:description"'),"missing social summary: "+path);
 }
-for(const name of ['mobileye-infrastructure','mobileye-technical-operations','technical-operations','automation-engineering','technical-leadership']){
+for(const name of ['systems-infrastructure','technical-support','technical-operations','automation-engineering','technical-leadership']){
  const content=fs.readFileSync('for/'+name+'/index.html','utf8');
  assert.ok(content.includes('content="noindex,follow"'),"tailored URL indexed accidentally: "+name);
 }
