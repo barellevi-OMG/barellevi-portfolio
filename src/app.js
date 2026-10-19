@@ -113,12 +113,26 @@
     const lab=document.querySelector("#lab");if(lab)lab.insertAdjacentHTML("beforebegin",html);
     const nav=document.querySelector(".header-nav");if(nav){const a=document.createElement("a");a.href="#field-studies";a.textContent="Field studies";const systems=nav.querySelector('a[href="#lab"]');if(systems)nav.insertBefore(a,systems);else nav.append(a);}
   }
+  // Keep real reference photos where relevant, but never repeat the same stock photo across cards.
+  // All other cards get a unique, explicitly illustrative project schematic.
+  const photoOwner={scv3020:"P11",camera:"P06",servers:"P07",switches:"P08",circuits:"P02",keyboard:"P14"};
+  function projectVisual(project){
+    if(photoOwner[project.visual]===project.id && model.images[project.visual]) return {src:model.images[project.visual],alt:"Representative hardware reference photograph"};
+    const title=project.title.replace(/[<>&"'\u0000-\u001f]/g," ").slice(0,36);
+    const tech=project.tech.slice(0,3).join("  /  ").replace(/[<>&"'\u0000-\u001f]/g," ").slice(0,70);
+    const num=Number(project.id.replace(/\D/g,""))||1;
+    const points=Array.from({length:7},(_,i)=>[52+(i*107+num*31)%660,65+(i*71+num*37)%230]);
+    const lines=points.slice(1).map((p,i)=>'<path d="M'+points[i][0]+' '+points[i][1]+' L'+p[0]+' '+p[1]+'" />').join("");
+    const dots=points.map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5" />').join("");
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440"><rect width="800" height="440" fill="#101c22"/><g stroke="#55796c" stroke-width="2" opacity=".65" fill="none">'+lines+'</g><g fill="#b6d6c7">'+dots+'</g><path d="M45 335 H755" stroke="#4b645c"/><text x="48" y="67" fill="#b5d5c7" font-size="19" font-family="Arial">PROJECT / '+project.id+'</text><text x="48" y="370" fill="#e4eee9" font-size="26" font-family="Arial" font-weight="bold">'+title+'</text><text x="48" y="406" fill="#9fb5ad" font-size="15" font-family="Arial">'+tech+'</text></svg>';
+    return {src:"data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg),alt:"Original conceptual schematic for "+project.title+"; not a photograph of the installation"};
+  }
   function card(project, i) {
-    const photo = model.images[project.visual] || model.images.circuits;
+    const visual=projectVisual(project); const photo=visual.src;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
     return '<article class="project-card reveal '+(i === 0 ? "wide" : "")+'" style="--delay:'+Math.min(i*42,260)+'ms">'+
        '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="Open detail for '+escapeHTML(project.title)+'">'+
-       '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(project.visual==="switches"?"Physical network switches and Ethernet cabling":project.visual==="circuits"?"Macro photograph of an electronic circuit board":project.visual==="servers"?"Server rack with physical network equipment":project.visual==="camera"?"Ceiling-mounted security camera":project.visual==="scv3020"?"Dell EMC SCv3020 storage array, exact-model reference photograph":"Close-up photograph of a laptop keyboard")+'" loading="lazy" data-fallback="/assets/server-stack.svg" />'+
+       '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(visual.alt)+'" loading="lazy" data-fallback="/assets/server-stack.svg" />'+
        '<span class="project-overlay"></span><span class="project-index">'+escapeHTML(project.id)+' / '+escapeHTML(project.year)+'</span>'+
        '<span class="project-image-symbol" aria-hidden="true">'+(project.tracks.includes("infrastructure")?"◈":project.tracks.includes("automation")?"⌘":"↗")+'</span></div>'+
        '<div class="project-content"><div class="project-topline"><span>'+escapeHTML(project.stage)+'</span><span>VIEW CASE STUDY ↗</span></div>'+
