@@ -175,9 +175,9 @@ window.PORTFOLIO = {
       "slug": "data-center-infrastructure",
       "title": "Data center infrastructure & operations",
       "subtitle": "Physical systems, connected services and operational continuity.",
-      "description": "Cross-environment work across data center infrastructure, physical and virtual servers, network cabling, storage, enterprise systems and monitoring.",
-      "detail": "A cross-career infrastructure case study: physical and virtual servers, enterprise storage, switching and cabling, systems administration, monitoring and technical operations across multiple organizational environments. This is a composite of documented experience, not a claim that a single complete DC was built from scratch. Site-specific topologies and identifiers are excluded.",
-      "role": "Hands-on infrastructure engineering, deployment, troubleshooting, operations and coordination",
+      "description": "Cross-environment work across data center infrastructure, physical and virtual servers, storage, enterprise systems and monitoring.",
+      "detail": "A cross-career infrastructure case study: physical and virtual servers, enterprise storage, systems administration, monitoring and technical operations across multiple organizational environments. This is a composite of documented experience, not a claim that a single complete DC was built from scratch. Site-specific topologies and identifiers are excluded.",
+      "role": "Hands-on infrastructure engineering, systems configuration, troubleshooting and coordination",
       "tech": [
         "Data center",
         "Servers",
