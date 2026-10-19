@@ -4,7 +4,7 @@
 const model=window.PORTFOLIO;if(!model)return;
 const he=location.pathname==="/he"||location.pathname.startsWith("/he/");
 const category={
- P11:"infrastructure",P07:"infrastructure",P03:"infrastructure",P09:"infrastructure",
+ P17:"infrastructure",P11:"infrastructure",P07:"infrastructure",P03:"infrastructure",P09:"infrastructure",
  P12:"automation",P02:"automation",P06:"automation",P14:"automation",P13:"automation",
  P05:"operations",P08:"operations",P16:"operations",
  P04:"leadership",P15:"leadership",P01:"leadership",P10:"leadership"
@@ -14,13 +14,14 @@ window.SITE_LANG=he?"he":"en";
 window.SITE_PREFIX=he?"/he":"";
 window.SITE_CATEGORY_MAP=category;
 window.SITE_JOB_PAGES={
-"systems-infrastructure":{track:"infrastructure",title:"Infrastructure & Systems",he:"תשתיות ומערכות",intro:"Virtualization, infrastructure diagnostics and working across physical and logical systems.",introHe:"וירטואליזציה, פתרון תקלות תשתית ועבודה מעשית בין חומרה, רשת ותוכנה.",ids:["P11","P08","P05","P07","P09","P16"]},
+"systems-infrastructure":{track:"infrastructure",title:"Infrastructure & Systems",he:"תשתיות ומערכות",intro:"Virtualization, infrastructure diagnostics and working across physical and logical systems.",introHe:"וירטואליזציה, פתרון תקלות תשתית ועבודה מעשית בין חומרה, רשת ותוכנה.",ids:["P17","P11","P08","P05","P07","P09","P16"]},
 "technical-support":{track:"operations",title:"Technical Support & Operations",he:"תמיכה ותפעול טכני",intro:"Cross-team coordination, fault isolation, reporting and day-to-day technical support.",introHe:"תיאום בין צוותים, אבחון תקלות, דיווח, הדרכה ותמיכה טכנית שוטפת.",ids:["P08","P11","P05","P04","P16","P12"]},
 "technical-operations":{track:"operations",title:"Technical Operations",he:"תפעול טכנולוגי",intro:"Troubleshooting, integration, documentation, reliable operations and practical service recovery.",introHe:"אבחון תקלות, אינטגרציות, תיעוד, עבודה תפעולית אמינה והתאוששות שירותים.",ids:["P05","P08","P16","P12","P11","P04"]},
 "automation-engineering":{track:"automation",title:"Automation Engineering",he:"פיתוח אוטומציה ואינטגרציות",intro:"Message workflows, APIs, process automation, service reliability and human-facing interfaces.",introHe:"תהליכי מסרים, API, אוטומציית תהליכים, אמינות שירותים וממשקים לאנשים.",ids:["P12","P01","P02","P06","P14","P04"]},
 "technical-leadership":{track:"leadership",title:"Technical & Product Leadership",he:"ניהול אנשים ומוצר טכנולוגי",intro:"Requirements, prioritization, team coordination, process design and delivery across disciplines.",introHe:"אפיון, תעדוף, תיאום צוותים, עיצוב תהליכים ומימוש פתרונות משולבים.",ids:["P04","P01","P15","P10","P11","P12"]}
 };
 const translations={
+ P17:["הקמה ותפעול תשתיות DC","מחומרה ותקשורת עד שירותים זמינים","עבודה מעשית בסביבות חדרי שרתים: שרתים פיזיים ווירטואליים, תשתיות תקשורת וכבילה, אחסון, מערכות הפעלה, ניטור ותחזוקה.","ניסיון מצטבר בתשתיות חדרי שרתים ובסביבות ארגוניות שונות, כולל פריסת שרתים, תחזוקת מערכות, חיבור בין שכבות חומרה ותקשורת, מערכות אחסון ותפעול שירותים. זהו סיכום רוחבי של ניסיון תשתיתי לאורך השנים, ולא תיעוד של פרויקט DC יחיד שהוקם כולו מאפס.","עבודה טכנית בשטח, תיאום תשתיות, אבחון, תחזוקה והובלת ביצוע"],
 P11:["וירטואליזציה, SAN וגיבויים","תשתיות עם שרידות והתאוששות מוכחות","עבודה ב־Proxmox, אחסון משותף, Quorum ובדיקות HA, לצד השלמה של מערך הגיבויים והשחזור באישור בעל הפרויקט.","תכנון תשתיות וירטואליזציה, נתיבי אחסון ושרידות, תהליכי גיבוי והתאוששות. תוצאות העבר מתועדות וסטטוס השלמת הגיבויים אושר ב־18.10.2026; מדדי RPO/RTO ומדיניות שמירה לא אומתו מחדש.","הובלה טכנית, תיאום עבודה פיזית, אבחון תקלות ותכנון בדיקות"],
 P12:["מערכת הודעות מתוזמנת","אוטומציה שמגיעה בזמן הנכון","בוטים ל־Telegram ול־WhatsApp עם העדפות משתמש, שפה, אזור זמן ושליחה מתוזמנת.","שירותי הודעות נפרדים, הגדרות משתמש וניהול זמני משלוח; תכנון התאוששות מחיבור מחדש ובקרת כפילויות.","תכנון, פיתוח בסיוע AI, בדיקות ותפעול שוטף"],
 P05:["מאירועים לתובנות","ניטור אבטחתי ותפעולי ברור","צינור מידע שמחבר איסוף אירועים, נרמול, OpenSearch ותצוגות Grafana.","בניית זרימת נתונים מרישומי מערכות ותהליכי ניטור לדשבורדים; ללא חשיפת חוקי זיהוי או סביבת ייצור.","סקירת ארכיטקטורה, תכנון דשבורדים ואבחון נתונים"],
@@ -41,7 +42,7 @@ P16:["פתרון תקלות במסלול הפיתוח","מאבחנים את הת
 window.SITE_TRANSLATIONS=translations;
 const heProfiles={
 all:{eyebrow:"תשתיות · אוטומציה · אנשים",title:"אני הופך אתגרים<br><em>למערכות שעובדות.</em>",subtitle:"אני הופך אתגרים טכנולוגיים לפתרונות עובדים — מתשתיות וחומרה ועד אוטומציה, מוצר וניהול צוותים.",note:"פורטפוליו טכנולוגי רב־תחומי"},
-infrastructure:{eyebrow:"תשתיות · רשתות · שרידות",title:"מערכות שעובדות.<br><em>גם כשקשה.</em>",subtitle:"חומרה, רשתות, וירטואליזציה, SAN, גיבויים וניטור — מתוך גישה של בדיקה ואחריות בפועל.",note:"תשתיות ומערכות"},
+infrastructure:{eyebrow:"DC · תשתיות · רשתות · שרידות",title:"מערכות שעובדות.<br><em>גם כשקשה.</em>",subtitle:"הקמה ותפעול תשתיות חדרי שרתים, שרתים פיזיים ווירטואליים, תקשורת, אחסון, גיבויים וניטור — מהשטח ועד שכבת השירות.",note:"תשתיות ומערכות"},
 automation:{eyebrow:"אוטומציה · אינטגרציה · מוצר",title:"פחות חיכוך.<br><em>יותר תוצאה.</em>",subtitle:"חיבור תהליכים, API, כלי AI וממשקי הפעלה לפתרונות פשוטים לאנשים שעובדים איתם.",note:"אוטומציה ואינטגרציות"},
 operations:{eyebrow:"אבחון · תפעול · אמינות",title:"מוצאים את התקלה.<br><em>פותרים את הבעיה.</em>",subtitle:"גישת עבודה שמתחילה במדידה, ממשיכה בבידוד גורמים ומסתיימת בבדיקה חוזרת ותיעוד.",note:"תפעול ואמינות"},
 leadership:{eyebrow:"מוצר · אנשים · ביצוע",title:"מתכנון<br><em>לביצוע בשטח.</em>",subtitle:"תרגום צורך עסקי לאפיון, סדרי עדיפויות, תיאום צוותים ומערכות שפועלות לאורך זמן.",note:"מנהיגות טכנולוגית ומוצר"}
@@ -52,8 +53,8 @@ document.documentElement.dir="rtl";
 document.body.classList.add("locale-he");
 for(const [key,p] of Object.entries(heProfiles))model.profiles[key]=p;
 const tracks={
- all:["כל הפרויקטים","16 פרויקטים טכנולוגיים, מתשתיות ועד תכנון מערכות ומוצר."],
- infrastructure:["תשתיות ומערכות","וירטואליזציה, אחסון, רשתות, חומרה ומערכות תקשורת."],
+ all:["כל הפרויקטים","פרויקטים טכנולוגיים, מתשתיות ועד תכנון מערכות ומוצר."],
+ infrastructure:["תשתיות ומערכות מידע","הקמת DC, שרתים, תקשורת, אחסון, וירטואליזציה, גיבויים ותפעול."],
  automation:["אוטומציה ואינטגרציות","מערכות מחוברות, כלי AI וממשקים שמייעלים עבודה."],
  operations:["תפעול ואמינות","אבחון, התאוששות, ניטור, נהלים ופעילות שוטפת."],
  leadership:["ניהול אנשים ומוצר טכנולוגי","אפיון, תעדוף, תיאום צוותים והובלת שיפור מתמשך."]
