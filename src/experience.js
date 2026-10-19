@@ -7,7 +7,7 @@ const cats=[
 ["infrastructure","Infrastructure & systems","תשתיות ומערכות","Virtualization, networks, SAN, devices and reliable systems.","וירטואליזציה, רשתות, SAN, חומרה ומערכות אמינות."],
 ["automation","Automation & integrations","אוטומציה ואינטגרציות","Connected services, process automation and useful interfaces.","שירותים מחוברים, אוטומציה וממשקים שימושיים."],
 ["operations","Technical operations","תפעול ואמינות","Diagnostics, monitoring and dependable recovery.","אבחון תקלות, ניטור, תפעול והתאוששות."],
-["leadership","Technical & product leadership","ניהול טכנולוגי ומוצר","Requirements, coordination, team leadership and product thinking.","אפיון, תיאום צוותים, מנהיגות טכנולוגית ומוצר."]
+["leadership","Technical & product leadership","ניהול אנשים ומוצר טכנולוגי","Requirements, coordination, team leadership and product thinking.","אפיון, תיאום צוותים, מנהיגות טכנולוגית ומוצר."]
 ];
 const about='<section class="about-section section-wrap" id="about" aria-labelledby="about-title">'+
 '<div class="section-heading"><div><p class="eyebrow">'+text("HOW I THINK AND WORK","איך אני חושב ועובד")+'</p><h2 id="about-title">'+text("Curiosity, ownership.<br><em>And getting things done.</em>","סקרנות, אחריות.<br><em>והיכולת להוציא לפועל.</em>")+'</h2></div></div>'+
@@ -32,7 +32,7 @@ const jobSection='<section class="job-links section-wrap" id="job-links" aria-la
 const hero=$(".hero"),work=$("#work"),approach=$("#approach");
 if(hero)hero.insertAdjacentHTML("afterend",about);
 const aboutNode=$("#about");if(aboutNode)aboutNode.insertAdjacentHTML("afterend",peopleLeadership);
-if(work)work.insertAdjacentHTML("beforebegin",category);
+if(aboutNode)aboutNode.insertAdjacentHTML("beforebegin",category);
 if(approach)approach.insertAdjacentHTML("afterend",jobSection);
 const nav=$(".header-nav");
 if(nav){
