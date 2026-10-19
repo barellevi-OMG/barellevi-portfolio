@@ -143,8 +143,8 @@ window.PORTFOLIO = {
     "P12": {
       "challenge": "Messaging delivery involves per-user schedules, language preferences, reconnects and duplicate-send hazards.",
       "approach": "Isolate channel processes, make schedules explicit, persist relevant delivery state and build recovery into operations.",
-      "evidence": "Working bot features and deployment/test activity are described in the project record. The site presents engineering decisions rather than live usage metrics.",
-      "limits": "No subscriber data, group identifiers or current service health are disclosed.",
+      "evidence": "Source-verified: Telegram inline menu, timezone and custom-time selection, language switching, archive search/pagination and clean-day controls; shared backup implementation; Node/API/browser test suites; PM2 and HTTPS reverse-proxy configuration.",
+      "limits": "Repository code and deployment documentation were reviewed; live service status, backup execution and usage metrics were not independently checked. No subscriber or infrastructure identifiers are published.",
       "evidenceLabel": "Personal automation case study"
     },
     "P02": {
@@ -173,18 +173,18 @@ window.PORTFOLIO = {
     {
       "id": "P17",
       "slug": "data-center-infrastructure",
-      "title": "Data center infrastructure & operations",
-      "subtitle": "Physical systems, connected services and operational continuity.",
-      "description": "Cross-environment work across data center infrastructure, physical and virtual servers, storage, enterprise systems and monitoring.",
-      "detail": "A cross-career infrastructure case study: physical and virtual servers, enterprise storage, systems administration, monitoring and technical operations across multiple organizational environments. This is a composite of documented experience, not a claim that a single complete DC was built from scratch. Site-specific topologies and identifiers are excluded.",
-      "role": "Hands-on infrastructure engineering, systems configuration, troubleshooting and coordination",
+      "title": "Enterprise data center build",
+      "subtitle": "From architecture to a working infrastructure environment.",
+      "description": "Hands-on end-to-end configuration of a recent enterprise data center environment: network segmentation, servers, virtualization, SAN, core services, backup and validation.",
+      "detail": "A recent full data center setup spanning requirements mapping, server and network architecture, switch and VLAN configuration, routing and firewall rules, server firmware and management interfaces, virtualization and virtual compute, SAN connectivity, operating systems and infrastructure services, permissions and monitoring, backup policy and restore testing, resilience, performance checks, troubleshooting, documentation and handoff. Led storage-volume allocation and contributed to equipment selection and build sequencing. This case study focuses on logical configuration and systems integration, not physical installation or electrical works. Exact product versions and deployment scale are not yet published.",
+      "role": "Hands-on systems and network configuration, storage integration, validation and technical handoff",
       "tech": [
         "Data center",
-        "Servers",
-        "Networking",
-        "SAN / Fibre Channel",
-        "VMware / Proxmox",
-        "Windows Server",
+        "VLAN & routing",
+        "Firewalls",
+        "Virtualization",
+        "SAN",
+        "Backup & recovery",
         "Monitoring"
       ],
       "tracks": [
@@ -193,8 +193,8 @@ window.PORTFOLIO = {
         "leadership"
       ],
       "visual": "servers",
-      "stage": "Infrastructure experience",
-      "year": "Career experience",
+      "stage": "Recent infrastructure build",
+      "year": "2026",
       "featured": true
     },
     {
@@ -225,16 +225,19 @@ window.PORTFOLIO = {
     {
       "id": "P12",
       "slug": "messaging-automation",
-      "title": "Messaging, on a schedule",
-      "subtitle": "Personalized delivery across two channels.",
-      "description": "A multi-channel messaging service shaped around language choice, local time, archives, and operational control.",
-      "detail": "Separate Telegram and WhatsApp services handle preferences, language, local delivery schedules and archival retrieval. Reliability considerations include session recovery, resource isolation and duplicate-send prevention.",
-      "role": "Product requirements, service boundaries, operational iteration",
+      "title": "Multi-channel messaging platform",
+      "subtitle": "Telegram, WhatsApp, shared services and an admin console.",
+      "description": "A Node.js product with localized delivery, user-specific time zones, archive search, clean-day tracking and operational tooling.",
+      "detail": "Built as separate Telegram and WhatsApp service components with shared date, timezone, archive and user-state utilities, plus an Express administration dashboard. Source code implements inline Telegram menus, localized settings, custom delivery times, reading sharing, archive navigation and search, and clean-day tracking. The repository also contains unit, API and browser tests, PM2 process configuration, a daily backup module and a documented HTTPS reverse-proxy setup. Source availability does not independently establish current runtime health or active backup scheduling.",
+      "role": "Product design, implementation iteration, system integration and service operations",
       "tech": [
         "Node.js",
         "Telegram",
         "WhatsApp",
-        "PM2"
+        "PM2",
+        "Express",
+        "Caddy",
+        "Automated tests"
       ],
       "tracks": [
         "automation",
