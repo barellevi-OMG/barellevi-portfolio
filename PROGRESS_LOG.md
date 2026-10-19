@@ -177,3 +177,26 @@ Mostly independently planned and configured a 6-server, 10-VM computing environm
 - TODO: לבדוק בנפרד קוד, README והיסטוריית GitHub של whatsapp-na-bot ושל telegram-na-bot; להצליב טענות פריסה/בדיקות עם commits.
 - TODO: להרחיב מקרה בוחן NA לתתי פרויקטים Telegram, WhatsApp, Admin, Reliability; לשקול מקרה בוחן workflow automation נפרד; ולמפות מחדש פרויקטי DC/Proxmox/Firewall כדי למנוע כפילות.
 - TODO: לעבור אחד־אחד על כל הפרויקטים עם המשתמש לפני שינוי ציבורי, בהתאם להנחייתו.
+
+
+## 2026-10-19 — הצלבת גיבוי השיחות עם קוד GitHub (סבב ראשון)
+
+**נבדקו ריפוזיטוריז ישירות דרך GitHub:** `barellevi-OMG/whatsapp-na-bot` (main), `barellevi-OMG/telegram-na-bot` (main), כולל עצי קבצים מלאים ומדגם קבצי מקור ותיעוד. הריפו `MusicProjact-YT-Analysis` הופיע ברשימת החשבון אך API מחזיר Git Repository is empty; **אין להציגו כפרויקט שבוצע** ללא מקור נוסף.
+
+### ראיות חדשות בקוד (להבדיל מתיאור בשיחות)
+- **מוצר רב-רכיבי, לא רק בוט:** בריפו whatsapp-na-bot נמצאים `index.js`, `wa-service.js`, `wa-role.js`, `wa-groups.js`, `wa-readings.js`, תיקיית `admin-dashboard/`, תיקיית `telegram-bot/` ותיקיית `shared/`. הריפו telegram-na-bot מחזיק קוד Telegram ועותק של `shared/` בנפרד. זו ראיה למבנה מערכת עם רכיבים עצמאיים ולספריית תשתית משותפת; אין להסיק אוטומטית שכל רכיב פרוס כעת.
+- **Telegram UX מתקדם, מאומת בקוד:** `telegram-na-bot/feature-keyboards.js` כולל main menu, settings, שינוי שפה, שיתוף בוט וקריאה, בחירת זמן, זמן מותאם אישית, אזור זמן לפי אזורים וערים, פעולות ימי ניקיון (הזנה/שינוי/מחיקה עם אישור), חיפוש ארכיון עם pagination, ניווט קריאה ליום קודם/הבא. אלו יכולות ממומשות ברמת UI, לא רק roadmap.
+- **הנדסת פריסה ואבטחת ממשק ניהול:** `whatsapp-na-bot/admin-dashboard/deploy/README.md` מתעד Caddy reverse proxy, TLS Let's Encrypt, Express קשור ל-loopback, חסימת פורט ניהול חיצוני והגדרות ingress ברמת Oracle Cloud VCN/NSG ו-firewall במכונה. אין לפרסם IP, כתובת דומיין אדמין, פורטים או פרטי חשיפה באתר הציבורי.
+- **עמידות תהליכים ב-Production:** `whatsapp-na-bot/ecosystem.config.js` מגדיר PM2 עם autorestart, backoff, מגבלת זיכרון, מחזור מתוזמן, סביבה/תפקיד נפרד לשירות WhatsApp קבוצתי ותצורת scheduler. **יש אי-התאמה אפשרית** בין תיאור קודם ביומן (group scheduler off) לבין תצורת הקוד הנוכחית (`WHATSAPP_JOBS_ENABLED=1`, `WHATSAPP_GROUP_BROADCAST_ENABLED=1`); חובה לבדוק runtime לפני הצגת סטטוס.
+- **גיבויים ותכנון לתנאי משאבים מוגבלים:** `whatsapp-na-bot/shared/backup.js` כולל גיבוי יומי מבוסס node-cron, כתיבה דרך staging + rename, ניקוי גיבויים ישנים עם retention ברירת מחדל 30 יום, I/O אסינכרוני ו-yield לאירועי loop כדי לצמצם חסימות במכונה קטנה. **אין להסיק שהגיבויים פעילים או ששחזור נבדק**; ב-PM2 legacy-group קיים `WHATSAPP_BACKUP_ENABLED=0`.
+- **איכות תוכנה ובדיקות:** עצי הריפו כוללים `shared/test/` עם בדיקות timezone, user-store, archive-query, backup, scraper, clean-time, reading-archive ועוד; `telegram-na-bot/test/` בודק UI/שיתוף; `whatsapp-na-bot/test/` בודק role/service/product; `admin-dashboard/test/` ו-`admin-dashboard/playwright/` כוללים בדיקות API ודפדפן. יש להציג כ-*כיסוי בדיקות בקוד*; טרם בוצעה הרצת בדיקות בסבב זה.
+- **הבחנה בין מסמכים ישנים לקוד:** `whatsapp-na-bot/README.md` מתאר בוט קבוצתי ראשוני; אינו מייצג את מלוא המערכת הנוכחית. אסור להסתפק ב-README בבניית סיפור הפרויקט.
+
+### כיווני case studies — הצעה לביקורת המשתמש, לא שינוי באתר
+1. NA multi-channel product & system architecture — Telegram, WhatsApp, admin, shared modules.
+2. Personalized scheduling, localization & archive — Telegram UX + timezone.
+3. Reliability & operations on constrained cloud infrastructure — PM2, Caddy/TLS, isolated service restarts, backup design.
+4. WhatsApp migration & separation of group/private workflows — לבדוק state בפועל לפני ניסוח.
+5. Testing & delivery practices — unit/API/Playwright, CI if evidenced separately.
+
+**המשך אימות:** לקרוא `admin-dashboard/server.js`, `wa-service.js`, `shared/user-store.js`, `telegram-na-bot/index.js`, workflow definitions והיסטוריית commits; להצליב תאריכים, בעיות שנפתרו ותוצאות מדידות; להריץ בדיקות בסביבה מתאימה אם תתאפשר גישה. לא לשנות אתר ציבורי לפני אישור בחירת הפרויקטים.
