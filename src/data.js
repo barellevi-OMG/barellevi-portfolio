@@ -171,6 +171,33 @@ window.PORTFOLIO = {
   },
   "projects": [
     {
+      "id": "P17",
+      "slug": "data-center-infrastructure",
+      "title": "Data center infrastructure & operations",
+      "subtitle": "Physical systems, connected services and operational continuity.",
+      "description": "Cross-environment work across data center infrastructure, physical and virtual servers, network cabling, storage, enterprise systems and monitoring.",
+      "detail": "A cross-career infrastructure case study: physical and virtual servers, enterprise storage, switching and cabling, systems administration, monitoring and technical operations across multiple organizational environments. This is a composite of documented experience, not a claim that a single complete DC was built from scratch. Site-specific topologies and identifiers are excluded.",
+      "role": "Hands-on infrastructure engineering, deployment, troubleshooting, operations and coordination",
+      "tech": [
+        "Data center",
+        "Servers",
+        "Networking",
+        "SAN / Fibre Channel",
+        "VMware / Proxmox",
+        "Windows Server",
+        "Monitoring"
+      ],
+      "tracks": [
+        "infrastructure",
+        "operations",
+        "leadership"
+      ],
+      "visual": "servers",
+      "stage": "Infrastructure experience",
+      "year": "Career experience",
+      "featured": true
+    },
+    {
       "id": "P11",
       "slug": "virtualization-lab",
       "title": "Virtualization, SAN & recovery",
