@@ -10,8 +10,8 @@
   let activeTrack = "all";
   const routes = { infrastructure:"infrastructure", automation:"automation", operations:"operations", leadership:"leadership" };
   const recruitmentRoutes = {
-    "mobileye-infrastructure":"infrastructure",
-    "mobileye-technical-operations":"operations",
+    "systems-infrastructure":"infrastructure",
+    "technical-support":"operations",
     "technical-operations":"operations",
     "automation-engineering":"automation",
     "technical-leadership":"leadership"
