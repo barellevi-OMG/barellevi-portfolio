@@ -25,7 +25,7 @@ try{
   page.on('pageerror',err=>errors.push(err.message));
   await page.goto('http://127.0.0.1:4190/',{waitUntil:'domcontentloaded'});
   await page.locator('.project-card').first().waitFor();
-  assert.equal(await page.locator('.project-card').count(),16);
+  assert.equal(await page.locator('.project-card').count(),17);
   const modelCards=page.locator('.model-reference-card');
   await modelCards.first().waitFor();
   assert.equal(await modelCards.count(),2,'two identified device model references');
@@ -51,7 +51,7 @@ try{
   assert.ok(page.url().endsWith('/he/'),'language switch to Hebrew route');
   assert.equal(await page.locator('html').getAttribute('lang'),'he');
   assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
-  assert.equal(await page.locator('.project-card').count(),16);
+  assert.equal(await page.locator('.project-card').count(),17);
   assert.equal(await page.locator('.project-category-group').count(),4);
   assert.match(await page.locator('.about-section').innerText(),/מנהל/);
   await page.screenshot({path:'artifacts/14-hebrew-home.png',fullPage:true,animations:'disabled'});
