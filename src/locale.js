@@ -14,8 +14,8 @@ window.SITE_LANG=he?"he":"en";
 window.SITE_PREFIX=he?"/he":"";
 window.SITE_CATEGORY_MAP=category;
 window.SITE_JOB_PAGES={
-"mobileye-infrastructure":{track:"infrastructure",title:"Infrastructure & Systems — Mobileye",he:"תשתיות ומערכות — Mobileye",intro:"Virtualization, infrastructure diagnostics and working across physical and logical systems.",introHe:"וירטואליזציה, פתרון תקלות תשתית ועבודה מעשית בין חומרה, רשת ותוכנה.",ids:["P11","P08","P05","P07","P09","P16"]},
-"mobileye-technical-operations":{track:"operations",title:"Technical Operations — Mobileye",he:"תפעול טכני — Mobileye",intro:"Cross-team coordination, fault isolation, reporting and day-to-day technical support.",introHe:"תיאום בין צוותים, אבחון תקלות, דיווח, הדרכה ותמיכה טכנית שוטפת.",ids:["P08","P11","P05","P04","P16","P12"]},
+"mobileye-infrastructure":{track:"infrastructure",title:"Infrastructure & Systems",he:"תשתיות ומערכות",intro:"Virtualization, infrastructure diagnostics and working across physical and logical systems.",introHe:"וירטואליזציה, פתרון תקלות תשתית ועבודה מעשית בין חומרה, רשת ותוכנה.",ids:["P11","P08","P05","P07","P09","P16"]},
+"mobileye-technical-operations":{track:"operations",title:"Technical Support & Operations",he:"תמיכה ותפעול טכני",intro:"Cross-team coordination, fault isolation, reporting and day-to-day technical support.",introHe:"תיאום בין צוותים, אבחון תקלות, דיווח, הדרכה ותמיכה טכנית שוטפת.",ids:["P08","P11","P05","P04","P16","P12"]},
 "technical-operations":{track:"operations",title:"Technical Operations",he:"תפעול טכנולוגי",intro:"Troubleshooting, integration, documentation, reliable operations and practical service recovery.",introHe:"אבחון תקלות, אינטגרציות, תיעוד, עבודה תפעולית אמינה והתאוששות שירותים.",ids:["P05","P08","P16","P12","P11","P04"]},
 "automation-engineering":{track:"automation",title:"Automation Engineering",he:"פיתוח אוטומציה ואינטגרציות",intro:"Message workflows, APIs, process automation, service reliability and human-facing interfaces.",introHe:"תהליכי מסרים, API, אוטומציית תהליכים, אמינות שירותים וממשקים לאנשים.",ids:["P12","P01","P02","P06","P14","P04"]},
 "technical-leadership":{track:"leadership",title:"Technical & Product Leadership",he:"ניהול טכנולוגי ומוצר",intro:"Requirements, prioritization, team coordination, process design and delivery across disciplines.",introHe:"אפיון, תעדוף, תיאום צוותים, עיצוב תהליכים ומימוש פתרונות משולבים.",ids:["P04","P01","P15","P10","P11","P12"]}
@@ -40,7 +40,7 @@ P16:["פתרון תקלות במסלול הפיתוח","מאבחנים את הת
 };
 window.SITE_TRANSLATIONS=translations;
 const heProfiles={
-all:{eyebrow:"תשתיות · אוטומציה · אנשים",title:"מחברים בין<br><em>מערכות ואנשים.</em>",subtitle:"אני הופך אתגרים טכנולוגיים לפתרונות עובדים — מתשתיות וחומרה ועד אוטומציה, מוצר וניהול צוותים.",note:"פורטפוליו טכנולוגי רב־תחומי"},
+all:{eyebrow:"תשתיות · אוטומציה · אנשים",title:"אני הופך אתגרים<br><em>למערכות שעובדות.</em>",subtitle:"אני הופך אתגרים טכנולוגיים לפתרונות עובדים — מתשתיות וחומרה ועד אוטומציה, מוצר וניהול צוותים.",note:"פורטפוליו טכנולוגי רב־תחומי"},
 infrastructure:{eyebrow:"תשתיות · רשתות · שרידות",title:"מערכות שעובדות.<br><em>גם כשקשה.</em>",subtitle:"חומרה, רשתות, וירטואליזציה, SAN, גיבויים וניטור — מתוך גישה של בדיקה ואחריות בפועל.",note:"תשתיות ומערכות"},
 automation:{eyebrow:"אוטומציה · אינטגרציה · מוצר",title:"פחות חיכוך.<br><em>יותר תוצאה.</em>",subtitle:"חיבור תהליכים, API, כלי AI וממשקי הפעלה לפתרונות פשוטים לאנשים שעובדים איתם.",note:"אוטומציה ואינטגרציות"},
 operations:{eyebrow:"אבחון · תפעול · אמינות",title:"מוצאים את התקלה.<br><em>פותרים את הבעיה.</em>",subtitle:"גישת עבודה שמתחילה במדידה, ממשיכה בבידוד גורמים ומסתיימת בבדיקה חוזרת ותיעוד.",note:"תפעול ואמינות"},
