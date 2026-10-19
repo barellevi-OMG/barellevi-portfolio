@@ -131,3 +131,23 @@
 **נדרש אימות נוסף לפני פרסום:** דגמי שרתים ואחסון אם רצוי; סוג מערכת הגיבויים הנוספת; מה בדיוק הוגדר ב-HA; ממשק ניהול מדויק; מטרת הפרויקט, תוצאות והישגים; נוסח סופי לאישור. אין להמציא מדדי ביצועים, זמינות או RPO/RTO. אין לערבב טכנולוגיות מפרויקטים קודמים.
 
 **משימות המשך:** אישור מקרה הבוחן; החלטה אם להחליף או לפצל את P17 (ניסיון תשתיתי מצטבר) מול P11 (וירטואליזציה וגיבויים); בהמשך מעבר פרויקט-פרויקט להרחבה, דיוק והסרה לפי החלטת המשתמש. אין לפרסם תוכן לא מאומת.
+
+
+## 2026-10-19 — DC case study: purpose, challenge, role, current status
+
+User-confirmed facts about the most recent DC build:
+- **Purpose:** Build a new DC from scratch (computing environment). Do not imply personally laying physical infrastructure.
+- **Primary challenge:** Complex networking and storage faults.
+- **Working model:** Worked mostly independently.
+- **Current state:** Build completed; environment currently undergoing testing. Do not describe as production-live or fully accepted.
+- No additional specific incident, decision or measurable outcome was supplied.
+
+Previously confirmed scope: 6 physical servers and 10 VMs; Proxmox VE, Linux, Cluster/HA, SAN/Fibre Channel, iSCSI, Dell Storage, Proxmox Backup Server plus another unnamed backup system, Dell Networking, Check Point, VLAN/Routing, DNS/DHCP and server management interfaces. Other platforms (VMware, Hyper-V, Windows Server, Cisco, Aruba/HP, Active Directory and monitoring systems) belong to prior projects, not this build. Veeam was explicitly excluded.
+
+Responsibilities: requirements and architecture, logical network/security configuration, server and virtualization configuration, SAN connectivity, backup and recovery testing, fault diagnosis, system tests and documentation. Storage-volume allocation was **led**, equipment selection and build sequencing were **partial**. The user did **not** perform physical infrastructure rollout, rack equipment installation, cabling or electrical/PDU/UPS work.
+
+### Draft story for later approval — NOT PUBLISHED
+**Building a new enterprise data center — from architecture to system testing.**
+Mostly independently planned and configured a 6-server, 10-VM computing environment, integrating Proxmox/Linux virtualization, Dell networking and storage, SAN/Fibre Channel and iSCSI, Check Point security, cluster/HA and backup/recovery tooling. Resolved complex networking and storage faults during the build. Installation and configuration are complete; acceptance/testing is ongoing. Scope excludes physical infrastructure deployment. No production status, measurable uptime, performance gains or RPO/RTO outcomes have been verified.
+
+**TODO:** Seek final editorial approval before changing public case-study content. Determine relationship of new DC case study to existing P17/P11; continue one-by-one project review later. Do not infer unspecified outcomes.
