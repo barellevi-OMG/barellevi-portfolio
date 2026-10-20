@@ -64,6 +64,41 @@ if(nav){
     const link=document.createElement("a");link.href=href;link.textContent=text(en,iw);nav.append(link);
   }
 }
+
+/* Recruitment-first editorial layout: preserve all underlying content for deeper pages. */
+const route=location.pathname.replace(/^\/he(?=\/|$)/,"")||"/";
+const isHome=route==="/";
+const isArchive=route==="/projects/"||route==="/projects";
+const isRole=route.startsWith("/for/");
+document.body.classList.add(isHome?"recruiter-home":isArchive?"portfolio-archive":isRole?"recruiter-role":"portfolio-category");
+const actionbar='<div class="recruiter-identity"><strong>'+text("Bar-El Levi","בר־אל לוי")+'</strong><span>'+text("Infrastructure · Automation · Technology & Product Leadership","תשתיות · אוטומציה · הובלה טכנולוגית ומוצר")+'</span><small>'+text("Jerusalem, Israel","ירושלים, ישראל")+'</small></div>';
+const heroCopy=$(".hero-copy");
+if(heroCopy){
+ heroCopy.insertAdjacentHTML("afterbegin",actionbar);
+ const cta=$(".hero-cta");
+ if(cta)cta.innerHTML='<a class="button-primary" href="mailto:Barellevi@gmail.com">'+text("Contact me","יצירת קשר")+' ↗</a><a class="button-text" href="'+prefix+'/resume/">'+text("One-page resume","תקציר קורות חיים")+' ↓</a><a class="button-text" href="'+prefix+'/projects/">'+text("Explore projects","לכל הפרויקטים")+' ↗</a>';
+}
+const headerContact=$(".header-actions .contact-link");if(headerContact)headerContact.textContent=text("Contact ↗","יצירת קשר ↗");
+const floating=$(".floating-label-top");if(floating)floating.textContent=text("ILLUSTRATIVE SYSTEMS VIEW","המחשת מערכות");
+const heroCounter=$(".hero-index");if(heroCounter)heroCounter.remove();
+const workBlock=$("#work");const careerBlock=$("#career");const aboutBlock=$("#about");
+if(isHome||isRole){
+ if(workBlock&&hero)hero.insertAdjacentElement("afterend",workBlock);
+ if(careerBlock&&workBlock)workBlock.insertAdjacentElement("afterend",careerBlock);
+ if(aboutBlock&&careerBlock)careerBlock.insertAdjacentElement("afterend",aboutBlock);
+ const workHead=$("#work .section-heading h2");
+ if(workHead)workHead.innerHTML=text("Selected proof.<br><em>Real work.</em>","עבודות נבחרות.<br><em>עשייה מוכחת.</em>");
+ const workDesc=$("#work .section-heading > p");
+ if(workDesc)workDesc.textContent=text("Three examples first. Explore the full portfolio for deeper technical detail.","שלוש עבודות מובילות תחילה. פירוט נוסף זמין בארכיון הפרויקטים.");
+ if(workBlock)workBlock.insertAdjacentHTML("beforeend",'<p class="portfolio-more"><a class="button-text" href="'+prefix+'/projects/">'+text("View all projects and categories ↗","לכל הפרויקטים והתחומים ↗")+'</a></p>');
+}
+if(isArchive){
+ const h=$("#work .section-heading h2");if(h)h.textContent=text("Project archive","כל הפרויקטים");
+ const d=$("#work .section-heading > p");if(d)d.textContent=text("Browse the full portfolio. Select one area or explore everything, then open an individual project.","כל 17 הפרויקטים במקום אחד. אפשר לסנן לפי תחום ולפתוח פרויקט מסוים.");
+}
+const navToggle=document.createElement("button");navToggle.type="button";navToggle.className="mobile-menu-toggle";navToggle.textContent=text("Menu ☰","תפריט ☰");navToggle.setAttribute("aria-expanded","false");navToggle.setAttribute("aria-controls","site-mobile-nav");
+const currentNav=$(".header-nav");if(currentNav){currentNav.id="site-mobile-nav";currentNav.insertAdjacentHTML("beforeend",'<a href="mailto:Barellevi@gmail.com">'+text("Contact","יצירת קשר")+'</a>');currentNav.parentElement.insertBefore(navToggle,currentNav);navToggle.addEventListener("click",()=>{const open=navToggle.getAttribute("aria-expanded")!=="true";navToggle.setAttribute("aria-expanded",String(open));currentNav.classList.toggle("mobile-open",open)});currentNav.addEventListener("click",()=>{currentNav.classList.remove("mobile-open");navToggle.setAttribute("aria-expanded","false")});}
+
 const holder=$(".header-actions");
 if(holder){
 const a=document.createElement("a");const own=location.pathname.replace(/^\/he(?=\/|$)/,"")||"/";a.href=he?own:"/he"+(own.startsWith("/")?own:"/"+own);
