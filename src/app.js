@@ -238,7 +238,7 @@
   });
   $(".modal-close").addEventListener("click",()=>dialog.close());
   dialog.addEventListener("close",()=>{if(location.hash.startsWith("#project-"))history.replaceState(history.state,"",location.pathname+location.search)});
-  window.addEventListener("load",()=>{const found=location.hash.match(/^#project-(P\\d+)$/);if(found)openProject(found[1])});
+  window.addEventListener("load",()=>{const found=location.hash.match(/^#project-(P[0-9]+)$/);if(found)openProject(found[1])});
   dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
   const steps = [
     {phase:"01 / OBSERVE",metric:"10",unit:"Mbps",label:"Illustrative symptom",explanation:"Start with an observable symptom. Compare results across the path before changing configuration.",width:"33%",target:"diag-client"},
