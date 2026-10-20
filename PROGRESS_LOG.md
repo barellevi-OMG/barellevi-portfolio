@@ -322,3 +322,22 @@ After the audit commits, re-fetched latest `gh-pages` sources through the GitHub
 Main project cards and previews now expose direct URLs to these pages. Printable resumes were linked to the dedicated project pages instead of old fragment links. Shared implementation and styles committed to GitHub in successive changes including `bfc6b2f`, `eb649a9`, `8d878c9`, `541ef32` (repair of a transient malformed permalink string), and `225233b`. Partial status #7 from the earlier audit matrix is therefore updated: **per-project pages implemented in source**, but individual page SEO metadata and live browser acceptance remain pending.
 
 **Latest static validation:** re-read current Git tree; 17 distinct project slugs and 34 EN/HE detail HTML files; syntax compilation passed for all five JS files (`src/app.js`, `src/experience.js`, `src/project-detail.js`, `src/locale.js`, `src/data.js`). No live cross-browser visual validation / Lighthouse / WCAG audit has been completed; do not claim fully tested publication.
+
+
+## 2026-10-20 — ביקורת עיצוב מלאה, מסמך 14 עמודים (Barel_Levi_Design_Audit_HE.pdf)
+
+המשתמש ביקש להתייחס **לכל** סעיפי ביקורת העיצוב (14 עמודים; מסמך מתוארך 19.10.2026), ליישם בפועל ב-GitHub ולהבחין בין ממצאי הביקורת ותנאי קבלה עתידיים. נוצר מסמך מיפוי מקיף `DESIGN_AUDIT_IMPLEMENTATION.md`, commit `48691e3c`, המפרט מצב יישום של כל תחומי הביקורת והבדיקות הנדרשות.
+
+**מסקנה אסטרטגית:** האתר אינו צריך עיצוב מחדש; עליו להיות *recruitment-first*: שם/התמחות/קשר/תקציר בחזית, אחריהם ניסיון ו-3 ראיות חזקות, עם עומק פרויקטלי בדפים נפרדים. לשמר פלטה כהה, מנטה ורכיבים טכנולוגיים. ההערכה המקורית מדדה תמונת מצב ב-19.10; חלק מתיקוני P0/P1 כבר היו קיימים בקוד בעת קליטת ה-PDF ב-20.10 ולכן לא יוחסו לתיקונים חדשים: שם בולט, mailto, סיכום להדפסה, דף /projects, תצוגת 3 פרויקטים בכניסה/4 לפי תפקיד, תפריט מובייל, כתובות פרויקט קבועות והעברת ראיות מוקדמת.
+
+**שינויים שבוצעו ב-GitHub במסגרת קריאת המסמך:**
+- תיקוני `hreflang` שבורים בעברית (`/he/he/`) והשלמת תוויות קשר/זמינות בחלק מדפי הכניסה; לוודא רוחבית בכל הנתיבים.
+- `src/app.js` commit `3ad2b4a`: תחום תרומה אישי ומצב פרויקט מופיעים לפני צילום המחשה בחלונית; תווית קבועה לתמונת המחשה.
+- `styles.css` commit `36a4614`: header sticky, גדלי ניווט/לחיצה, קיצור פתיחה, טיפוגרפיה וריווח, Hebrew font/letter spacing, שיפור חלונית ו-print fallback.
+- `src/app.js` commit `de7de4c`: תרגום פעולות בכרטיסים/חלונית/alt לעברית.
+- `he/cases/proxmox-ha-san/index.html` commit `d3d8c0b`: תרגום מבוא וניווט ראשוני בדף מקרה בוחן (תרשים, מצבי מבט והבהרת המחשה).
+- `DESIGN_AUDIT_IMPLEMENTATION.md` commit `48691e3c`: טבלת ממצאים, תיעוד מצב פתוח/חלקי/מבוסס קוד ומבחני קבלה.
+
+**אימות:** בוצע syntax validation לשני קובצי `src/app.js` ו-`src/experience.js` באמצעות פרסר JavaScript; עבר. ניסיון לפתוח את barellevi.com בכלי הגלישה נכשל; אין טענה לבדיקת אתר חי או בדיקת UI/מובייל מלאה. בדיקות WCAG, contrast לכל המצבים, mobile 320/390/768/1024/1440, תקינות מודלים וטפסים, החלפת שפה לאורך עמודי העומק ומחקר משתמשים עם 5–8 מגייסים/מהנדסים — נשארו פתוחים. אין להמציא מסקנות אמפיריות על שיעורי המרה.
+
+**תיעוד פרטיות:** הדף הציבורי אינו מפרסם פרטי ארכיטקטורת לקוח, תיעוד רגיש או מזהים אישיים.
