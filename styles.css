@@ -252,3 +252,5 @@ html[lang="he"] .section-heading h2{font-family:Arial,"Noto Sans Hebrew",sans-se
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 .project-role-label{font-size:14px;line-height:1.65;color:#d7e4db;margin-top:14px}.project-role-label strong{color:var(--mint)}.modal-share a{color:var(--mint);text-decoration:underline;text-underline-offset:4px}.contact-direct{display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin:22px 0 0;width:100%}.contact-direct a{display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid #8cbaa7;color:var(--ink);font-size:clamp(14px,1.15vw,17px)}.case-header{position:sticky;top:0;z-index:90;background:#0b1115f5;backdrop-filter:blur(12px)}html[lang="he"] .modal-deep-link{direction:rtl}html[lang="he"] .modal-content{font-family:Arial,"Noto Sans Hebrew",sans-serif}@media(max-width:760px){.contact-direct{gap:10px}.contact-direct a{min-height:44px}.case-header nav{gap:10px;flex-wrap:wrap}.case-header nav a{min-height:36px}}
+
+.site-shell{overflow:clip}
