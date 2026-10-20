@@ -202,15 +202,15 @@
     if (!p) return;
     const t = p.tech.map(x=>"<span>"+escapeHTML(x)+"</span>").join("");
     $("#dialog-body").innerHTML =
-      '<div class="modal-eyebrow">'+escapeHTML(p.id)+' / SELECTED WORK / '+escapeHTML(p.year)+'</div>'+
+      '<div class="modal-eyebrow">'+escapeHTML(p.id)+' / '+txt("SELECTED WORK","פרויקט נבחר")+' / '+escapeHTML(p.year)+'</div>'+
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<p class="modal-status">'+txt("Project context · ","הקשר הפרויקט · ") + escapeHTML(p.stage || "Portfolio project")+'</p>'+
       '<p class="modal-lead"><strong>'+txt("My contribution: ","התרומה שלי: ")+'</strong>'+escapeHTML(p.role)+'</p>'+ 
-      '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" loading="lazy" /><span class="visual-disclaimer">'+txt("Representative image","תמונת המחשה")+'</span></div>'+
+      '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="'+txt("Representative technology photograph, not a project image","תמונת המחשה טכנולוגית, לא צילום מהפרויקט")+'" loading="lazy" /><span class="visual-disclaimer">'+txt("Representative image","תמונת המחשה")+'</span></div>'+
       '<h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+
       '<p class="modal-share"><a href="'+base+'/project/'+escapeHTML(p.slug)+'/">'+txt("Permanent link to this project ↗","קישור לשיתוף הפרויקט ↗")+'</a></p>'+ '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
-       '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
+       '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">'+txt("EXPLORE INTERACTIVE FIELD STUDY ↗","למקרה הבוחן האינטראקטיבי ↗")+'</a></p>':'')+
       '';
     enableImageFallbacks($("#dialog-body"));
     dialog.showModal();
