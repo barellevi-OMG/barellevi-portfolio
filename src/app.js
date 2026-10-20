@@ -153,7 +153,7 @@
     const normalized=pieces[0]==="he"?pieces.slice(1):pieces;
     const job=(normalized[0]==="for"&&jobs[normalized[1]])?jobs[normalized[1]]:null;
     let projects=job?model.projects.filter(p=>job.ids.includes(p.id)):model.projects.filter(p=>track==="all"||p.primaryCategory===track);
-    const route=location.pathname.replace(/^\\/he(?=\\/|$)/,"")||"/";
+    const route=(location.pathname.startsWith("/he/")?location.pathname.slice(3):location.pathname)||"/";
     const compactHome=route==="/"||route==="/for/"||route.startsWith("/for/");
     if(compactHome){const spotlight=job?job.ids.slice(0,4):["P17","P12","P11"];projects=projects.filter(p=>spotlight.includes(p.id));projects.sort((a,b)=>spotlight.indexOf(a.id)-spotlight.indexOf(b.id));}
     if(job)projects.sort((a,b)=>job.ids.indexOf(a.id)-job.ids.indexOf(b.id));
