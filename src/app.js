@@ -130,7 +130,7 @@
   function card(project, i) {
     const visual=projectVisual(project); const photo=visual.src;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
-    const deep=["P17","P11","P12"].includes(project.id)?base+"/project/"+project.slug+"/":base+"/projects/#project-"+project.id;
+    const deep=base+"/project/"+project.slug+"/";
     return '<article class="project-card reveal '+(i === 0 ? "wide" : "")+'" style="--delay:'+Math.min(i*42,260)+'ms">'+
        '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="'+txt("Open project: ","פתיחת פרויקט: ")+escapeHTML(project.title)+'">'+
        '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(visual.alt)+'" loading="lazy" data-fallback="/assets/server-stack.svg" />'+
@@ -206,7 +206,7 @@
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
       '<h3>'+txt("My contribution","התרומה שלי")+'</h3><p>'+escapeHTML(p.role)+'</p><h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+
-      '<p class="modal-share"><a href="'+base+'/projects/#project-'+escapeHTML(p.id)+'">'+txt("Permanent link to this project ↗","קישור לשיתוף הפרויקט ↗")+'</a></p>'+ '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
+      '<p class="modal-share"><a href="'+base+'/project/'+escapeHTML(p.slug)+'/''+'">'+txt("Permanent link to this project ↗","קישור לשיתוף הפרויקט ↗")+'</a></p>'+ '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
        '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '';
