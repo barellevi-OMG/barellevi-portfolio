@@ -261,3 +261,43 @@ Mostly independently planned and configured a 6-server, 10-VM computing environm
 User explicitly confirmed: **11 parallel subprojects** in entrepreneurial activity. For all other conflicting data, use **V6 as authoritative**, rather than V5 or historical CV figures. In the public About section, this means March 2017–March 2019; more than 1.5 million unique active users; approximately 4,500 vendors; approximately 150 managers, of whom 11–12 senior managers reported directly; development manager and four developers; intake automation used for over one year. Older figures (55,000 users; 70 managers; 2016–2017; seven subprojects) are superseded for public copy and must not be presented as alternative current facts. Earlier infrastructure/education details can be considered separately when relevant and confirmed. Do not publish sensitive project names or personal identifiers.
 
 **Published directly to gh-pages:** `src/experience.js`, commit `bb07dca1de8c69f6610542e53a84a0b07aa97257`: bilingual About-section experience/scale facts, including the newly confirmed 11 subprojects. User's pending comprehensive critique files have **not** yet arrived; await them for the broader editorial redesign. No additional project restructuring was performed.
+
+
+## 2026-10-20 — Implementation against Barel_Levi_Design_Audit_HE.pdf (14 pages)
+
+**Source:** user-supplied design audit dated 19 October 2026. The report visually reviewed pages at 1363×936 and estimated 16,200px homepage length; those measures are a historical baseline **before** the 20 October fixes, not measurements of the current site. The audit is usability/design analysis, not independent verification of experience claims.
+
+### Audit findings and implementation status
+
+1. **P0 — visible candidate identity & direct action (pages 1,3,10,12): IMPLEMENTED IN CODE.** Added prominent name and cross-disciplinary specialization at top of hero, Jerusalem, primary email CTA, secondary printable resume CTA and project archive CTA. Existing GitHub prompts had previously been replaced by email. Added phone/email/resume links at end of long pages.
+2. **P0 — downloadable concise professional summary (pages 10–13): IMPLEMENTED AS PRINT-FRIENDLY HTML.** New dedicated `/resume/` and `/he/resume/` pages support browser Print / Save as PDF. **No standalone pre-generated PDF** included yet. Content based on user-approved career timeline, no sensitive employer details.
+3. **P1 — information hierarchy and length (pages 2,4,10,12): IMPLEMENTED IN THE HOMEPAGE CODE.** Initial list reduced to 3 headline works: P17 DC, P12 Telegram/WhatsApp system, P11 virtualization/recovery. Moved project proof to directly after hero, timeline after projects, short About later. Technical explorations/components/hardware/lab/job-list no longer displayed on homepage; underlying code and deeper pages retained.
+4. **P1 — dedicated full archive (pages 4,10): IMPLEMENTED.** New `/projects/`, `/he/projects/` retain all 17 projects and one category filter, while homepage sends users there. **Editorial review of 17 projects and decisions to merge/remove remain open.**
+5. **P1 — focused role pages (pages 4,10,12): IMPLEMENTED IN CODE.** Retain 3–4 (up to 4) job-specific cases, suppress general longer modules and bring cases forward. Role profile wording still requires future review for each specific job.
+6. **P1 — sticky header + mobile navigation (pages 4,9,12): IMPLEMENTED IN CODE.** Sticky header and an explicit mobile menu toggle with aria-expanded and visible links including contact; requires testing at 320/390/768px and keyboard.
+7. **P1 — project previews, hierarchy, permanent evidence (pages 5,11,12): PARTIAL.** Contribution appears on cards and before context in modal; per-project shareable URL uses `/projects/#project-Pxx`, with modal deep-link opening. This is a shareable **fragment URL, not a separate SEO-indexable standalone project page**. Independent project pages for all projects and consistent stage/outcome verification remain open. Kept existing Escape/focus restoration behavior. Double nested scrolling and dialog layout still require browser verification.
+8. **P1 — typography and Hebrew (pages 6,9,11): PARTIAL.** Reduced hero scale, raised nav to 14px, adjusted Hebrew headings and modality; translated title, hero, navigation and skip link in Hebrew Proxmox case study. **Full Hebrew translation of every technical case page and automatic RTL QA not complete.**
+9. **P2 — palette/contrast (pages 7,11): PARTIAL.** Preserved audited dark/mint palette; improved functional text sizing and touch sizes. **Contrast ratios after edits and all active/hover states have not been measured.** Historical report highlighted ~4.10/4.09 for specific decorative/info elements; retest.
+10. **P2 — motion and decorative affordances (pages 8,11,12): PARTIAL.** Disabled marquee continuous motion and orbit animation, added global reduced-motion styling, replaced misleading `SYSTEMS / ONLINE` badge with illustrative wording and removed slide-like `01 / 04` number from hero. Decorative arrow patterns elsewhere still need inventory.
+11. **P2 — image evidence (pages 5,8,11): NOT COMPLETE.** Existing illustrative photography retained; project artifacts/screenshots and fixed 'illustrative' labels still need curation and permissions. No fabricated work samples were added.
+12. **P1 — mobile and accessibility (pages 5,9,13): PARTIAL.** Mobile menu created; text size revised; locale-specific project button aria labels changed; project URLs can be shared. Full WCAG 2.2 AA, 200% zoom, 320px reflow, focus order, reduced-motion WCAG criterion and keyboard end-to-end test remain pending.
+13. **Research / usability validation (page 13): NOT DONE.** No testing with 5–8 actual recruiters/technical interviewers or quantified conversion; never claim UX improvement metrics without measurement.
+14. **Avoid destructive scope creep (pages 10,12): FOLLOWED.** Maintained original color scheme, all existing projects, detailed optional explorations and no invented metrics; did not publish private network information or sensitive histories.
+
+### Commits / artifact locations
+
+- `979a767` `src/experience.js`: recruiter-first DOM order, identity, contact, resume, archive links, mobile menu
+- `2009aa5` and subsequent bug fixes `5763bfa`, `7ad9078`: `src/app.js`: shortlist and project shareability
+- `ef778a9`: locale route handling in `src/experience.js`
+- `7221ef2` and `77fffab`: full project archive pages EN/HE
+- `39c7d32` and `3970e31`: printable resume pages EN/HE
+- `f3bb29e` and `e300e95`: design system, responsive navigation, typography and motion in `styles.css`
+- `13c824c`: Hebrew Proxmox case top-of-page i18n
+- `56a5287`: project card contribution and aria labels
+- `c7017f2`: contact details in closing section
+
+### Verification status / risks
+
+All modifications were written directly to **GitHub `gh-pages`**. The repository code was re-fetched to check critical snippets. **No successful live browser render or responsive screenshot verification yet:** external site fetch failed from available browsing channel. Container network could not resolve GitHub raw host, so JS syntax, build and automated tests were not independently run. Accordingly, statuses refer to **source implementation**, not verified production UX.
+
+**Next:** validate actual site at 320/390/768/1024/1440 in both languages; run JS syntax checks, console error scan, keyboard and dialog focus checks; validate links and pages; fix CSS overrides; measure contrast; finish Hebrew case-study translation; create individual static project URLs/consistent stage/contribution/outcome; add authentic evidence screenshots and finalize portfolio content with user.
