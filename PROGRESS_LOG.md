@@ -306,3 +306,10 @@ All modifications were written directly to **GitHub `gh-pages`**. The repository
 ### Code syntax verification addendum (2026-10-20)
 
 After the audit commits, re-fetched latest `gh-pages` sources through the GitHub connector and successfully **compiled without executing** each JavaScript file using the JS parser: `src/app.js`, `src/experience.js`, `src/data.js`, `src/locale.js` — all four passed syntax validation. This confirms parseability only, **not** DOM/runtime rendering or mobile/browser behavior. Live site fetch remains unavailable from current browsing environment.
+
+
+### Additional QA and fixes
+
+- Re-fetched the latest Git tree: all four newly published EN/HE archive and resume pages are present on `gh-pages`, alongside updated source files.
+- CSS follow-up `173b5e6`: changed `.site-shell` overflow to `clip`, so it does not establish an unintended scroll container around the sticky header (browser validation still needed).
+- CSS follow-up `9caf5a9`: constrained the dialog itself to `overflow:hidden` and made `.modal-content` the single scroll container, enlarged the close target to >=44px. This addresses the audit's double-scroll finding in code, with visual re-test pending.
