@@ -313,3 +313,12 @@ After the audit commits, re-fetched latest `gh-pages` sources through the GitHub
 - Re-fetched the latest Git tree: all four newly published EN/HE archive and resume pages are present on `gh-pages`, alongside updated source files.
 - CSS follow-up `173b5e6`: changed `.site-shell` overflow to `clip`, so it does not establish an unintended scroll container around the sticky header (browser validation still needed).
 - CSS follow-up `9caf5a9`: constrained the dialog itself to `overflow:hidden` and made `.modal-content` the single scroll container, enlarged the close target to >=44px. This addresses the audit's double-scroll finding in code, with visual re-test pending.
+
+
+### 2026-10-20 — Full individual project URLs completed (supersedes earlier 'fragment URL only' status)
+
+**All 17 projects now have individual, stable EN/HE pages** under `/project/<slug>/` and `/he/project/<slug>/` — **34 paths**, verified against the GitHub tree with **zero missing**. These pages use shared `src/project-detail.js`, which reads the current portfolio and locale data and shows role, description, technical detail, any documented challenge/approach/evidence/limits, technical labels, contact action, language switching and a relevant linked interactive case study where available. The 17 project titles/content originate from the existing portfolio dataset; no performance results were invented.
+
+Main project cards and previews now expose direct URLs to these pages. Printable resumes were linked to the dedicated project pages instead of old fragment links. Shared implementation and styles committed to GitHub in successive changes including `bfc6b2f`, `eb649a9`, `8d878c9`, `541ef32` (repair of a transient malformed permalink string), and `225233b`. Partial status #7 from the earlier audit matrix is therefore updated: **per-project pages implemented in source**, but individual page SEO metadata and live browser acceptance remain pending.
+
+**Latest static validation:** re-read current Git tree; 17 distinct project slugs and 34 EN/HE detail HTML files; syntax compilation passed for all five JS files (`src/app.js`, `src/experience.js`, `src/project-detail.js`, `src/locale.js`, `src/data.js`). No live cross-browser visual validation / Lighthouse / WCAG audit has been completed; do not claim fully tested publication.
