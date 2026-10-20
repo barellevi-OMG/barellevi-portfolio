@@ -130,6 +130,7 @@
   function card(project, i) {
     const visual=projectVisual(project); const photo=visual.src;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
+    const deep=["P17","P11","P12"].includes(project.id)?base+"/project/"+project.slug+"/":base+"/projects/#project-"+project.id;
     return '<article class="project-card reveal '+(i === 0 ? "wide" : "")+'" style="--delay:'+Math.min(i*42,260)+'ms">'+
        '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="'+txt("Open project: ","פתיחת פרויקט: ")+escapeHTML(project.title)+'">'+
        '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(visual.alt)+'" loading="lazy" data-fallback="/assets/server-stack.svg" />'+
@@ -137,7 +138,7 @@
        '<span class="project-image-symbol" aria-hidden="true">'+(project.tracks.includes("infrastructure")?"◈":project.tracks.includes("automation")?"⌘":"↗")+'</span></div>'+
        '<div class="project-content"><div class="project-topline"><span>'+escapeHTML(project.stage)+'</span><span>VIEW CASE STUDY ↗</span></div>'+
        '<h3>'+escapeHTML(project.title)+'</h3><p class="project-subtitle">'+escapeHTML(project.subtitle)+'</p>'+
-       '<p class="project-description">'+escapeHTML(project.description)+'</p><p class="project-role-label"><strong>'+txt("My contribution: ","התרומה שלי: ")+'</strong>'+escapeHTML(project.role)+'</p><div class="project-tags">'+tags+'</div></div></button></article>';
+       '<p class="project-description">'+escapeHTML(project.description)+'</p><p class="project-role-label"><strong>'+txt("My contribution: ","התרומה שלי: ")+'</strong>'+escapeHTML(project.role)+'</p><div class="project-tags">'+tags+'</div></div></button><a class="project-direct-link" href="'+deep+'">'+txt("Shareable project details ↗","עמוד פרויקט לשיתוף ↗")+'</a></article>';
   }
   function showTrack(track, push) {
     if (!model.tracks[track]) track = "all";
