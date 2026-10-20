@@ -131,13 +131,13 @@
     const visual=projectVisual(project); const photo=visual.src;
     const tags = project.tech.slice(0,3).map(t=>"<span>"+escapeHTML(t)+"</span>").join("");
     return '<article class="project-card reveal '+(i === 0 ? "wide" : "")+'" style="--delay:'+Math.min(i*42,260)+'ms">'+
-       '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="Open detail for '+escapeHTML(project.title)+'">'+
+       '<button type="button" class="project-click" data-project="'+escapeHTML(project.id)+'" aria-label="'+txt("Open project: ","פתיחת פרויקט: ")+escapeHTML(project.title)+'">'+
        '<div class="project-image"><img src="'+photo+'" alt="'+escapeHTML(visual.alt)+'" loading="lazy" data-fallback="/assets/server-stack.svg" />'+
        '<span class="project-overlay"></span><span class="project-index">'+escapeHTML(project.id)+' / '+escapeHTML(project.year)+'</span>'+
        '<span class="project-image-symbol" aria-hidden="true">'+(project.tracks.includes("infrastructure")?"◈":project.tracks.includes("automation")?"⌘":"↗")+'</span></div>'+
        '<div class="project-content"><div class="project-topline"><span>'+escapeHTML(project.stage)+'</span><span>VIEW CASE STUDY ↗</span></div>'+
        '<h3>'+escapeHTML(project.title)+'</h3><p class="project-subtitle">'+escapeHTML(project.subtitle)+'</p>'+
-       '<p class="project-description">'+escapeHTML(project.description)+'</p><div class="project-tags">'+tags+'</div></div></button></article>';
+       '<p class="project-description">'+escapeHTML(project.description)+'</p><p class="project-role-label"><strong>'+txt("My contribution: ","התרומה שלי: ")+'</strong>'+escapeHTML(project.role)+'</p><div class="project-tags">'+tags+'</div></div></button></article>';
   }
   function showTrack(track, push) {
     if (!model.tracks[track]) track = "all";
@@ -168,7 +168,7 @@
     }).join("");
     showProfile(track);
     enableImageFallbacks(cardArea);
-    if(push && location.pathname !== linkFor(track)) history.pushState({track:track},"",linkFor(track));
+    if(push && !location.pathname.includes("/projects/") && location.pathname !== linkFor(track)) history.pushState({track:track},"",linkFor(track));
     document.title = he?(job?job.he+" | בר-אל לוי":(track==="all"?"בר-אל לוי | תשתיות, אוטומציה וניהול טכנולוגי":cfg.label+" | בר-אל לוי")):(job?job.title+" | Bar-El Levi":(track==="all"?"Bar-El Levi | Infrastructure, Automation & Technical Operations":cfg.label+" — Bar-El Levi | Technology Portfolio"));
     const canonicalUrl = "https://barellevi.com" + (location.pathname.endsWith("/")?location.pathname:location.pathname+"/");
     const setMeta=(selector,value)=>{const el=document.querySelector(selector);if(el)el.content=value;};
@@ -205,7 +205,7 @@
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
       '<h3>'+txt("My contribution","התרומה שלי")+'</h3><p>'+escapeHTML(p.role)+'</p><h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+
-      '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
+      '<p class="modal-share"><a href="'+base+'/projects/#project-'+escapeHTML(p.id)+'">'+txt("Permanent link to this project ↗","קישור לשיתוף הפרויקט ↗")+'</a></p>'+ '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
        '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '';
