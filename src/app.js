@@ -153,6 +153,9 @@
     const normalized=pieces[0]==="he"?pieces.slice(1):pieces;
     const job=(normalized[0]==="for"&&jobs[normalized[1]])?jobs[normalized[1]]:null;
     let projects=job?model.projects.filter(p=>job.ids.includes(p.id)):model.projects.filter(p=>track==="all"||p.primaryCategory===track);
+    const route=location.pathname.replace(/^\\/he(?=\\/|$)/,"")||"/";
+    const compactHome=route==="/"||route==="/for/"||route.startsWith("/for/");
+    if(compactHome){const spotlight=job?job.ids.slice(0,4):["P17","P12","P11"];projects=projects.filter(p=>spotlight.includes(p.id));projects.sort((a,b)=>spotlight.indexOf(a.id)-spotlight.indexOf(b.id));}
     if(job)projects.sort((a,b)=>job.ids.indexOf(a.id)-job.ids.indexOf(b.id));
     else projects.sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
     intro.innerHTML='<span>'+escapeHTML(job?(he?job.he:job.title):cfg.label)+'</span><p>'+escapeHTML(job?(he?job.introHe:job.intro):cfg.desc)+'</p><span class="counter">'+projects.length+' '+txt("PROJECTS","פרויקטים")+'</span>';
@@ -201,13 +204,14 @@
       '<div class="modal-eyebrow">'+escapeHTML(p.id)+' / SELECTED WORK / '+escapeHTML(p.year)+'</div>'+
       '<h2 id="dialog-title">'+escapeHTML(p.title)+'</h2><p class="modal-subtitle">'+escapeHTML(p.subtitle)+'</p>'+
       '<div class="modal-image"><img src="'+escapeHTML(model.images[p.visual])+'" alt="Representative technology photograph, not a project image" /></div>'+
-      '<h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+'<h3>'+txt("Contribution & scope","תחומי אחריות ותרומה")+'</h3><p>'+escapeHTML(p.role)+'</p>'+
+      '<h3>'+txt("My contribution","התרומה שלי")+'</h3><p>'+escapeHTML(p.role)+'</p><h3>'+txt("Context","רקע")+'</h3><p>'+escapeHTML(p.detail)+'</p>'+caseStudyMarkup(p)+
       '<h3>'+txt("Technology","טכנולוגיות")+'</h3><div class="project-tags modal-tags">'+t+'</div>'+hardwareInProject(p)+
       ({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id]?
        '<p><a class="modal-deep-link" href="'+base+'/cases/'+({"P11":"proxmox-ha-san","P08":"network-diagnostics","P05":"security-observability"}[p.id])+'/">EXPLORE INTERACTIVE FIELD STUDY ↗</a></p>':'')+
       '';
     enableImageFallbacks($("#dialog-body"));
     dialog.showModal();
+    if(!location.hash.startsWith("#project-"))history.replaceState(history.state,"","#project-"+encodeURIComponent(id));
     $(".modal-close",dialog).focus();
   }
   let observer;
@@ -233,6 +237,8 @@
     if(b) openProject(b.dataset.project);
   });
   $(".modal-close").addEventListener("click",()=>dialog.close());
+  dialog.addEventListener("close",()=>{if(location.hash.startsWith("#project-"))history.replaceState(history.state,"",location.pathname+location.search)});
+  window.addEventListener("load",()=>{const found=location.hash.match(/^#project-(P\\d+)$/);if(found)openProject(found[1])});
   dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
   const steps = [
     {phase:"01 / OBSERVE",metric:"10",unit:"Mbps",label:"Illustrative symptom",explanation:"Start with an observable symptom. Compare results across the path before changing configuration.",width:"33%",target:"diag-client"},
