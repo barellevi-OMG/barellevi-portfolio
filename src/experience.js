@@ -66,7 +66,7 @@ if(nav){
 }
 
 /* Recruitment-first editorial layout: preserve all underlying content for deeper pages. */
-const route=location.pathname.replace(/^\/he(?=\/|$)/,"")||"/";
+const route=(location.pathname.startsWith("/he/")?location.pathname.slice(3):location.pathname)||"/";
 const isHome=route==="/";
 const isArchive=route==="/projects/"||route==="/projects";
 const isRole=route.startsWith("/for/");
