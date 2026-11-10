@@ -76,7 +76,8 @@ const heroCopy=$(".hero-copy");
 if(heroCopy){
  heroCopy.insertAdjacentHTML("afterbegin",actionbar);
  const cta=$(".hero-cta");
- if(cta)cta.innerHTML='<a class="button-primary" href="mailto:Barellevi@gmail.com">'+text("Contact me","יצירת קשר")+' ↗</a><a class="button-text" href="'+prefix+'/resume/">'+text("One-page resume","תקציר קורות חיים")+' ↓</a><a class="button-text" href="'+prefix+'/projects/">'+text("Explore projects","לכל הפרויקטים")+' ↗</a>';
+ if(cta&&isHome)cta.innerHTML='<a class="button-primary" href="#work">'+text("Explore selected work","לפרויקטים נבחרים")+' ↓</a><a class="button-text" href="'+prefix+'/resume/">'+text("One-page resume","תקציר קורות חיים")+' ↓</a><a class="button-text" href="mailto:Barellevi@gmail.com">'+text("Contact me","יצירת קשר")+' ↗</a>';
+ else if(cta)cta.innerHTML='<a class="button-primary" href="mailto:Barellevi@gmail.com">'+text("Contact me","יצירת קשר")+' ↗</a><a class="button-text" href="'+prefix+'/resume/">'+text("One-page resume","תקציר קורות חיים")+' ↓</a><a class="button-text" href="'+prefix+'/projects/">'+text("Explore projects","לכל הפרויקטים")+' ↗</a>';
 }
 const closing=$(".closing-section");
 if(closing)closing.insertAdjacentHTML("beforeend",'<div class="contact-direct"><a href="mailto:Barellevi@gmail.com">Barellevi@gmail.com</a><a href="tel:+972527049003" dir="ltr">+972 52 704 9003</a><a href="'+prefix+'/resume/">'+text("Print-friendly resume","תקציר להדפסה")+'</a></div>');
