@@ -354,3 +354,9 @@ Main project cards and previews now expose direct URLs to these pages. Printable
 **בדיקות:** לפני הכתיבה נבדקו במחרוזת המקור `lang=he`, canonical תקין, קיום תיאור בעברית ומופע יחיד של og:title. תשעת ההחלפות הצפויות נמצאו. יש לבצע בדיקת Fetch/Preview של פלט OG לאחר פריסה והצלבת התוכן שמוגדר בקוד עם התרגום שמבוצע ע״י `src/he-ui.js`.
 
 **פתוח:** ניסיון פתיחת `https://barellevi.com/` ו-`/he/` בכלי הדפדוף נכשל עם cache miss. לכן לא אומתה טעינה חיה, אין עדיין צילום רספונסיבי ב-320/390/768/1024/1440 או בדיקה מלאה של נגישות/מקלדת. נדרשת בדיקה בפועל בדפדפן והשלמת הפריטים הפתוחים ב-`DESIGN_AUDIT_IMPLEMENTATION.md`.
+
+## 2026-11-10 — Gallery signal and image reveal
+
+The homepage signal and station buttons sit under the cards. The route doubles as a drag control and follows the same gallery progress as wheel scrolling and station selection. The card opens its details directly, with the permanent project link in the detail dialog.
+
+After the gallery, a narrow opening widens as the visitor scrolls. The existing cluster illustration is provisional until a portrait is selected. The reduced-motion view shows the complete image.
