@@ -82,7 +82,16 @@ assert.equal(hebrewTest.window.SITE_LANG,'he');
 assert.equal(hebrewTest.window.SITE_PREFIX,'/he');
 assert.equal(hebrewTest.window.PORTFOLIO.projects.filter(p=>p.primaryCategory==='leadership').length,4);
 assert.deepEqual([...new Set(hebrewTest.window.PORTFOLIO.projects.map(p=>p.primaryCategory))].sort(),['automation','infrastructure','leadership','operations']);
-assert.equal(hebrewTest.window.PORTFOLIO.projects.length,16);
+assert.equal(hebrewTest.window.PORTFOLIO.projects.length,m.projects.length);
+for (const [id, category] of [["P18","automation"],["P19","automation"],["P20","operations"]]) {
+ const p=hebrewTest.window.PORTFOLIO.projects.find(project=>project.id===id);
+ assert.equal(p?.primaryCategory,category);
+ assert.notEqual(p.title,m.projects.find(project=>project.id===id).title);
+ for (const prefix of ["","he/"]) {
+   const route=prefix+"project/"+p.slug+"/index.html";
+   assert.ok(fs.readFileSync(route,"utf8").includes('data-project-id="'+id+'"'),route);
+ }
+}
 for(const [id,job] of Object.entries(hebrewTest.window.SITE_JOB_PAGES)){
  assert.ok(fs.existsSync('for/'+id+'/index.html'));
  assert.ok(fs.existsSync('he/for/'+id+'/index.html'));

@@ -171,6 +171,71 @@ window.PORTFOLIO = {
   },
   "projects": [
     {
+      "id": "P18",
+      "slug": "spotify-youtube-liked-sync",
+      "title": "Spotify to YouTube liked-song sync",
+      "subtitle": "Personal software for syncing a music library.",
+      "description": "Matches saved Spotify tracks to YouTube videos and applies likes for confident matches.",
+      "detail": "Built a Python service that matches title, artist and duration, records mappings and unmatched tracks in SQLite, and schedules runs within YouTube API quotas. The report distinguishes tracks that were searched without a match from tracks still waiting to be searched.",
+      "role": "Designed and implemented the matching, scheduling, quota tracking and review workflow.",
+      "tech": [
+        "Python",
+        "SQLite",
+        "Spotify API",
+        "YouTube Data API"
+      ],
+      "tracks": [
+        "automation"
+      ],
+      "visual": "circuits",
+      "stage": "Personal software",
+      "year": "2026",
+      "featured": true
+    },
+    {
+      "id": "P19",
+      "slug": "service-health-dashboard",
+      "title": "Service health and incident dashboard",
+      "subtitle": "Operational history and targeted Telegram alerts.",
+      "description": "Tracks service health, resource usage and incident history from one dashboard.",
+      "detail": "Built a dashboard and background monitor for messaging services. It separates the incident timeline from notification delivery and retains short-lived failures for review. The alert policy sends a Telegram notification when the same issue remains continuously abnormal for more than 59 minutes.",
+      "role": "Designed the dashboard, health checks, incident history, and alerting rules.",
+      "tech": [
+        "Node.js",
+        "Service monitoring",
+        "Telegram alerts"
+      ],
+      "tracks": [
+        "automation"
+      ],
+      "visual": "circuits",
+      "stage": "Operational automation",
+      "year": "2026",
+      "featured": true
+    },
+    {
+      "id": "P20",
+      "slug": "telegrass-operations",
+      "title": "TeleGrass · technology and operations leadership",
+      "subtitle": "Managing teams, workflows and day-to-day operations.",
+      "description": "Co-founded TeleGrass and led its technology and operations work from March 2017 to March 2019.",
+      "detail": "I directly managed 11–12 senior managers within an organization of about 150 managers and worked with a development lead and four developers. I led recruitment, training, procedure design and incident response, coordinated operations with support, content and marketing, and led delivery of a multi-stage identity verification workflow and an intake bot. Reported scale during the period was more than 1.5 million unique active users and about 4,500 vendors.",
+      "role": "Co-founder and technology and operations lead, responsible for coordinating management and development, setting priorities and handling operational incidents.",
+      "tech": [
+        "Operations",
+        "Team leadership",
+        "Process design",
+        "Automation"
+      ],
+      "tracks": [
+        "operations"
+      ],
+      "visual": "circuits",
+      "stage": "Operations leadership",
+      "year": "2017–2019",
+      "featured": true
+    },
+    {
       "id": "P17",
       "slug": "data-center-infrastructure",
       "title": "Enterprise data center build",
@@ -227,8 +292,8 @@ window.PORTFOLIO = {
       "slug": "messaging-automation",
       "title": "Multi-channel messaging platform",
       "subtitle": "Telegram, WhatsApp, shared services and an admin console.",
-      "description": "A Node.js product with localized delivery, user-specific time zones, archive search, clean-day tracking and operational tooling.",
-      "detail": "Built as separate Telegram and WhatsApp service components with shared date, timezone, archive and user-state utilities, plus an Express administration dashboard. Source code implements inline Telegram menus, localized settings, custom delivery times, reading sharing, archive navigation and search, and clean-day tracking. The repository also contains unit, API and browser tests, PM2 process configuration, a daily backup module and a documented HTTPS reverse-proxy setup. Source availability does not independently establish current runtime health or active backup scheduling.",
+      "description": "Scheduled text delivery in Telegram, with personal reading progress, time zones and an archive, alongside a WhatsApp integration.",
+      "detail": "Built as separate Telegram and WhatsApp service components with shared date, timezone, archive and user-state utilities, plus an Express administration dashboard. Source code implements inline Telegram menus, localized settings, custom delivery times, reading sharing, archive navigation and search, and clean-day tracking. The Telegram bot also sends scheduled excerpts from a selected book, with per-user progress and pause or restart controls. The repository also contains unit, API and browser tests, PM2 process configuration, a daily backup module and a documented HTTPS reverse-proxy setup. Source availability does not independently establish current runtime health or active backup scheduling.",
       "role": "Product design, implementation iteration, system integration and service operations",
       "tech": [
         "Node.js",

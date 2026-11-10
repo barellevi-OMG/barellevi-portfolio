@@ -261,10 +261,14 @@
   $$(".lab-step").forEach(btn=>btn.addEventListener("click",()=>step(Number(btn.dataset.step))));
   document.addEventListener("click",e=>{
     const nav=e.target.closest("a[data-nav]");
-    if(!nav)return;
-    if(nav.getAttribute("href")===linkFor("all")){e.preventDefault();history.pushState({track:"all"},"",linkFor("all"));showTrack("all",false);window.scrollTo({top:0,behavior:"smooth"});}
+    const home=linkFor("all");
+    if(!nav||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    if(nav.getAttribute("href")!==home||location.pathname!==home||!document.body.classList.contains("recruiter-home"))return;
+    e.preventDefault();
+    if(location.hash||location.search)history.replaceState(history.state,"",home);
+    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
   });
-  window.addEventListener("popstate",()=>showTrack(fromLocation(),false));
+  window.addEventListener("popstate",()=>{const track=fromLocation();if(track!==activeTrack)showTrack(track,false);});
   const navTrack=fromLocation();showTrack(navTrack,false);step(0);showComponent("compute");renderHardwareShowcase();renderFieldStudies();observeReveal();enableImageFallbacks();
   const path=location.pathname.replace(/\/+$/,"");
   // The job-specific introduction is rendered by showTrack.

@@ -5,7 +5,7 @@ const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(
 const text=(en,iw)=>he?iw:en;
 const cats=[
 ["infrastructure","Infrastructure & systems","תשתיות ומערכות","Virtualization, networks, SAN, devices and reliable systems.","הקמת תשתיות DC, שרתים, רשתות, אחסון, גיבויים ותפעול מערכות."],
-["automation","Automation & integrations","אוטומציה ואינטגרציות","Connected services, process automation and useful interfaces.","שירותים מחוברים, אוטומציה וממשקים שימושיים."],
+["automation","Automation & integrations","אוטומציה ואינטגרציות","Personal software, scheduled delivery and monitoring tools.","תוכנות לשימוש אישי, שליחת תוכן מתוזמנת וכלי ניטור."],
 ["operations","Technical operations","תפעול ואמינות","Diagnostics, monitoring and dependable recovery.","אבחון תקלות, ניטור, תפעול והתאוששות."],
 ["leadership","Technical & product leadership","ניהול אנשים ומוצר טכנולוגי","Requirements, coordination, team leadership and product thinking.","אפיון, תיאום צוותים, מנהיגות טכנולוגית ומוצר."]
 ];
@@ -35,7 +35,7 @@ const peopleLeadership='<section class="people-leadership section-wrap" id="peop
 const careerRoles=[
 ["2026 — PRESENT","2026 — היום","Systems Administrator & Advanced Solutions Specialist","מנהל מערכות ופתרונות מתקדמים","Enterprise infrastructure, virtualization, networking, storage, customer integrations and technical delivery.","תשתיות ארגוניות, וירטואליזציה, תקשורת, אחסון, אינטגרציות ומסירת פתרונות טכנולוגיים."],
 ["2025","2025","Software Implementation & Integration","הטמעת מערכות ואינטגרציה","Customer-facing software implementation, troubleshooting and practical user training.","הטמעת תוכנה אצל לקוחות, פתרון תקלות, הדרכה והתאמת תהליכי עבודה."],
-["2017 — 2019","2017 — 2019","Co-founder, Technology & Operations Lead","מייסד שותף ומוביל טכנולוגיה ותפעול","Built operational processes, led management layers and coordinated product requirements with a development team.","בניית תהליכים תפעוליים, הובלת שכבות ניהול ותיאום דרישות מוצר עם צוות פיתוח."],
+["2017 — 2019","2017 — 2019","TeleGrass · Co-founder, Technology & Operations Lead","טלגראס · מייסד שותף ומוביל טכנולוגיה ותפעול","Led senior managers and coordinated development, onboarding, internal procedures and incident response.","ניהול ישיר של 11–12 מנהלים בכירים, תיאום צוות פיתוח, גיוס והכשרה, בניית נהלים וטיפול במשברים."],
 ["2016 — 2017","2016 — 2017","NOC & Systems Administration","NOC וניהול מערכות","Production monitoring, Windows infrastructure, enterprise storage support and incident coordination.","ניטור מערכות ייצור, תשתיות Windows, תמיכה באחסון ארגוני ותיאום טיפול בתקלות."],
 ["2015 — 2016","2015 — 2016","Junior Systems Administration & Helpdesk","ניהול מערכות ותמיכה טכנית","Windows and SAP environments, physical servers and day-to-day enterprise support.","סביבות Windows ו־SAP, שרתים פיזיים ותמיכה טכנית ארגונית."],
 ["2012 — 2015","2012 — 2015","Systems Team & Training Leadership","הובלת צוות מערכות והדרכה","Military IT infrastructure, systems operations, knowledge transfer and training.","תשתיות מחשוב צבאיות, תפעול מערכות, שימור ידע והדרכת צוותים."]
@@ -54,20 +54,23 @@ const hero=$(".hero"),work=$("#work"),approach=$("#approach");
 if(hero)hero.insertAdjacentHTML("afterend",about);
 const aboutFactsAnchor=$("#about");if(aboutFactsAnchor)aboutFactsAnchor.insertAdjacentHTML("beforeend",backgroundFacts);
 const aboutNode=$("#about");if(aboutNode)aboutNode.insertAdjacentHTML("afterend",peopleLeadership);
+const managementLink=$(".leadership-story");
+if(managementLink)managementLink.insertAdjacentHTML("beforeend",'<a class="button-text" href="'+prefix+'/project/telegrass-operations/">'+text("My operations work at TeleGrass","העבודה שלי בתפעול טלגראס")+'</a>');
 const leadershipNode=$("#people-leadership");if(leadershipNode)leadershipNode.insertAdjacentHTML("afterend",career);
 if(aboutNode)aboutNode.insertAdjacentHTML("beforebegin",category);
 if(approach)approach.insertAdjacentHTML("afterend",jobSection);
+const home=prefix+"/";
+const route=(location.pathname.startsWith("/he/")?location.pathname.slice(3):location.pathname)||"/";
+const isHome=route==="/";
 const nav=$(".header-nav");
 if(nav){
   nav.replaceChildren();
   for(const [href,en,iw] of [["#about","About","עליי"],["#people-leadership","Management","ניהול"],["#career","Experience","ניסיון מקצועי"],["#categories","Four disciplines, one person","ארבעה תחומים, אדם אחד"],["#work","Projects","פרויקטים"]]){
-    const link=document.createElement("a");link.href=href;link.textContent=text(en,iw);nav.append(link);
+    const link=document.createElement("a");link.href=isHome?href:home+href;link.textContent=text(en,iw);nav.append(link);
   }
 }
 
 /* Recruitment-first editorial layout: preserve all underlying content for deeper pages. */
-const route=(location.pathname.startsWith("/he/")?location.pathname.slice(3):location.pathname)||"/";
-const isHome=route==="/";
 const isArchive=route==="/projects/"||route==="/projects";
 const isRole=route.startsWith("/for/");
 document.body.classList.add(isHome?"recruiter-home":isArchive?"portfolio-archive":isRole?"recruiter-role":"portfolio-category");
@@ -80,8 +83,16 @@ if(heroCopy){
  else if(cta)cta.innerHTML='<a class="button-primary" href="mailto:Barellevi@gmail.com">'+text("Contact me","יצירת קשר")+' ↗</a><a class="button-text" href="'+prefix+'/resume/">'+text("One-page resume","תקציר קורות חיים")+' ↓</a><a class="button-text" href="'+prefix+'/projects/">'+text("Explore projects","לכל הפרויקטים")+' ↗</a>';
 }
 const closing=$(".closing-section");
+if(closing)closing.id="contact";
 if(closing)closing.insertAdjacentHTML("beforeend",'<div class="contact-direct"><a href="mailto:Barellevi@gmail.com">Barellevi@gmail.com</a><a href="tel:+972527049003" dir="ltr">+972 52 704 9003</a><a href="'+prefix+'/resume/">'+text("Print-friendly resume","תקציר להדפסה")+'</a></div>');
-const headerContact=$(".header-actions .contact-link");if(headerContact)headerContact.textContent=text("Contact ↗","יצירת קשר ↗");
+const headerContact=$(".header-actions .contact-link");
+if(headerContact){
+ headerContact.href=isHome?"#contact":home+"#contact";
+ headerContact.textContent=text("Contact","יצירת קשר");
+}
+const brand=$(".site-header .brand");
+if(brand)brand.setAttribute("aria-label",text("Bar-El Levi, homepage","בר־אל לוי, דף הבית"));
+if(!isHome&&work)work.insertAdjacentHTML("afterbegin",'<a class="button-text portfolio-back" href="'+home+'">'+text("Back to homepage","חזרה לדף הבית")+'</a>');
 const floating=$(".floating-label-top");if(floating)floating.textContent=text("ILLUSTRATIVE SYSTEMS VIEW","המחשת מערכות");
 const heroCounter=$(".hero-index");if(heroCounter)heroCounter.remove();
 const workBlock=$("#work");const careerBlock=$("#career");const aboutBlock=$("#about");
@@ -97,10 +108,10 @@ if(isHome||isRole){
 }
 if(isArchive){
  const h=$("#work .section-heading h2");if(h)h.textContent=text("Project archive","כל הפרויקטים");
- const d=$("#work .section-heading > p");if(d)d.textContent=text("Browse the full portfolio. Select one area or explore everything, then open an individual project.","כל 17 הפרויקטים במקום אחד. אפשר לסנן לפי תחום ולפתוח פרויקט מסוים.");
+ const d=$("#work .section-heading > p");if(d)d.textContent=text("Browse the full portfolio. Select one area or explore everything, then open an individual project.","כל "+model.projects.length+" הפרויקטים במקום אחד. אפשר לסנן לפי תחום ולפתוח פרויקט מסוים.");
 }
 const navToggle=document.createElement("button");navToggle.type="button";navToggle.className="mobile-menu-toggle";navToggle.textContent=text("Menu ☰","תפריט ☰");navToggle.setAttribute("aria-expanded","false");navToggle.setAttribute("aria-controls","site-mobile-nav");
-const currentNav=$(".header-nav");if(currentNav){currentNav.id="site-mobile-nav";currentNav.insertAdjacentHTML("beforeend",'<a href="mailto:Barellevi@gmail.com">'+text("Contact","יצירת קשר")+'</a>');currentNav.parentElement.insertBefore(navToggle,currentNav);navToggle.addEventListener("click",()=>{const open=navToggle.getAttribute("aria-expanded")!=="true";navToggle.setAttribute("aria-expanded",String(open));currentNav.classList.toggle("mobile-open",open)});currentNav.addEventListener("click",()=>{currentNav.classList.remove("mobile-open");navToggle.setAttribute("aria-expanded","false")});}
+const currentNav=$(".header-nav");if(currentNav){currentNav.id="site-mobile-nav";currentNav.parentElement.insertBefore(navToggle,currentNav);navToggle.addEventListener("click",()=>{const open=navToggle.getAttribute("aria-expanded")!=="true";navToggle.setAttribute("aria-expanded",String(open));currentNav.classList.toggle("mobile-open",open)});currentNav.addEventListener("click",()=>{currentNav.classList.remove("mobile-open");navToggle.setAttribute("aria-expanded","false")});}
 
 const holder=$(".header-actions");
 if(holder){

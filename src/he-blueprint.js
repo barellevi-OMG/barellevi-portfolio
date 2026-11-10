@@ -4,6 +4,7 @@ const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(
 const put=(sel,s,html=false)=>{const el=$(sel);if(!el)return;if(html)el.innerHTML=s;else el.textContent=s;};
 document.documentElement.lang="he";document.documentElement.dir="rtl";
 put(".bp-header a:last-child","← חזרה לפורטפוליו");const home=$(".bp-header a:last-child");if(home)home.href="/he/";
+const brand=$(".bp-brand");if(brand)brand.href="/he/";
 const nav=$(".bp-header");if(nav){const link=document.createElement("a");link.href="/examples/network-design/";link.textContent="English";link.lang="en";link.hreflang="en";nav.append(link);}
 put(".bp-eyebrow","01 / דוגמה אינטראקטיבית");
 put(".bp-intro h1","מערכות הן<br><em>קשרים.</em>",true);

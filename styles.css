@@ -221,7 +221,7 @@ html[lang="he"] .about-story p{letter-spacing:0}
 .hero-cta .button-primary,.hero-cta .button-text{min-height:44px;display:inline-flex;align-items:center}
 .hero-visual{min-height:490px}.floating-label-top{pointer-events:none}.hero-orbit{animation:none!important}
 .marquee-strip{overflow:hidden}.marquee-inner{animation:none!important;transform:none!important}
-.recruiter-home .category-overview,.recruiter-home .people-leadership,.recruiter-home .components-section,.recruiter-home #hardware,.recruiter-home #field-studies,.recruiter-home #lab,.recruiter-home #approach,.recruiter-home .job-links,
+.recruiter-home .components-section,.recruiter-home #hardware,.recruiter-home #field-studies,.recruiter-home #lab,.recruiter-home #approach,.recruiter-home .job-links,
 .recruiter-role .category-overview,.recruiter-role .people-leadership,.recruiter-role .components-section,.recruiter-role #hardware,.recruiter-role #field-studies,.recruiter-role #lab,.recruiter-role #approach,.recruiter-role .job-links{display:none!important}
 .recruiter-home .track-tabs,.recruiter-role .track-tabs{display:none!important}
 .recruiter-home .work-section,.recruiter-role .work-section{padding-top:64px;padding-bottom:55px}
@@ -236,6 +236,7 @@ html[lang="he"] .about-story p{letter-spacing:0}
 .recruiter-home .about-section .about-story,.recruiter-role .about-section .about-story{margin-bottom:25px}
 .recruiter-home .about-section .about-pillars article{min-height:unset;padding:22px}
 .portfolio-more{margin-top:25px}
+.portfolio-back{display:inline-flex;align-items:center;min-height:44px;margin-block-end:16px}
 .portfolio-archive .hero,.portfolio-archive .marquee-strip,.portfolio-archive .category-overview,.portfolio-archive .about-section,.portfolio-archive .people-leadership,.portfolio-archive #career,.portfolio-archive .components-section,.portfolio-archive #hardware,.portfolio-archive #field-studies,.portfolio-archive #lab,.portfolio-archive #approach,.portfolio-archive .job-links{display:none!important}
 .portfolio-archive .work-section{padding-top:60px}
 .project-click{min-height:44px}
