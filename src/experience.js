@@ -35,7 +35,7 @@ const peopleLeadership='<section class="people-leadership section-wrap" id="peop
 const careerRoles=[
 ["2026 — PRESENT","2026 — היום","Systems Administrator & Advanced Solutions Specialist","מנהל מערכות ופתרונות מתקדמים","Enterprise infrastructure, virtualization, networking, storage, customer integrations and technical delivery.","תשתיות ארגוניות, וירטואליזציה, תקשורת, אחסון, אינטגרציות ומסירת פתרונות טכנולוגיים."],
 ["2025","2025","Software Implementation & Integration","הטמעת מערכות ואינטגרציה","Customer-facing software implementation, troubleshooting and practical user training.","הטמעת תוכנה אצל לקוחות, פתרון תקלות, הדרכה והתאמת תהליכי עבודה."],
-["2017 — 2019","2017 — 2019","TeleGrass · Co-founder, Technology & Operations Lead","טלגראס · מייסד שותף ומוביל טכנולוגיה ותפעול","Led senior managers and coordinated development, onboarding, internal procedures and incident response.","ניהול ישיר של 11–12 מנהלים בכירים, תיאום צוות פיתוח, גיוס והכשרה, בניית נהלים וטיפול במשברים."],
+["2017 — 2019","2017 — 2019","Co-founder, Technology & Operations Lead","מייסד שותף ומוביל טכנולוגיה ותפעול","Built operational processes, led management layers and coordinated product requirements with a development team.","בניית תהליכים תפעוליים, הובלת שכבות ניהול ותיאום דרישות מוצר עם צוות פיתוח."],
 ["2016 — 2017","2016 — 2017","NOC & Systems Administration","NOC וניהול מערכות","Production monitoring, Windows infrastructure, enterprise storage support and incident coordination.","ניטור מערכות ייצור, תשתיות Windows, תמיכה באחסון ארגוני ותיאום טיפול בתקלות."],
 ["2015 — 2016","2015 — 2016","Junior Systems Administration & Helpdesk","ניהול מערכות ותמיכה טכנית","Windows and SAP environments, physical servers and day-to-day enterprise support.","סביבות Windows ו־SAP, שרתים פיזיים ותמיכה טכנית ארגונית."],
 ["2012 — 2015","2012 — 2015","Systems Team & Training Leadership","הובלת צוות מערכות והדרכה","Military IT infrastructure, systems operations, knowledge transfer and training.","תשתיות מחשוב צבאיות, תפעול מערכות, שימור ידע והדרכת צוותים."]
@@ -54,8 +54,6 @@ const hero=$(".hero"),work=$("#work"),approach=$("#approach");
 if(hero)hero.insertAdjacentHTML("afterend",about);
 const aboutFactsAnchor=$("#about");if(aboutFactsAnchor)aboutFactsAnchor.insertAdjacentHTML("beforeend",backgroundFacts);
 const aboutNode=$("#about");if(aboutNode)aboutNode.insertAdjacentHTML("afterend",peopleLeadership);
-const managementLink=$(".leadership-story");
-if(managementLink)managementLink.insertAdjacentHTML("beforeend",'<a class="button-text" href="'+prefix+'/project/telegrass-operations/">'+text("My operations work at TeleGrass","העבודה שלי בתפעול טלגראס")+'</a>');
 const leadershipNode=$("#people-leadership");if(leadershipNode)leadershipNode.insertAdjacentHTML("afterend",career);
 if(aboutNode)aboutNode.insertAdjacentHTML("beforebegin",category);
 if(approach)approach.insertAdjacentHTML("afterend",jobSection);
